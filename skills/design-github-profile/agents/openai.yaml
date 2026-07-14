@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design GitHub Profile"
+  short_description: "Build verified animated GitHub profile READMEs"
+  default_prompt: "Use $design-github-profile to audit and redesign my GitHub profile with a verified preview branch."

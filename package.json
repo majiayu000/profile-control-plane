@@ -1,0 +1,65 @@
+{
+  "name": "profile-control-plane",
+  "version": "0.1.0",
+  "description": "Compile a GitHub identity into an animated, dark/light, self-hosted profile README.",
+  "type": "module",
+  "bin": {
+    "profilectl": "dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage --coverage.include='src/**/*.ts' --coverage.exclude='src/cli.ts' --coverage.thresholds.lines=80 --coverage.thresholds.functions=80 --coverage.thresholds.statements=80 --coverage.thresholds.branches=80",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run typecheck && npm run test:coverage && npm run build",
+    "prepublishOnly": "npm run check"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "github-profile",
+    "readme",
+    "svg",
+    "generator",
+    "cli",
+    "codex-skill"
+  ],
+  "author": "lifcc",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majiayu000/profile-control-plane.git"
+  },
+  "bugs": {
+    "url": "https://github.com/majiayu000/profile-control-plane/issues"
+  },
+  "homepage": "https://github.com/majiayu000/profile-control-plane#readme",
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "commander": "^15.0.0",
+    "fast-xml-parser": "^5.10.0",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "prettier": "^3.9.5",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

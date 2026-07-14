@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/majiayu000/profile-control-plane/schemas/profile.schema.json",
+  "title": "Profile Control Plane configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "github", "identity", "theme", "layers", "flagships", "module_groups", "settings"],
+  "properties": {
+    "version": { "const": 1 },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["username"],
+      "properties": {
+        "username": { "type": "string", "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "headline", "tagline"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "headline": { "type": "string", "minLength": 1, "maxLength": 48 },
+        "tagline": { "type": "string", "maxLength": 350 },
+        "location": { "type": "string", "maxLength": 64 }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preset", "primary", "secondary"],
+      "properties": {
+        "preset": { "const": "control-plane" },
+        "primary": { "$ref": "#/definitions/color" },
+        "secondary": { "$ref": "#/definitions/color" }
+      }
+    },
+    "links": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "url"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1, "maxLength": 24 },
+          "url": { "type": "string", "pattern": "^(https?://|mailto:).+" }
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "project", "description", "tone"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 18 },
+          "project": { "$ref": "#/definitions/repoName" },
+          "description": { "type": "string", "maxLength": 42 },
+          "tone": { "enum": ["primary", "secondary"] }
+        }
+      }
+    },
+    "flagships": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["repo", "role", "description", "tone"],
+        "properties": {
+          "repo": { "$ref": "#/definitions/repoName" },
+          "role": { "type": "string", "minLength": 1, "maxLength": 24 },
+          "description": { "type": "string", "maxLength": 350 },
+          "tone": { "enum": ["primary", "secondary"] }
+        }
+      }
+    },
+    "module_groups": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "projects"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "projects": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["repo", "description"],
+              "properties": {
+                "repo": { "$ref": "#/definitions/repoName" },
+                "description": { "type": "string", "maxLength": 350 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["show_stars", "show_badges"],
+      "properties": {
+        "show_stars": { "type": "boolean" },
+        "show_badges": { "type": "boolean" }
+      }
+    }
+  },
+  "definitions": {
+    "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "repoName": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,100}$" }
+  }
+}
