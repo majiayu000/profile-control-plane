@@ -1,0 +1,113 @@
+version: 1
+github:
+  username: majiayu000
+identity:
+  name: lifcc
+  headline: AI AGENT INFRASTRUCTURE
+  tagline: Building the systems around coding agents — from skills and trust to memory and orchestration.
+  location: Beijing · UTC+8
+theme:
+  preset: control-plane
+  primary: "#00A7D1"
+  secondary: "#E84A8A"
+links:
+  - label: GitHub
+    url: https://github.com/majiayu000
+  - label: Blog
+    url: https://silencestar.com
+  - label: Email
+    url: mailto:mylifcc@gmail.com
+layers:
+  - name: DIRECT
+    project: sage
+    description: A fast coding agent in pure Rust
+    tone: primary
+  - name: EXTEND
+    project: claude-skill-registry
+    description: Discovery and distribution for agent skills
+    tone: primary
+  - name: TRUST
+    project: vibeguard
+    description: Rules and guards against unverified changes
+    tone: primary
+  - name: REMEMBER
+    project: remem
+    description: Local-first auditable agent memory
+    tone: primary
+  - name: ORCHESTRATE
+    project: harness
+    description: Governed fleets of parallel coding agents
+    tone: secondary
+  - name: ROUTE
+    project: litellm-rs
+    description: One high-performance gateway for 100+ LLM APIs
+    tone: secondary
+  - name: GOVERN
+    project: specrail
+    description: Spec-first repository workflow rails
+    tone: secondary
+  - name: KEEP
+    project: keepline
+    description: Monitor and recover long-running agent work
+    tone: secondary
+flagships:
+  - repo: claude-skill-registry
+    role: EXTEND
+    description: The comprehensive discovery layer for Claude Code skills.
+    tone: primary
+  - repo: spellbook
+    role: EXTEND
+    description: Cross-runtime skills for Claude Code, Codex, and multi-agent workflows.
+    tone: primary
+  - repo: litellm-rs
+    role: ROUTE
+    description: High-performance Rust gateway for 100+ LLM APIs through one format.
+    tone: secondary
+  - repo: harness
+    role: ORCHESTRATE
+    description: Governed fleets of parallel coding agents, powered by a Rust control plane.
+    tone: secondary
+  - repo: vibeguard
+    role: TRUST
+    description: Rules, hooks, and guards against hallucinated or unverified agent changes.
+    tone: secondary
+  - repo: remem
+    role: REMEMBER
+    description: Local-first, auditable memory for long-running Claude Code and Codex work.
+    tone: secondary
+module_groups:
+  - name: Core loop
+    projects:
+      - repo: awesome-goal-prompts
+        description: 114 source-backed goal contracts for coding agents.
+      - repo: argus
+        description: Install-time supply-chain scanner for package ecosystems.
+      - repo: specrail
+        description: Spec-first rails for agent-assisted repository workflows.
+      - repo: keepline
+        description: Session command center for monitoring and recovery.
+  - name: Rust systems
+    projects:
+      - repo: sage
+        description: Blazing-fast coding agent in pure Rust.
+      - repo: rnk
+        description: Declarative TUI framework with React-like hooks.
+      - repo: ccstats
+        description: Claude Code and Codex usage analytics CLI.
+      - repo: jsonrepair-rs
+        description: Repair malformed JSON from LLM output.
+      - repo: rekey
+        description: Agent credential-isolation proxy.
+  - name: Agent tooling
+    projects:
+      - repo: loom
+        description: Skill registry and projection control plane.
+      - repo: claude-skill-manager
+        description: Discover, install, and manage Claude Code skills.
+      - repo: refine
+        description: Extract reusable knowledge from agent conversations.
+      - repo: chat-archive-rs
+        description: Archive and search Claude Code and Codex sessions.
+settings:
+  show_stars: true
+  show_badges: true

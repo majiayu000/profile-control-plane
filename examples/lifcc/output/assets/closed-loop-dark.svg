@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc closed loop architecture" data-mode="dark">
+      <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07131A"/><stop offset="1" stop-color="#10141F"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00A7D1"/><stop offset="1" stop-color="#E84A8A"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#17313C" stroke-width="1"/></pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="frame"><rect x="1" y="1" width="1198" height="358" rx="18"/></clipPath>
+  </defs><style>
+    text{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .label{font-size:12px;letter-spacing:3px;font-weight:700}.micro{font-size:10px;letter-spacing:2px}
+    .flow{stroke-dasharray:7 9;animation:flow 8s linear infinite}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}
+    .orbit{transform-box:fill-box;transform-origin:center;animation:orbit 24s linear infinite}.blink{animation:blink 2s ease-in-out infinite}
+    @keyframes flow{to{stroke-dashoffset:-160}}@keyframes pulse{50%{opacity:.35;transform:scale(.72)}}
+    @keyframes orbit{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.35}}
+    @media(prefers-reduced-motion:reduce){.flow,.pulse,.orbit,.blink{animation:none}}
+  </style><rect width="1200" height="330" rx="18" fill="url(#bg)"/><rect width="1200" height="330" rx="18" fill="url(#grid)" opacity=".7"/>
+      <text x="28" y="34" class="label" fill="#00A7D1">CLOSED LOOP / ARCHITECTURE MAP</text><text x="1170" y="34" text-anchor="end" class="micro" fill="#8BA9B5">08 NODES · ONE SYSTEM</text>
+      <path d="M600.0 60.0L904.1 90.5L1030.0 164.0L904.1 237.5L600.0 268.0L295.9 237.5L170.0 164.0L295.9 90.5Z" fill="none" stroke="#2B4A57" stroke-width="2"/><path class="flow" d="M600.0 60.0L904.1 90.5L1030.0 164.0L904.1 237.5L600.0 268.0L295.9 237.5L170.0 164.0L295.9 90.5Z" fill="none" stroke="url(#accent)" stroke-width="2"/>
+      <g transform="translate(600 164)"><circle r="62" fill="#0C1C24" stroke="#2B4A57"/><circle class="orbit" r="48" fill="none" stroke="url(#accent)" stroke-width="2" stroke-dasharray="5 8"/>
+      <circle r="23" fill="#07131A" stroke="#00A7D1" filter="url(#glow)"/><circle class="pulse" r="6" fill="#00A7D1"/>
+      <text y="84" text-anchor="middle" class="micro" fill="#8BA9B5">AI AGENT INFRASTRUCTURE</text></g><g><circle cx="600.0" cy="60.0" r="15" fill="#0C1C24" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="600.0" cy="60.0" r="4" fill="#00A7D1"/>
+        <text x="600.0" y="42.0" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">DIRECT</text>
+        <text x="600.0" y="54.0" text-anchor="middle" font-size="8" fill="#8BA9B5">sage</text>
+        <text x="600.0" y="63.0" text-anchor="middle" font-size="8" fill="#00A7D1">01</text></g><g><circle cx="904.1" cy="90.5" r="15" fill="#0C1C24" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="904.1" cy="90.5" r="4" fill="#00A7D1"/>
+        <text x="904.1" y="72.5" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">EXTEND</text>
+        <text x="904.1" y="84.5" text-anchor="middle" font-size="8" fill="#8BA9B5">claude-skill-registry</text>
+        <text x="904.1" y="93.5" text-anchor="middle" font-size="8" fill="#00A7D1">02</text></g><g><circle cx="1030.0" cy="164.0" r="15" fill="#0C1C24" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="1030.0" cy="164.0" r="4" fill="#00A7D1"/>
+        <text x="1030.0" y="194.0" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">TRUST</text>
+        <text x="1030.0" y="206.0" text-anchor="middle" font-size="8" fill="#8BA9B5">vibeguard</text>
+        <text x="1030.0" y="167.0" text-anchor="middle" font-size="8" fill="#00A7D1">03</text></g><g><circle cx="904.1" cy="237.5" r="15" fill="#0C1C24" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="904.1" cy="237.5" r="4" fill="#00A7D1"/>
+        <text x="904.1" y="267.5" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">REMEMBER</text>
+        <text x="904.1" y="279.5" text-anchor="middle" font-size="8" fill="#8BA9B5">remem</text>
+        <text x="904.1" y="240.5" text-anchor="middle" font-size="8" fill="#00A7D1">04</text></g><g><circle cx="600.0" cy="268.0" r="15" fill="#0C1C24" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="600.0" cy="268.0" r="4" fill="#E84A8A"/>
+        <text x="600.0" y="298.0" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">ORCHESTRATE</text>
+        <text x="600.0" y="310.0" text-anchor="middle" font-size="8" fill="#8BA9B5">harness</text>
+        <text x="600.0" y="271.0" text-anchor="middle" font-size="8" fill="#E84A8A">05</text></g><g><circle cx="295.9" cy="237.5" r="15" fill="#0C1C24" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="295.9" cy="237.5" r="4" fill="#E84A8A"/>
+        <text x="295.9" y="267.5" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">ROUTE</text>
+        <text x="295.9" y="279.5" text-anchor="middle" font-size="8" fill="#8BA9B5">litellm-rs</text>
+        <text x="295.9" y="240.5" text-anchor="middle" font-size="8" fill="#E84A8A">06</text></g><g><circle cx="170.0" cy="164.0" r="15" fill="#0C1C24" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="170.0" cy="164.0" r="4" fill="#E84A8A"/>
+        <text x="170.0" y="194.0" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">GOVERN</text>
+        <text x="170.0" y="206.0" text-anchor="middle" font-size="8" fill="#8BA9B5">specrail</text>
+        <text x="170.0" y="167.0" text-anchor="middle" font-size="8" fill="#E84A8A">07</text></g><g><circle cx="295.9" cy="90.5" r="15" fill="#0C1C24" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="295.9" cy="90.5" r="4" fill="#E84A8A"/>
+        <text x="295.9" y="72.5" text-anchor="middle" font-size="10" font-weight="700" fill="#E7F7FC">KEEP</text>
+        <text x="295.9" y="84.5" text-anchor="middle" font-size="8" fill="#8BA9B5">keepline</text>
+        <text x="295.9" y="93.5" text-anchor="middle" font-size="8" fill="#E84A8A">08</text></g>
+      <rect x="1" y="1" width="1198" height="328" rx="18" fill="none" stroke="#E84A8A" stroke-opacity=".55"/>
+    </svg>

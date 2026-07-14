@@ -4,7 +4,16 @@
   "title": "Profile Control Plane configuration",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "github", "identity", "theme", "layers", "flagships", "module_groups", "settings"],
+  "required": [
+    "version",
+    "github",
+    "identity",
+    "theme",
+    "layers",
+    "flagships",
+    "module_groups",
+    "settings"
+  ],
   "properties": {
     "version": { "const": 1 },
     "github": {
@@ -12,7 +21,10 @@
       "additionalProperties": false,
       "required": ["username"],
       "properties": {
-        "username": { "type": "string", "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$" }
+        "username": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
+        }
       }
     },
     "identity": {
@@ -60,7 +72,7 @@
         "properties": {
           "name": { "type": "string", "minLength": 1, "maxLength": 18 },
           "project": { "$ref": "#/definitions/repoName" },
-          "description": { "type": "string", "maxLength": 42 },
+          "description": { "type": "string", "maxLength": 350 },
           "tone": { "enum": ["primary", "secondary"] }
         }
       }

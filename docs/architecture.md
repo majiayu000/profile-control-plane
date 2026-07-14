@@ -9,23 +9,23 @@ or browser access.
 
 ## Current evidence
 
-| Area | Evidence | Implication |
-| --- | --- | --- |
-| Entrypoint | One `profilectl` CLI | Commands remain thin application adapters. |
-| Core | YAML data becomes SVG and Markdown | Compilation can be a pure function. |
-| Runtime | One-shot developer tool | Use a streaming compile pipeline, not persistent state. |
-| IO | Filesystem, GitHub REST, local HTTP preview | Keep each behind an explicit adapter. |
-| Config | `profile.yaml` validated by JSON Schema | Config is the only authoring source of truth. |
-| Errors | Invalid output would be publicly visible | Fail closed; never emit partial output. |
-| Tests | SVG, Markdown, long text, and IO boundaries | Use unit, golden, and CLI integration tests. |
+| Area       | Evidence                                    | Implication                                             |
+| ---------- | ------------------------------------------- | ------------------------------------------------------- |
+| Entrypoint | One `profilectl` CLI                        | Commands remain thin application adapters.              |
+| Core       | YAML data becomes SVG and Markdown          | Compilation can be a pure function.                     |
+| Runtime    | One-shot developer tool                     | Use a streaming compile pipeline, not persistent state. |
+| IO         | Filesystem, GitHub REST, local HTTP preview | Keep each behind an explicit adapter.                   |
+| Config     | `profile.yaml` validated by JSON Schema     | Config is the only authoring source of truth.           |
+| Errors     | Invalid output would be publicly visible    | Fail closed; never emit partial output.                 |
+| Tests      | SVG, Markdown, long text, and IO boundaries | Use unit, golden, and CLI integration tests.            |
 
 ## Reference models considered
 
-| Reference | Borrow | Do not copy | Source |
-| --- | --- | --- | --- |
-| GitHub Metrics | Generated self-hosted assets | Plugin count and token-heavy automation | https://github.com/lowlighter/metrics |
-| capsule-render | Parameterized SVG themes | Hosted runtime dependency | https://github.com/kyechan99/capsule-render |
-| RepoVerse | Projects as a visual system | Fixed metaphor and scheduled generation | https://github.com/nimaldanyathk/repo-verse |
+| Reference      | Borrow                       | Do not copy                             | Source                                      |
+| -------------- | ---------------------------- | --------------------------------------- | ------------------------------------------- |
+| GitHub Metrics | Generated self-hosted assets | Plugin count and token-heavy automation | https://github.com/lowlighter/metrics       |
+| capsule-render | Parameterized SVG themes     | Hosted runtime dependency               | https://github.com/kyechan99/capsule-render |
+| RepoVerse      | Projects as a visual system  | Fixed metaphor and scheduled generation | https://github.com/nimaldanyathk/repo-verse |
 
 ## Chosen shape
 
@@ -50,25 +50,25 @@ into non-zero exit codes.
 
 ## Source of truth
 
-| Contract | Source | Consumers | Rule |
-| --- | --- | --- | --- |
-| Public configuration | `schemas/profile.schema.json` | loader, docs, tests | Types must match schema. |
-| Runtime profile | validated `ProfileConfig` | compiler and theme | No unvalidated object enters rendering. |
-| Theme geometry | `src/themes/control-plane` | compiler | Dark/light variants share geometry. |
-| Generated README/assets | compiler output | writer and preview | Generated files are never authoritative. |
-| Skill workflow | `skills/design-github-profile/SKILL.md` | Codex | Skill calls CLI; it does not render. |
+| Contract                | Source                                  | Consumers           | Rule                                     |
+| ----------------------- | --------------------------------------- | ------------------- | ---------------------------------------- |
+| Public configuration    | `schemas/profile.schema.json`           | loader, docs, tests | Types must match schema.                 |
+| Runtime profile         | validated `ProfileConfig`               | compiler and theme  | No unvalidated object enters rendering.  |
+| Theme geometry          | `src/themes/control-plane`              | compiler            | Dark/light variants share geometry.      |
+| Generated README/assets | compiler output                         | writer and preview  | Generated files are never authoritative. |
+| Skill workflow          | `skills/design-github-profile/SKILL.md` | Codex               | Skill calls CLI; it does not render.     |
 
 ## Boundary contracts
 
-| Contract | Owner | Allowed | Forbidden | Tests |
-| --- | --- | --- | --- | --- |
-| Config | loader | YAML, schema validation | defaults that invent user data | valid/invalid fixtures |
-| Compilation | compiler | pure config-to-files transform | filesystem and network | deterministic snapshots |
-| Theme | renderer | escaped strings and theme tokens | raw user HTML/XML | injection and length tests |
-| GitHub import | GitHub adapter | public REST, optional token | silent partial pagination | mocked pagination/errors |
-| Output | writer | atomic directory replacement | partial file writes | temporary-directory integration |
-| Preview | HTTP adapter | generated output only | rebuilding with hidden defaults | route tests |
-| Publish | external workflow | explicit user authorization | implicit push to `main` | Skill validation checklist |
+| Contract      | Owner             | Allowed                          | Forbidden                       | Tests                           |
+| ------------- | ----------------- | -------------------------------- | ------------------------------- | ------------------------------- |
+| Config        | loader            | YAML, schema validation          | defaults that invent user data  | valid/invalid fixtures          |
+| Compilation   | compiler          | pure config-to-files transform   | filesystem and network          | deterministic snapshots         |
+| Theme         | renderer          | escaped strings and theme tokens | raw user HTML/XML               | injection and length tests      |
+| GitHub import | GitHub adapter    | public REST, optional token      | silent partial pagination       | mocked pagination/errors        |
+| Output        | writer            | atomic directory replacement     | partial file writes             | temporary-directory integration |
+| Preview       | HTTP adapter      | generated output only            | rebuilding with hidden defaults | route tests                     |
+| Publish       | external workflow | explicit user authorization      | implicit push to `main`         | Skill validation checklist      |
 
 ## Error policy
 
@@ -80,11 +80,11 @@ into non-zero exit codes.
 
 ## Roadmap
 
-| Priority | Work | Done when | Verification |
-| --- | --- | --- | --- |
-| P0 | Schema, compiler, control-plane theme, build/check | Example produces four valid SVGs and README | typecheck, tests, XML parse |
-| P1 | GitHub init, preview, Skill | Fresh user reaches a preview branch | mocked REST and Skill validation |
-| P2 | More themes, web playground, npm release | Contracts remain stable across themes | compatibility fixtures |
+| Priority | Work                                               | Done when                                   | Verification                     |
+| -------- | -------------------------------------------------- | ------------------------------------------- | -------------------------------- |
+| P0       | Schema, compiler, control-plane theme, build/check | Example produces four valid SVGs and README | typecheck, tests, XML parse      |
+| P1       | GitHub init, preview, Skill                        | Fresh user reaches a preview branch         | mocked REST and Skill validation |
+| P2       | More themes, web playground, npm release           | Contracts remain stable across themes       | compatibility fixtures           |
 
 ## Non-goals
 

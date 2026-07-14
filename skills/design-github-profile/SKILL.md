@@ -1,85 +1,66 @@
 ---
 name: design-github-profile
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: Audit, design, generate, and safely stage an animated GitHub profile README with Profile Control Plane. Use when a user asks to improve a GitHub profile, turn repositories into a visual architecture story, generate dark/light profile SVGs, preview profile changes, or prepare a profile README branch without directly publishing to main.
 ---
 
-# Design Github Profile
+# Design GitHub Profile
 
-## Overview
+Turn a GitHub account into a reviewed profile system: factual repository data, human-meaningful architecture
+labels, animated dark/light SVGs, and a safe preview branch.
 
-[TODO: 1-2 sentences explaining what this skill enables]
+## Workflow
 
-## Structuring This Skill
+1. Inspect before creating.
+   - Locate the target `USERNAME/USERNAME` profile repository and any existing `README.md`, `assets/`, or
+     `profile.yaml`.
+   - Preserve existing user content until the generated result has been reviewed.
+   - Locate `profilectl`; in this repository use `npm ci && npm run build` followed by `node dist/cli.js`.
 
-[TODO: Choose the structure that best fits this skill's purpose. Common patterns:
+2. Import factual metadata.
+   - Run `profilectl init USERNAME --output profile.yaml` in a separate working directory.
+   - If GitHub returns 403 due to public API limits, rerun with an existing `GITHUB_TOKEN` environment
+     variable. Never print or write the token.
+   - Do not continue after pagination, HTTP, parse, or schema errors.
 
-**1. Workflow-Based** (best for sequential processes)
-- Works well when there are clear step-by-step procedures
-- Example: DOCX skill with "Workflow Decision Tree" -> "Reading" -> "Creating" -> "Editing"
-- Structure: ## Overview -> ## Workflow Decision Tree -> ## Step 1 -> ## Step 2...
+3. Establish the architecture story.
+   - Read the account profile plus README files for repositories being labeled.
+   - Replace generic `SYSTEM 01` and `PROJECT 01` labels only when repository evidence supports the role.
+   - Keep GitHub names, descriptions, links, languages, and stars factual. Leave uncertain descriptions blank.
+   - Ask the user before making a semantic choice that materially changes their positioning.
 
-**2. Task-Based** (best for tool collections)
-- Works well when the skill offers different operations/capabilities
-- Example: PDF skill with "Quick Start" -> "Merge PDFs" -> "Split PDFs" -> "Extract Text"
-- Structure: ## Overview -> ## Quick Start -> ## Task Category 1 -> ## Task Category 2...
+4. Compile and validate.
 
-**3. Reference/Guidelines** (best for standards or specifications)
-- Works well for brand guidelines, coding standards, or requirements
-- Example: Brand styling with "Brand Guidelines" -> "Colors" -> "Typography" -> "Features"
-- Structure: ## Overview -> ## Guidelines -> ## Specifications -> ## Usage...
+   ```bash
+   profilectl check --config profile.yaml
+   profilectl build --config profile.yaml --out .profile-output
+   profilectl preview --config profile.yaml
+   ```
 
-**4. Capabilities-Based** (best for integrated systems)
-- Works well when the skill provides multiple interrelated features
-- Example: Product Management with "Core Capabilities" -> numbered capability list
-- Structure: ## Overview -> ## Core Capabilities -> ### 1. Feature -> ### 2. Feature...
+   - Inspect both `/` and `/light` in the preview.
+   - Check headline wrapping, long repository names, node collisions, contrast, reduced-motion behavior, and
+     every outbound link.
+   - Use `profilectl check --online` only when network verification is appropriate.
 
-Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
+5. Stage safely.
+   - Create a new branch in the profile repository.
+   - Copy only `.profile-output/README.md` and `.profile-output/assets/` into the profile repository.
+   - Run `git diff --check`, inspect the full diff, and confirm no unrelated files changed.
+   - Do not commit, push, open a pull request, or merge unless the user authorizes that specific action.
+   - Never force-push and never replace a directory containing `.git`.
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+## Editing rules
 
-## [TODO: Replace with the first main section based on chosen structure]
+- Treat `profile.yaml` as the authoring source; never hand-edit generated SVGs.
+- Preserve dark and light variants together.
+- Prefer one coherent system metaphor over a list of technologies.
+- Keep the hero legible at GitHub's narrow mobile width.
+- Do not add dynamic hosted widgets, tracking pixels, secrets, or scheduled jobs without explicit scope.
+- If existing profile work is stronger in one section, retain it rather than forcing a full replacement.
 
-[TODO: Add content here. See examples in existing skills:
-- Code samples for technical skills
-- Decision trees for complex workflows
-- Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+## Done when
 
-## Resources (optional)
-
-Create only the resource directories this skill actually needs. Delete this section if no resources are required.
-
-### scripts/
-Executable code (Python/Bash/etc.) that can be run directly to perform specific operations.
-
-**Examples from other skills:**
-- PDF skill: `fill_fillable_fields.py`, `extract_form_field_info.py` - utilities for PDF manipulation
-- DOCX skill: `document.py`, `utilities.py` - Python modules for document processing
-
-**Appropriate for:** Python scripts, shell scripts, or any executable code that performs automation, data processing, or specific operations.
-
-**Note:** Scripts may be executed without loading into context, but can still be read by Codex for patching or environment adjustments.
-
-### references/
-Documentation and reference material intended to be loaded into context to inform Codex's process and thinking.
-
-**Examples from other skills:**
-- Product management: `communication.md`, `context_building.md` - detailed workflow guides
-- BigQuery: API reference documentation and query examples
-- Finance: Schema documentation, company policies
-
-**Appropriate for:** In-depth documentation, API references, database schemas, comprehensive guides, or any detailed information that Codex should reference while working.
-
-### assets/
-Files not intended to be loaded into context, but rather used within the output Codex produces.
-
-**Examples from other skills:**
-- Brand styling: PowerPoint template files (.pptx), logo files
-- Frontend builder: HTML/React boilerplate project directories
-- Typography: Font files (.ttf, .woff2)
-
-**Appropriate for:** Templates, boilerplate code, document templates, images, icons, fonts, or any files meant to be copied or used in the final output.
-
----
-
-**Not every skill requires all three types of resources.**
+- `profilectl check` passes from the final config.
+- The four SVGs are valid and reviewed in dark and light modes.
+- The generated README references only files that will be staged.
+- The preview branch diff contains no unrelated or secret material.
+- Semantic labels are supported by repository evidence or explicitly approved by the user.

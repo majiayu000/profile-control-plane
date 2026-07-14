@@ -6,8 +6,12 @@
   "bin": {
     "profilectl": "dist/cli.js"
   },
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "files": [
     "dist",
@@ -25,6 +29,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run format:check && npm run typecheck && npm run test:coverage && npm run build",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run check"
   },
   "engines": {
