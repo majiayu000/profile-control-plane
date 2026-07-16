@@ -55,8 +55,9 @@ function metroStyle(): string {
   return `<style>
     .sans{font-family:Helvetica,Arial,sans-serif}
     .flow{stroke-dasharray:4 22;animation:flow 14s linear infinite}
-    @keyframes flow{to{stroke-dashoffset:-260}}
-    @media(prefers-reduced-motion:reduce){.flow{animation:none}}
+    .train{stroke-dasharray:1 99;animation:train 7s linear infinite}
+    @keyframes flow{to{stroke-dashoffset:-260}}@keyframes train{to{stroke-dashoffset:-100}}
+    @media(prefers-reduced-motion:reduce){.flow,.train{animation:none}}
   </style>`;
 }
 
@@ -148,10 +149,14 @@ function heroLines(palette: MetroPalette, colors: readonly string[]): string {
       `<path d="${d}" fill="none" stroke="${colors[i % colors.length]}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>`,
   ).join("");
   const flow = `<path class="flow" d="${HERO_LINE_PATHS[0]}" fill="none" stroke="${palette.stationFill}" stroke-width="3" stroke-linecap="round" opacity=".55"/>`;
+  const trains = HERO_LINE_PATHS.map(
+    (d, index) =>
+      `<path class="train" style="animation-duration:${(6.2 + index * 1.1).toFixed(1)}s;animation-delay:-${(index * 1.7).toFixed(1)}s" pathLength="100" d="${d}" fill="none" stroke="${palette.stationRing}" stroke-width="5" stroke-linecap="round"/>`,
+  ).join("");
   const arrowA = `<path d="M1094 236L1116 246L1094 256Z" fill="${colors[0]}"/>`;
   const arrowC = `<path d="M1094 186L1116 196L1094 206Z" fill="${colors[2 % colors.length]}"/>`;
   const terminus = `<rect x="972" y="207" width="18" height="18" rx="3" fill="${colors[1 % colors.length]}" stroke="${palette.stationRing}" stroke-width="2"/>`;
-  return `${paths}${flow}${arrowA}${arrowC}${terminus}`;
+  return `${paths}${flow}${trains}${arrowA}${arrowC}${terminus}`;
 }
 
 function heroStations(
@@ -234,7 +239,8 @@ function loopLine(
       return `${ring}<text transform="translate(${(x + 4).toFixed(1)} ${(route.levelY - 9).toFixed(1)}) rotate(-45)" class="sans" font-size="8" fill="${palette.ink}">${escapeXml(shorten(project.repo, 14))}</text>`;
     })
     .join("");
-  return `<path d="${loopRoutePath(route)}" fill="none" stroke="${color}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>${stations}`;
+  const path = loopRoutePath(route);
+  return `<path d="${path}" fill="none" stroke="${color}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><path class="train" style="animation-duration:${(6.8 + index * 0.9).toFixed(1)}s;animation-delay:-${(index * 1.4).toFixed(1)}s" pathLength="100" d="${path}" fill="none" stroke="${palette.stationRing}" stroke-width="4.5" stroke-linecap="round"/>${stations}`;
 }
 
 function metroLegend(

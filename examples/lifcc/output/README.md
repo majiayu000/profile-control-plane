@@ -12,9 +12,9 @@ Building the systems around coding agents — from skills and trust to memory an
 
 | Repository | Role | Purpose |
 | --- | --- | --- |
-| [`claude-skill-registry`](https://github.com/majiayu000/claude-skill-registry) ![stars](https://img.shields.io/github/stars/majiayu000/claude--skill--registry?style=flat-square&label=%E2%98%85) | EXTEND | The comprehensive discovery layer for Claude Code skills\. |
+| [`claude-skill-registry`](https://github.com/majiayu000/claude-skill-registry) ![stars](https://img.shields.io/github/stars/majiayu000/claude-skill-registry?style=flat-square&label=%E2%98%85) | EXTEND | The comprehensive discovery layer for Claude Code skills\. |
 | [`spellbook`](https://github.com/majiayu000/spellbook) ![stars](https://img.shields.io/github/stars/majiayu000/spellbook?style=flat-square&label=%E2%98%85) | EXTEND | Cross-runtime skills for Claude Code, Codex, and multi-agent workflows\. |
-| [`litellm-rs`](https://github.com/majiayu000/litellm-rs) ![stars](https://img.shields.io/github/stars/majiayu000/litellm--rs?style=flat-square&label=%E2%98%85) | ROUTE | High-performance Rust gateway for 100\+ LLM APIs through one format\. |
+| [`litellm-rs`](https://github.com/majiayu000/litellm-rs) ![stars](https://img.shields.io/github/stars/majiayu000/litellm-rs?style=flat-square&label=%E2%98%85) | ROUTE | High-performance Rust gateway for 100\+ LLM APIs through one format\. |
 | [`harness`](https://github.com/majiayu000/harness) ![stars](https://img.shields.io/github/stars/majiayu000/harness?style=flat-square&label=%E2%98%85) | ORCHESTRATE | Governed fleets of parallel coding agents, powered by a Rust control plane\. |
 | [`vibeguard`](https://github.com/majiayu000/vibeguard) ![stars](https://img.shields.io/github/stars/majiayu000/vibeguard?style=flat-square&label=%E2%98%85) | TRUST | Rules, hooks, and guards against hallucinated or unverified agent changes\. |
 | [`remem`](https://github.com/majiayu000/remem) ![stars](https://img.shields.io/github/stars/majiayu000/remem?style=flat-square&label=%E2%98%85) | REMEMBER | Local-first, auditable memory for long-running Claude Code and Codex work\. |

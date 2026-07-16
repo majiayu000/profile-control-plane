@@ -67,6 +67,63 @@ describe("profile compiler", () => {
     expect(new Set(heroes).size).toBe(THEME_PRESETS.length);
   });
 
+  it("wires visible, staggered motion into the control-plane hero", () => {
+    const hero =
+      compileProfile(validConfig).files.find(
+        (file) => file.path === "assets/hero-dark.svg",
+      )?.content ?? "";
+
+    expect(hero).toContain("@keyframes scan");
+    expect(hero).toContain('class="scan"');
+    expect(hero).toContain('class="flow"');
+    expect(hero.match(/class="node"/g)).toHaveLength(validConfig.layers.length);
+    expect(hero).toContain("animation-delay:.32s");
+    expect(hero).toContain("prefers-reduced-motion:reduce");
+  });
+
+  it("renders distinct signature motion for control-plane, metro, and constellation", () => {
+    const asset = (preset: ThemePreset, path: string): string =>
+      compileProfile({
+        ...validConfig,
+        theme: { ...validConfig.theme, preset },
+      }).files.find((file) => file.path === path)?.content ?? "";
+
+    const controlHero = asset("control-plane", "assets/hero-dark.svg");
+    const controlLoop = asset("control-plane", "assets/closed-loop-dark.svg");
+    expect(controlHero).toContain("@keyframes boot");
+    expect(controlHero).toContain('class="boot"');
+    expect(controlLoop.match(/class="packet"/g)).toHaveLength(2);
+
+    const metroHero = asset("metro", "assets/hero-dark.svg");
+    const metroLoop = asset("metro", "assets/closed-loop-dark.svg");
+    expect(metroHero).toContain("@keyframes train");
+    expect(metroHero.match(/class="train"/g)).toHaveLength(3);
+    expect(metroLoop).toContain('class="train"');
+
+    const constellationHero = asset("constellation", "assets/hero-dark.svg");
+    const constellationLoop = asset(
+      "constellation",
+      "assets/closed-loop-dark.svg",
+    );
+    expect(constellationHero).toContain("@keyframes signal");
+    expect(constellationHero).toContain('class="signal"');
+    expect(constellationHero.match(/class="major"/g)).toHaveLength(
+      validConfig.layers.length,
+    );
+    expect(constellationLoop).toContain('class="signal"');
+
+    for (const svg of [
+      controlHero,
+      controlLoop,
+      metroHero,
+      metroLoop,
+      constellationHero,
+      constellationLoop,
+    ]) {
+      expect(svg).toContain("prefers-reduced-motion:reduce");
+    }
+  });
+
   it("renders each new template's signature structure", () => {
     const signatures = new Map([
       ["terminal", ["whoami", "tree layers"]],

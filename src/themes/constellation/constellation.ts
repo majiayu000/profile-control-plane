@@ -71,9 +71,10 @@ function unit(seed: string): number {
 function constellationStyle(): string {
   return `<style>
     .display{font-family:Georgia,"Times New Roman",serif}.body{font-family:"Avenir Next",Avenir,Helvetica,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-    .tw{animation:tw 3.4s ease-in-out infinite}
-    @keyframes tw{50%{opacity:.2}}
-    @media(prefers-reduced-motion:reduce){.tw{animation:none}}
+    .tw{animation:tw 3.4s ease-in-out infinite}.signal{stroke-dasharray:2 98;animation:signal 6s linear infinite}
+    .major{transform-box:fill-box;transform-origin:center;animation:major 4.8s ease-in-out infinite}
+    @keyframes tw{50%{opacity:.2}}@keyframes signal{to{stroke-dashoffset:-100}}@keyframes major{0%,44%,100%{opacity:.62;transform:scale(.88)}12%,30%{opacity:1;transform:scale(1.12)}}
+    @media(prefers-reduced-motion:reduce){.tw,.signal,.major{animation:none}}
   </style>`;
 }
 
@@ -164,9 +165,10 @@ function heroConstellation(
   const layers = config.layers.slice(0, 12);
   const seed = `${config.github.username}:hero`;
   const points = gridPoints(seed, layers.length, 4, 3, 560, 52, 596, 244);
+  const path = polylinePath(points);
   const line =
     points.length > 1
-      ? `<path d="${polylinePath(points)}" fill="none" stroke="url(#cline)" stroke-width="1.3" stroke-opacity=".55"/>`
+      ? `<path d="${path}" fill="none" stroke="url(#cline)" stroke-width="1.3" stroke-opacity=".55"/><path class="signal" pathLength="100" d="${path}" fill="none" stroke="${palette.star}" stroke-width="3.5" stroke-linecap="round"${palette.glow}/>`
       : "";
   const stars = layers
     .map((layer, index) => {
@@ -177,8 +179,10 @@ function heroConstellation(
       const x = point.x.toFixed(1);
       const y = point.y.toFixed(1);
       const labelY = (point.y - radius - 7).toFixed(1);
+      const delay =
+        index === 0 ? "0" : (index * 0.32).toFixed(2).replace(/^0/, "");
       return `<g>
-        <circle cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}"${palette.glow}/>
+        <circle class="major" style="animation-delay:${delay}s" cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}"${palette.glow}/>
         <text x="${x}" y="${labelY}" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="${palette.muted}">${escapeXml(shorten(layer.project, 18))}</text>
       </g>`;
     })
@@ -214,9 +218,10 @@ function loopConstellation(
     760,
     190,
   );
+  const path = polylinePath(points);
   const line =
     points.length > 1
-      ? `<path d="${polylinePath(points)}" fill="none" stroke="url(#cline)" stroke-width="1.3" stroke-opacity=".55"/>`
+      ? `<path d="${path}" fill="none" stroke="url(#cline)" stroke-width="1.3" stroke-opacity=".55"/><path class="signal" pathLength="100" d="${path}" fill="none" stroke="${palette.star}" stroke-width="3.5" stroke-linecap="round"${palette.glow}/>`
       : "";
   const stars = layers
     .map((layer, index) => {
@@ -228,8 +233,10 @@ function loopConstellation(
       const y = point.y.toFixed(1);
       const nameY = (point.y + radius + 14).toFixed(1);
       const projectY = (point.y + radius + 26).toFixed(1);
+      const delay =
+        index === 0 ? "0" : (index * 0.32).toFixed(2).replace(/^0/, "");
       return `<g>
-        <circle cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}"${palette.glow}/>
+        <circle class="major" style="animation-delay:${delay}s" cx="${x}" cy="${y}" r="${radius.toFixed(1)}" fill="${color}"${palette.glow}/>
         <text x="${x}" y="${nameY}" text-anchor="middle" class="body" font-size="10" font-weight="800" fill="${palette.ink}">${escapeXml(shorten(layer.name, 14))}</text>
         <text x="${x}" y="${projectY}" text-anchor="middle" class="mono" font-size="8" fill="${palette.muted}">${escapeXml(shorten(layer.project, 16))}</text>
       </g>`;
