@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc field taxonomy" data-mode="dark">
+      <defs>
+    <pattern id="field-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#47574E" stroke-opacity=".12"/><path d="M5 28l4-4M23 8l4-4" stroke="#6992A8" stroke-opacity=".13"/></pattern>
+    <filter id="field-mineral" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .032 0"/></filter>
+    <g id="field-specimen-pin"><path d="M0-9V9" stroke="#C56350"/><circle cy="-10" r="3.2" fill="#C56350"/><path d="M-5 9H5" stroke="#6992A8"/></g>
+  </defs><style>
+    .field-serif{font-family:Iowan Old Style,Palatino Linotype,Book Antiqua,Georgia,serif}.field-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.field-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .field-trace{stroke-dasharray:4 8;animation:field-trace 9s linear infinite}.field-pin{transform-box:fill-box;transform-origin:center;animation:field-pin 3.8s ease-in-out infinite}.field-rise{animation:field-rise .68s cubic-bezier(.2,.75,.2,1) both}
+    @keyframes field-trace{to{stroke-dashoffset:-120}}@keyframes field-pin{50%{opacity:.45;transform:scale(.78)}}@keyframes field-rise{from{opacity:.18;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.field-trace,.field-pin,.field-rise{animation:none}}
+  </style><rect width="1200" height="330" fill="#101916"/><rect x="14" y="14" width="1172" height="302" fill="#1B2722" stroke="#47574E"/><rect x="14" y="14" width="1172" height="302" fill="url(#field-grid)"/><rect x="14" y="14" width="1172" height="302" filter="url(#field-mineral)" opacity=".4" pointer-events="none"/>
+      <rect x="29" y="29" width="235" height="272" fill="#22312A" fill-opacity=".62" stroke="#47574E"/><text x="50" y="54" class="field-mono" font-size="8" letter-spacing="2.1" fill="#6992A8">DICHOTOMOUS KEY</text><text x="50" y="91" class="field-serif" font-size="21" font-style="italic" fill="#E8E8DA">Layer taxonomy</text>
+      <path d="M58 244C57 207 86 186 77 151C69 120 88 94 111 75" fill="none" stroke="#699078" stroke-width="2.5"/><path class="field-trace" d="M58 244C57 207 86 186 77 151C69 120 88 94 111 75" fill="none" stroke="#6992A8"/><g transform="translate(58 245)"><use class="field-pin" href="#field-specimen-pin"/></g>
+      <text x="184" y="190" text-anchor="middle" class="field-serif" font-size="58" font-weight="700" fill="#E8E8DA">08</text><text x="184" y="216" text-anchor="middle" class="field-mono" font-size="8" letter-spacing="1.8" fill="#C56350">TAXA OBSERVED</text><text x="50" y="280" class="field-label" font-size="9" fill="#A7AFA4">LIFCC</text>
+      <text x="309" y="40" class="field-serif" font-size="17" font-style="italic" fill="#E8E8DA">LAYER TAXONOMY / CLASSIFICATION KEY</text><text x="1146" y="40" text-anchor="end" class="field-mono" font-size="8" letter-spacing="1.4" fill="#A7AFA4">AI AGENT INFRASTRUCTURE</text><path d="M309 52H1146" stroke="#47574E"/><path d="M727 61V303" stroke="#47574E"/>
+      <g class="field-rise" style="animation-delay:0ms">
+        <path d="M290 91C301 91 299 73 312 73" fill="none" stroke="#699078"/><g transform="translate(317 73) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="334" y="70" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#699078">01 / DIRECT</text><text x="500" y="70" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">sage</text>
+        <text x="334" y="87" class="field-label" font-size="8.5" fill="#A7AFA4">A fast coding agent in pure Rust</text><path d="M334 95H708" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:42ms">
+        <path d="M290 138C301 138 299 120 312 120" fill="none" stroke="#699078"/><g transform="translate(317 120) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="334" y="117" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#699078">02 / EXTEND</text><text x="500" y="117" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">claude-skill-registry</text>
+        <text x="334" y="134" class="field-label" font-size="8.5" fill="#A7AFA4">Discovery and distribution for agent skills</text><path d="M334 142H708" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:84ms">
+        <path d="M290 185C301 185 299 167 312 167" fill="none" stroke="#699078"/><g transform="translate(317 167) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="334" y="164" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#699078">03 / TRUST</text><text x="500" y="164" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">vibeguard</text>
+        <text x="334" y="181" class="field-label" font-size="8.5" fill="#A7AFA4">Rules and guards against unverified changes</text><path d="M334 189H708" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:126ms">
+        <path d="M290 232C301 232 299 214 312 214" fill="none" stroke="#699078"/><g transform="translate(317 214) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="334" y="211" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#699078">04 / REMEMBER</text><text x="500" y="211" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">remem</text>
+        <text x="334" y="228" class="field-label" font-size="8.5" fill="#A7AFA4">Local-first auditable agent memory</text><path d="M334 236H708" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:168ms">
+        <path d="M290 279C301 279 299 261 312 261" fill="none" stroke="#C56350"/><g transform="translate(317 261) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="334" y="258" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#C56350">05 / ORCHESTRATE</text><text x="500" y="258" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">harness</text>
+        <text x="334" y="275" class="field-label" font-size="8.5" fill="#A7AFA4">Governed fleets of parallel coding agents</text><path d="M334 283H708" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:210ms">
+        <path d="M728 91C739 91 737 73 750 73" fill="none" stroke="#C56350"/><g transform="translate(755 73) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="772" y="70" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#C56350">06 / ROUTE</text><text x="938" y="70" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">litellm-rs</text>
+        <text x="772" y="87" class="field-label" font-size="8.5" fill="#A7AFA4">One high-performance gateway for 100+ LLM APIs</text><path d="M772 95H1146" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:252ms">
+        <path d="M728 138C739 138 737 120 750 120" fill="none" stroke="#C56350"/><g transform="translate(755 120) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="772" y="117" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#C56350">07 / GOVERN</text><text x="938" y="117" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">specrail</text>
+        <text x="772" y="134" class="field-label" font-size="8.5" fill="#A7AFA4">Spec-first repository workflow rails</text><path d="M772 142H1146" stroke="#47574E"/>
+      </g><g class="field-rise" style="animation-delay:294ms">
+        <path d="M728 185C739 185 737 167 750 167" fill="none" stroke="#C56350"/><g transform="translate(755 167) scale(.72)"><use class="field-pin" href="#field-specimen-pin"/></g>
+        <text x="772" y="164" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#C56350">08 / KEEP</text><text x="938" y="164" class="field-serif" font-size="11" font-style="italic" fill="#E8E8DA">keepline</text>
+        <text x="772" y="181" class="field-label" font-size="8.5" fill="#A7AFA4">Monitor and recover long-running agent work</text><path d="M772 189H1146" stroke="#47574E"/>
+      </g><circle cx="1129" cy="293" r="3" fill="#00A7D1"/><circle cx="1141" cy="293" r="3" fill="#E84A8A"/>
+    </svg>

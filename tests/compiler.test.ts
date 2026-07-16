@@ -52,6 +52,10 @@ describe("profile compiler", () => {
       ["metro", "## Interchange stations"],
       ["command-deck", "## Mission-critical systems"],
       ["signal-grid", "## Primary signals"],
+      ["monolith", "## Selected proofs"],
+      ["interlace", "## Anchor threads"],
+      ["cipher-print", "## Registered works"],
+      ["field-specimen", "## Reference specimens"],
     ]);
     const heroes = THEME_PRESETS.map((preset) => {
       const output = compileProfile({
@@ -134,6 +138,13 @@ describe("profile compiler", () => {
       ["metro", ["NETWORK MAP", "DEPOT"]],
       ["command-deck", ["COMMAND_DECK", "COMMAND BUS"]],
       ["signal-grid", ["SIGNAL_GRID", "NETWORK TOPOLOGY"]],
+      ["monolith", ["MONOLITH / MASS STUDY", "MONOLITH / STRATA INDEX"]],
+      ["interlace", ["INTERLACE / OPEN LOOM", "INTERLACE / WEAVE MAP"]],
+      ["cipher-print", ["CIPHER PRINT / OPEN SYSTEMS FOLIO", "GUILLOCHÉ KEY"]],
+      [
+        "field-specimen",
+        ["FIELD SPECIMEN / SYSTEMATIC INDEX", "CLASSIFICATION KEY"],
+      ],
     ]);
     for (const [preset, probes] of signatures) {
       const output = compileProfile({
@@ -273,6 +284,10 @@ describe("escaping and palette utilities", () => {
     expect(publicApi.MetroRenderer).toBeTypeOf("function");
     expect(publicApi.CommandDeckRenderer).toBeTypeOf("function");
     expect(publicApi.SignalGridRenderer).toBeTypeOf("function");
+    expect(publicApi.MonolithRenderer).toBeTypeOf("function");
+    expect(publicApi.InterlaceRenderer).toBeTypeOf("function");
+    expect(publicApi.CipherPrintRenderer).toBeTypeOf("function");
+    expect(publicApi.FieldSpecimenRenderer).toBeTypeOf("function");
     expect(publicApi.THEME_PRESETS).toEqual(THEME_PRESETS);
   });
 });

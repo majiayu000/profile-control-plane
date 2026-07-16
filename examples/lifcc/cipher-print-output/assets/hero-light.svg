@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc cipher print profile" data-mode="light">
+      <defs>
+    <pattern id="cipher-paper" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#B8A58F" stroke-opacity=".13"/><circle cx="4" cy="4" r=".65" fill="#B8A58F" fill-opacity=".2"/></pattern>
+    <pattern id="cipher-weave" width="72" height="24" patternUnits="userSpaceOnUse"><path d="M-18 12C0-3 18-3 36 12S72 27 90 12" fill="none" stroke="#68466E" stroke-opacity=".2"/><path d="M-18 12C0 27 18 27 36 12S72-3 90 12" fill="none" stroke="#337B6D" stroke-opacity=".18"/></pattern>
+    <g id="cipher-rosette" fill="none"><ellipse rx="96" ry="31" stroke="#68466E"/><ellipse rx="96" ry="31" transform="rotate(30)" stroke="#337B6D"/><ellipse rx="96" ry="31" transform="rotate(60)" stroke="#68466E"/><ellipse rx="96" ry="31" transform="rotate(90)" stroke="#B84837"/><ellipse rx="96" ry="31" transform="rotate(120)" stroke="#68466E"/><ellipse rx="96" ry="31" transform="rotate(150)" stroke="#337B6D"/><circle r="67" stroke="#B8A58F" stroke-dasharray="1 5"/><circle r="18" stroke="#B84837"/></g>
+  </defs><style>
+    .cipher-display{font-family:Iowan Old Style,Palatino Linotype,Book Antiqua,Georgia,serif}.cipher-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.cipher-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .cipher-orbit{transform-box:fill-box;transform-origin:center;animation:cipher-orbit 22s linear infinite}.cipher-thread{stroke-dasharray:2 12;animation:cipher-thread 8s linear infinite}.cipher-reveal{animation:cipher-reveal .72s cubic-bezier(.2,.75,.2,1) both}
+    @keyframes cipher-orbit{to{transform:rotate(360deg)}}@keyframes cipher-thread{to{stroke-dashoffset:-112}}@keyframes cipher-reveal{from{opacity:.18;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.cipher-orbit,.cipher-thread,.cipher-reveal{animation:none}}
+  </style><rect width="1200" height="360" fill="#D4C4AB"/><rect x="14" y="14" width="1172" height="332" rx="2" fill="#F3E8D2" stroke="#B8A58F"/><rect x="14" y="14" width="1172" height="332" fill="url(#cipher-paper)"/>
+      <rect x="28" y="28" width="620" height="304" fill="none" stroke="#B8A58F"/><rect x="663" y="28" width="494" height="304" fill="#FBF2E2" fill-opacity=".38" stroke="#B8A58F"/><path d="M672 57H1145" stroke="#68466E"/><path class="cipher-thread" d="M672 59H1145" stroke="#337B6D" stroke-width="2"/>
+      <g transform="translate(582 181)" opacity=".27"><use class="cipher-orbit" href="#cipher-rosette"/></g><rect x="28" y="294" width="620" height="38" fill="url(#cipher-weave)"/>
+      <g class="cipher-reveal"><text x="52" y="51" class="cipher-mono" font-size="8" letter-spacing="2.5" fill="#337B6D">CIPHER PRINT / OPEN SYSTEMS FOLIO</text><text x="624" y="51" text-anchor="end" class="cipher-mono" font-size="8" letter-spacing="1.5" fill="#776B70">PLATE 08 · BEIJING · UTC+8</text>
+      <text x="52" y="83" class="cipher-label" font-size="12" font-weight="800" letter-spacing="2" fill="#68466E">LIFCC</text>
+      <text x="49" y="137" class="cipher-display" font-size="36" font-weight="700" fill="#35283A">AI AGENT INFRASTRUCTURE</text>
+      <path d="M52 213H392" stroke="#B84837" stroke-width="3"/><text x="52" y="241" class="cipher-label" font-size="11" fill="#776B70">Building the systems around coding agents — from skills and trust to memory and o…</text>
+      <text x="52" y="278" class="cipher-mono" font-size="8" letter-spacing="1.7" fill="#35283A">ROSETTE 06 / LAYER REGISTER 08</text></g>
+      <text x="687" y="48" class="cipher-display" font-size="16" font-style="italic" fill="#35283A">Flagship impressions</text><text x="1138" y="48" text-anchor="end" class="cipher-mono" font-size="8" letter-spacing="1.4" fill="#776B70">06 IMPRESSIONS</text><g class="cipher-reveal" style="animation-delay:90ms">
+        <circle cx="697" cy="74" r="7" fill="#FBF2E2" stroke="#337B6D"/><circle cx="697" cy="74" r="2" fill="#337B6D"/>
+        <text x="717" y="71" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">claude-skill-registry</text><text x="1138" y="71" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#337B6D">EXTEND</text>
+        <text x="717" y="89" class="cipher-label" font-size="9" fill="#776B70">The comprehensive discovery layer for Claude Code skills.</text><path d="M717 98H1138" stroke="#B8A58F"/>
+      </g><g class="cipher-reveal" style="animation-delay:145ms">
+        <circle cx="697" cy="117" r="7" fill="#FBF2E2" stroke="#337B6D"/><circle cx="697" cy="117" r="2" fill="#337B6D"/>
+        <text x="717" y="114" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">spellbook</text><text x="1138" y="114" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#337B6D">EXTEND</text>
+        <text x="717" y="132" class="cipher-label" font-size="9" fill="#776B70">Cross-runtime skills for Claude Code, Codex, and multi-agent work…</text><path d="M717 141H1138" stroke="#B8A58F"/>
+      </g><g class="cipher-reveal" style="animation-delay:200ms">
+        <circle cx="697" cy="160" r="7" fill="#FBF2E2" stroke="#B84837"/><circle cx="697" cy="160" r="2" fill="#B84837"/>
+        <text x="717" y="157" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">litellm-rs</text><text x="1138" y="157" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#B84837">ROUTE</text>
+        <text x="717" y="175" class="cipher-label" font-size="9" fill="#776B70">High-performance Rust gateway for 100+ LLM APIs through one forma…</text><path d="M717 184H1138" stroke="#B8A58F"/>
+      </g><g class="cipher-reveal" style="animation-delay:255ms">
+        <circle cx="697" cy="203" r="7" fill="#FBF2E2" stroke="#B84837"/><circle cx="697" cy="203" r="2" fill="#B84837"/>
+        <text x="717" y="200" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">harness</text><text x="1138" y="200" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#B84837">ORCHESTRATE</text>
+        <text x="717" y="218" class="cipher-label" font-size="9" fill="#776B70">Governed fleets of parallel coding agents, powered by a Rust cont…</text><path d="M717 227H1138" stroke="#B8A58F"/>
+      </g><g class="cipher-reveal" style="animation-delay:310ms">
+        <circle cx="697" cy="246" r="7" fill="#FBF2E2" stroke="#B84837"/><circle cx="697" cy="246" r="2" fill="#B84837"/>
+        <text x="717" y="243" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">vibeguard</text><text x="1138" y="243" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#B84837">TRUST</text>
+        <text x="717" y="261" class="cipher-label" font-size="9" fill="#776B70">Rules, hooks, and guards against hallucinated or unverified agent…</text><path d="M717 270H1138" stroke="#B8A58F"/>
+      </g><g class="cipher-reveal" style="animation-delay:365ms">
+        <circle cx="697" cy="289" r="7" fill="#FBF2E2" stroke="#B84837"/><circle cx="697" cy="289" r="2" fill="#B84837"/>
+        <text x="717" y="286" class="cipher-label" font-size="12" font-weight="800" fill="#35283A">remem</text><text x="1138" y="286" text-anchor="end" class="cipher-mono" font-size="7.5" letter-spacing="1.4" fill="#B84837">REMEMBER</text>
+        <text x="717" y="304" class="cipher-label" font-size="9" fill="#776B70">Local-first, auditable memory for long-running Claude Code and Co…</text><path d="M717 313H1138" stroke="#B8A58F"/>
+      </g>
+      <circle cx="43" cy="315" r="3" fill="#00A7D1"/><circle cx="55" cy="315" r="3" fill="#E84A8A"/><path d="M67 315H116" stroke="#35283A"/><path d="M1145 315h-22m11-11v22" stroke="#B84837"/>
+    </svg>

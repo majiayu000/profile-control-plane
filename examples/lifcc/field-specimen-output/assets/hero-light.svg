@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc field specimen profile" data-mode="light">
+      <defs>
+    <pattern id="field-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#AAB2A8" stroke-opacity=".12"/><path d="M5 28l4-4M23 8l4-4" stroke="#3E718E" stroke-opacity=".13"/></pattern>
+    <filter id="field-mineral" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .032 0"/></filter>
+    <g id="field-specimen-pin"><path d="M0-9V9" stroke="#A74838"/><circle cy="-10" r="3.2" fill="#A74838"/><path d="M-5 9H5" stroke="#3E718E"/></g>
+  </defs><style>
+    .field-serif{font-family:Iowan Old Style,Palatino Linotype,Book Antiqua,Georgia,serif}.field-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.field-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .field-trace{stroke-dasharray:4 8;animation:field-trace 9s linear infinite}.field-pin{transform-box:fill-box;transform-origin:center;animation:field-pin 3.8s ease-in-out infinite}.field-rise{animation:field-rise .68s cubic-bezier(.2,.75,.2,1) both}
+    @keyframes field-trace{to{stroke-dashoffset:-120}}@keyframes field-pin{50%{opacity:.45;transform:scale(.78)}}@keyframes field-rise{from{opacity:.18;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.field-trace,.field-pin,.field-rise{animation:none}}
+  </style><rect width="1200" height="360" fill="#CFD2C7"/><rect x="14" y="14" width="1172" height="332" fill="#E8E9DE" stroke="#AAB2A8"/><rect x="14" y="14" width="1172" height="332" fill="url(#field-grid)"/><rect x="14" y="14" width="1172" height="332" filter="url(#field-mineral)" opacity=".42" pointer-events="none"/>
+      <rect x="30" y="30" width="520" height="300" fill="#F3F3E9" fill-opacity=".58" stroke="#AAB2A8"/><path d="M50 58H526" stroke="#3E718E"/><path d="M565 30V330" stroke="#AAB2A8"/><g fill="none" stroke-linecap="round">
+    <path d="M605 309C599 268 633 235 621 194C609 153 630 116 650 80C659 63 661 47 659 35" stroke="#315D49" stroke-width="3"/>
+    <path class="field-trace" d="M605 309C599 268 633 235 621 194C609 153 630 116 650 80C659 63 661 47 659 35" stroke="#3E718E" stroke-width="1.5"/>
+    <path d="M623 196C597 182 582 163 574 141M632 116C609 105 595 89 586 69M616 244C638 232 651 216 659 197" stroke="#315D49" stroke-width="1.4"/>
+    <circle cx="574" cy="141" r="3" fill="#A74838" stroke="none"/><circle cx="586" cy="69" r="3" fill="#3E718E" stroke="none"/><circle cx="659" cy="197" r="3" fill="#A74838" stroke="none"/>
+  </g>
+      <g class="field-rise"><text x="50" y="49" class="field-mono" font-size="8" letter-spacing="2.3" fill="#3E718E">FIELD SPECIMEN / SYSTEMATIC INDEX</text><text x="50" y="82" class="field-label" font-size="12" font-weight="800" letter-spacing="2" fill="#315D49">LIFCC</text>
+      <text x="48" y="133" class="field-serif" font-size="36" font-weight="700" fill="#24332C">AI AGENT</text><text x="48" y="169" class="field-serif" font-size="36" font-style="italic" fill="#24332C">INFRASTRUCTURE</text>
+      <path d="M50 210H132" stroke="#A74838" stroke-width="4"/><text x="50" y="238" class="field-label" font-size="11" fill="#68736B">Building the systems around coding agents — from skills and trust to memo…</text>
+      <text x="50" y="276" class="field-mono" font-size="8" letter-spacing="1.5" fill="#24332C">06 SPECIMENS · 08 CLASSIFIED LAYERS</text><text x="50" y="308" class="field-mono" font-size="8" letter-spacing="1.6" fill="#68736B">SITE / BEIJING · UTC+8</text></g>
+      <text x="763" y="47" class="field-serif" font-size="16" font-style="italic" fill="#24332C">Pinned systems</text><text x="1142" y="47" text-anchor="end" class="field-mono" font-size="8" letter-spacing="1.4" fill="#68736B">CATALOG / MAJIAYU000</text><g class="field-rise" style="animation-delay:100ms">
+        <path d="M625 151.5C668 151.5 691 70 733 70" fill="none" stroke="#315D49" stroke-opacity=".72"/><path class="field-trace" d="M625 151.5C668 151.5 691 70 733 70" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 70)"><use class="field-pin" style="animation-delay:0.00s" href="#field-specimen-pin"/></g>
+        <text x="763" y="66" class="field-label" font-size="12" font-weight="800" fill="#24332C">claude-skill-registry</text><text x="1142" y="66" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#315D49">EXTEND</text>
+        <text x="763" y="83" class="field-label" font-size="8.7" fill="#68736B">The comprehensive discovery layer for Claude Code skills.</text><path d="M763 92H1142" stroke="#AAB2A8"/>
+      </g><g class="field-rise" style="animation-delay:155ms">
+        <path d="M625 160.5C668 160.5 691 114 733 114" fill="none" stroke="#315D49" stroke-opacity=".72"/><path class="field-trace" d="M625 160.5C668 160.5 691 114 733 114" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 114)"><use class="field-pin" style="animation-delay:0.31s" href="#field-specimen-pin"/></g>
+        <text x="763" y="110" class="field-label" font-size="12" font-weight="800" fill="#24332C">spellbook</text><text x="1142" y="110" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#315D49">EXTEND</text>
+        <text x="763" y="127" class="field-label" font-size="8.7" fill="#68736B">Cross-runtime skills for Claude Code, Codex, and multi-age…</text><path d="M763 136H1142" stroke="#AAB2A8"/>
+      </g><g class="field-rise" style="animation-delay:210ms">
+        <path d="M625 169.5C668 169.5 691 158 733 158" fill="none" stroke="#A74838" stroke-opacity=".72"/><path class="field-trace" d="M625 169.5C668 169.5 691 158 733 158" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 158)"><use class="field-pin" style="animation-delay:0.62s" href="#field-specimen-pin"/></g>
+        <text x="763" y="154" class="field-label" font-size="12" font-weight="800" fill="#24332C">litellm-rs</text><text x="1142" y="154" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#A74838">ROUTE</text>
+        <text x="763" y="171" class="field-label" font-size="8.7" fill="#68736B">High-performance Rust gateway for 100+ LLM APIs through on…</text><path d="M763 180H1142" stroke="#AAB2A8"/>
+      </g><g class="field-rise" style="animation-delay:265ms">
+        <path d="M625 178.5C668 178.5 691 202 733 202" fill="none" stroke="#A74838" stroke-opacity=".72"/><path class="field-trace" d="M625 178.5C668 178.5 691 202 733 202" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 202)"><use class="field-pin" style="animation-delay:0.93s" href="#field-specimen-pin"/></g>
+        <text x="763" y="198" class="field-label" font-size="12" font-weight="800" fill="#24332C">harness</text><text x="1142" y="198" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#A74838">ORCHESTRATE</text>
+        <text x="763" y="215" class="field-label" font-size="8.7" fill="#68736B">Governed fleets of parallel coding agents, powered by a Ru…</text><path d="M763 224H1142" stroke="#AAB2A8"/>
+      </g><g class="field-rise" style="animation-delay:320ms">
+        <path d="M625 187.5C668 187.5 691 246 733 246" fill="none" stroke="#A74838" stroke-opacity=".72"/><path class="field-trace" d="M625 187.5C668 187.5 691 246 733 246" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 246)"><use class="field-pin" style="animation-delay:1.24s" href="#field-specimen-pin"/></g>
+        <text x="763" y="242" class="field-label" font-size="12" font-weight="800" fill="#24332C">vibeguard</text><text x="1142" y="242" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#A74838">TRUST</text>
+        <text x="763" y="259" class="field-label" font-size="8.7" fill="#68736B">Rules, hooks, and guards against hallucinated or unverifie…</text><path d="M763 268H1142" stroke="#AAB2A8"/>
+      </g><g class="field-rise" style="animation-delay:375ms">
+        <path d="M625 196.5C668 196.5 691 290 733 290" fill="none" stroke="#A74838" stroke-opacity=".72"/><path class="field-trace" d="M625 196.5C668 196.5 691 290 733 290" fill="none" stroke="#3E718E" stroke-width="1.5"/>
+        <g transform="translate(741 290)"><use class="field-pin" style="animation-delay:1.55s" href="#field-specimen-pin"/></g>
+        <text x="763" y="286" class="field-label" font-size="12" font-weight="800" fill="#24332C">remem</text><text x="1142" y="286" text-anchor="end" class="field-mono" font-size="7.5" letter-spacing="1.3" fill="#A74838">REMEMBER</text>
+        <text x="763" y="303" class="field-label" font-size="8.7" fill="#68736B">Local-first, auditable memory for long-running Claude Code…</text><path d="M763 312H1142" stroke="#AAB2A8"/>
+      </g>
+      <circle cx="526" cy="315" r="3" fill="#00A7D1"/><circle cx="514" cy="315" r="3" fill="#E84A8A"/><path d="M50 319H94m-22-8v16" stroke="#A74838"/>
+    </svg>

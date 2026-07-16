@@ -14,12 +14,12 @@ Compile a GitHub identity into an animated, dark/light, self-hosted profile READ
 
 Most profile generators render a banner or assemble remote widgets. Profile Control Plane turns your
 repositories into a coherent visual system: a hero, a project map, flagship work, and an expandable module
-registry—all generated from one reviewed YAML file and one of nine distinct templates.
+registry—all generated from one reviewed YAML file and one of thirteen distinct templates.
 
 ## What you get
 
 - One declarative `profile.yaml` as the authoring source of truth.
-- Nine templates, each producing four SVGs with native dark/light variants and reduced-motion support.
+- Thirteen templates, each producing four SVGs with native dark/light variants and reduced-motion support.
 - A generated GitHub-safe `README.md` with escaped metadata and optional star badges.
 - `init`, `build`, `preview`, and `check` commands with typed, fail-closed errors.
 - A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill for evidence-backed
@@ -199,6 +199,82 @@ The default Control Plane hero is shown at the top of this README.
 
 </details>
 
+### Monolith (`monolith`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/monolith-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/monolith-output/assets/hero-light.svg">
+  <img alt="Monolith template" src="examples/lifcc/monolith-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the typographic route</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/monolith-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/monolith-output/assets/closed-loop-light.svg">
+  <img alt="Monolith typographic route" src="examples/lifcc/monolith-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Interlace (`interlace`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/interlace-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/interlace-output/assets/hero-light.svg">
+  <img alt="Interlace template" src="examples/lifcc/interlace-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the project weave</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/interlace-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/interlace-output/assets/closed-loop-light.svg">
+  <img alt="Interlace project weave" src="examples/lifcc/interlace-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Cipher Print (`cipher-print`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/cipher-print-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/cipher-print-output/assets/hero-light.svg">
+  <img alt="Cipher Print template" src="examples/lifcc/cipher-print-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the engraved index</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/cipher-print-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/cipher-print-output/assets/closed-loop-light.svg">
+  <img alt="Cipher Print engraved index" src="examples/lifcc/cipher-print-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Field Specimen (`field-specimen`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/field-specimen-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/field-specimen-output/assets/hero-light.svg">
+  <img alt="Field Specimen template" src="examples/lifcc/field-specimen-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the classification plate</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/field-specimen-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/field-specimen-output/assets/closed-loop-light.svg">
+  <img alt="Field Specimen classification plate" src="examples/lifcc/field-specimen-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
 ## Quick start
 
 The package is currently distributed from GitHub. Build and link the CLI locally:
@@ -271,20 +347,24 @@ See the curated [lifcc configuration](examples/lifcc/profile.yaml) and its [gene
 
 ### Templates
 
-| Preset          | Best fit                                          | Visual language                         |
-| --------------- | ------------------------------------------------- | --------------------------------------- |
-| `control-plane` | Infrastructure, agent systems, connected tooling  | Animated control room and systems loop  |
-| `command-deck`  | Operations-heavy systems and flagship execution   | Mission console and command bus         |
-| `signal-grid`   | Networked projects and relationship-heavy systems | Signal topology and connected mesh      |
-| `editorial`     | Maintainers, researchers, selected body of work   | Technical journal and working index     |
-| `bento-grid`    | Product builders and modular project portfolios   | Connected workbench and signal map      |
-| `terminal`      | CLI tools, daemons, and hands-on builders         | Live shell session and process tree     |
-| `blueprint`     | Spec-driven engineering and deliberate systems    | Engineering drawing and assembly map    |
-| `constellation` | Broad portfolios with a few standout projects     | Animated star atlas and signal chain    |
-| `metro`         | Many repositories grouped into clear domains      | Transit network with moving train paths |
+| Preset           | Best fit                                          | Visual language                         |
+| ---------------- | ------------------------------------------------- | --------------------------------------- |
+| `control-plane`  | Infrastructure, agent systems, connected tooling  | Animated control room and systems loop  |
+| `command-deck`   | Operations-heavy systems and flagship execution   | Mission console and command bus         |
+| `signal-grid`    | Networked projects and relationship-heavy systems | Signal topology and connected mesh      |
+| `editorial`      | Maintainers, researchers, selected body of work   | Technical journal and working index     |
+| `bento-grid`     | Product builders and modular project portfolios   | Connected workbench and signal map      |
+| `terminal`       | CLI tools, daemons, and hands-on builders         | Live shell session and process tree     |
+| `blueprint`      | Spec-driven engineering and deliberate systems    | Engineering drawing and assembly map    |
+| `constellation`  | Broad portfolios with a few standout projects     | Animated star atlas and signal chain    |
+| `metro`          | Many repositories grouped into clear domains      | Transit network with moving train paths |
+| `monolith`       | Focused specialists and assertive bodies of work  | Internationalist typographic poster     |
+| `interlace`      | Work connected across disciplines or layers       | Woven bands and a project loom          |
+| `cipher-print`   | Meticulous systems and high-craft maintainers     | Guilloché engraving and edition marks   |
+| `field-specimen` | Exploratory work and branching research           | Natural-history plate and taxonomy      |
 
 The bundled agent skill can recommend a preset from repository evidence. The user remains the decision
-maker: `profilectl preview --all-templates` renders the same configuration in all nine directions before
+maker: `profilectl preview --all-templates` renders the same configuration in all thirteen directions before
 anything is built or staged.
 
 ## Commands

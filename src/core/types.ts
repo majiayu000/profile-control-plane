@@ -9,7 +9,11 @@ export type ThemePreset =
   | "constellation"
   | "metro"
   | "command-deck"
-  | "signal-grid";
+  | "signal-grid"
+  | "monolith"
+  | "interlace"
+  | "cipher-print"
+  | "field-specimen";
 
 export interface ProfileLink {
   readonly label: string;

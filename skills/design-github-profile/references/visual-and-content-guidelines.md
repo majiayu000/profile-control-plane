@@ -43,17 +43,21 @@ typing gimmicks, exhaustive technology lists, or generic enthusiasm.
 
 ### Supported template directions
 
-| Preset          | Prefer when the evidence shows                               | Reject when                                     |
-| --------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `control-plane` | Connected systems, infrastructure, orchestration, flow       | The repositories do not form an explainable map |
-| `command-deck`  | Operational systems with a few mission-critical flagships    | The work lacks a clear execution hierarchy      |
-| `signal-grid`   | Projects whose relationships and shared signals matter       | The projects are mostly independent             |
-| `editorial`     | A curated body of authored or maintained work                | The account needs dense product comparison      |
-| `bento-grid`    | Distinct products or modules that deserve equal scanning     | The work is one continuous system narrative     |
-| `terminal`      | CLI tools, shells, daemons, a hands-on-keyboard identity     | The audience is non-technical or design-first   |
-| `blueprint`     | Deliberate engineering, specs, protocols, hardware           | The work is exploratory or artistic in nature   |
-| `constellation` | A broad body of related work with a few standout stars       | Repositories need dense technical comparison    |
-| `metro`         | Many repositories organized into clear language/domain lines | The account has few repositories or one domain  |
+| Preset           | Prefer when the evidence shows                               | Reject when                                     |
+| ---------------- | ------------------------------------------------------------ | ----------------------------------------------- |
+| `control-plane`  | Connected systems, infrastructure, orchestration, flow       | The repositories do not form an explainable map |
+| `command-deck`   | Operational systems with a few mission-critical flagships    | The work lacks a clear execution hierarchy      |
+| `signal-grid`    | Projects whose relationships and shared signals matter       | The projects are mostly independent             |
+| `editorial`      | A curated body of authored or maintained work                | The account needs dense product comparison      |
+| `bento-grid`     | Distinct products or modules that deserve equal scanning     | The work is one continuous system narrative     |
+| `terminal`       | CLI tools, shells, daemons, a hands-on-keyboard identity     | The audience is non-technical or design-first   |
+| `blueprint`      | Deliberate engineering, specs, protocols, hardware           | The work is exploratory or artistic in nature   |
+| `constellation`  | A broad body of related work with a few standout stars       | Repositories need dense technical comparison    |
+| `metro`          | Many repositories organized into clear language/domain lines | The account has few repositories or one domain  |
+| `monolith`       | A focused body of work with a strong central thesis          | The work needs dense comparison or soft tone    |
+| `interlace`      | Projects connect across disciplines, layers, or shared craft | The projects are unrelated independent products |
+| `cipher-print`   | Precision, stewardship, and craft are part of the evidence   | The audience needs a casual or playful tone     |
+| `field-specimen` | Exploratory or branching work benefits from classification   | The work is one linear operational pipeline     |
 
 Recommend the strongest evidence fit, then use the all-template preview when another direction remains
 credible. The user's explicit visual preference overrides the recommendation as long as it does not require

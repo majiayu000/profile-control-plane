@@ -79,8 +79,11 @@ rendering after the user has reviewed the semantic positioning.
      operations-heavy systems with a few mission-critical flagships, `signal-grid` for relationship-heavy
      networks, `editorial` for a curated body of authored work, `bento-grid` for distinct modular products,
      `terminal` for a CLI-and-tooling identity, `blueprint` for deliberate spec-driven engineering,
-     `constellation` for a broad body of work with a few standout stars, and `metro` for many repositories
-     that organize into clear language or domain lines (see the template table in
+     `constellation` for a broad body of work with a few standout stars, `metro` for many repositories that
+     organize into clear language or domain lines, `monolith` for a focused body of work that benefits from
+     assertive typographic hierarchy, `interlace` for work connected across disciplines or layers,
+     `cipher-print` for meticulous high-craft systems, and `field-specimen` for exploratory or branching work
+     (see the template table in
      `references/visual-and-content-guidelines.md`). Do not treat these as identity labels; repository
      evidence and user preference take precedence.
 

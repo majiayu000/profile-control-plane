@@ -48,6 +48,22 @@ describe("profile schema", () => {
     }
   });
 
+  it("keeps the registry and JSON Schema preset catalogs identical", async () => {
+    const schema = JSON.parse(
+      await readFile(
+        new URL("../schemas/profile.schema.json", import.meta.url),
+        "utf8",
+      ),
+    ) as {
+      properties: {
+        theme: { properties: { preset: { enum: readonly string[] } } };
+      };
+    };
+    expect(schema.properties.theme.properties.preset.enum).toEqual(
+      THEME_PRESETS,
+    );
+  });
+
   it("rejects duplicate case-insensitive identifiers", async () => {
     const duplicateLayer = {
       ...validConfig,

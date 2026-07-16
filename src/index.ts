@@ -32,4 +32,8 @@ export { ConstellationRenderer } from "./themes/constellation/constellation.js";
 export { MetroRenderer } from "./themes/metro/metro.js";
 export { CommandDeckRenderer } from "./themes/command-deck/command-deck.js";
 export { SignalGridRenderer } from "./themes/signal-grid/signal-grid.js";
+export { MonolithRenderer } from "./themes/monolith/monolith.js";
+export { InterlaceRenderer } from "./themes/interlace/interlace.js";
+export { CipherPrintRenderer } from "./themes/cipher-print/cipher-print.js";
+export { FieldSpecimenRenderer } from "./themes/field-specimen/field-specimen.js";
 export { THEME_PRESETS, getThemeDefinition } from "./themes/registry.js";

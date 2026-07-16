@@ -2,11 +2,15 @@ import { ProfileError } from "../core/errors.js";
 import type { ThemeDefinition, ThemePreset } from "../core/types.js";
 import { BentoGridRenderer } from "./bento-grid/bento-grid.js";
 import { BlueprintRenderer } from "./blueprint/blueprint.js";
+import { CipherPrintRenderer } from "./cipher-print/cipher-print.js";
 import { CommandDeckRenderer } from "./command-deck/command-deck.js";
 import { ConstellationRenderer } from "./constellation/constellation.js";
 import { ControlPlaneRenderer } from "./control-plane/control-plane.js";
 import { EditorialRenderer } from "./editorial/editorial.js";
+import { FieldSpecimenRenderer } from "./field-specimen/field-specimen.js";
+import { InterlaceRenderer } from "./interlace/interlace.js";
 import { MetroRenderer } from "./metro/metro.js";
+import { MonolithRenderer } from "./monolith/monolith.js";
 import { SignalGridRenderer } from "./signal-grid/signal-grid.js";
 import { TerminalRenderer } from "./terminal/terminal.js";
 
@@ -20,6 +24,10 @@ export const THEME_PRESETS = [
   "blueprint",
   "constellation",
   "metro",
+  "monolith",
+  "interlace",
+  "cipher-print",
+  "field-specimen",
 ] as const satisfies readonly ThemePreset[];
 
 const themes: Record<ThemePreset, ThemeDefinition> = {
@@ -150,6 +158,65 @@ const themes: Record<ThemePreset, ThemeDefinition> = {
       emptyModules: "No additional signals declared.",
       heroAlt: (config) => `${config.identity.name} signal grid`,
       overviewAlt: (config) => `${config.identity.name} signal topology`,
+    },
+  },
+  monolith: {
+    preset: "monolith",
+    label: "Monolith",
+    description:
+      "A stark internationalist poster built from type, mass, and proof.",
+    renderer: new MonolithRenderer(),
+    copy: {
+      flagshipHeading: "Selected proofs",
+      overviewHeading: "Typographic route",
+      modulesHeading: "Complete index",
+      emptyModules: "No additional work selected.",
+      heroAlt: (config) => `${config.identity.name} monolith poster`,
+      overviewAlt: (config) => `${config.identity.name} typographic route`,
+    },
+  },
+  interlace: {
+    preset: "interlace",
+    label: "Interlace",
+    description:
+      "A quiet project loom for work connected across layers and disciplines.",
+    renderer: new InterlaceRenderer(),
+    copy: {
+      flagshipHeading: "Anchor threads",
+      overviewHeading: "Project weave",
+      modulesHeading: "Thread archive",
+      emptyModules: "No additional threads selected.",
+      heroAlt: (config) => `${config.identity.name} interlaced portfolio`,
+      overviewAlt: (config) => `${config.identity.name} project weave`,
+    },
+  },
+  "cipher-print": {
+    preset: "cipher-print",
+    label: "Cipher Print",
+    description: "An engraved folio for meticulous systems and enduring craft.",
+    renderer: new CipherPrintRenderer(),
+    copy: {
+      flagshipHeading: "Registered works",
+      overviewHeading: "Engraved index",
+      modulesHeading: "Edition ledger",
+      emptyModules: "No additional impressions registered.",
+      heroAlt: (config) => `${config.identity.name} cipher print folio`,
+      overviewAlt: (config) => `${config.identity.name} engraved index`,
+    },
+  },
+  "field-specimen": {
+    preset: "field-specimen",
+    label: "Field Specimen",
+    description:
+      "A natural-history plate for exploratory, branching bodies of work.",
+    renderer: new FieldSpecimenRenderer(),
+    copy: {
+      flagshipHeading: "Reference specimens",
+      overviewHeading: "Classification plate",
+      modulesHeading: "Specimen catalog",
+      emptyModules: "No additional specimens cataloged.",
+      heroAlt: (config) => `${config.identity.name} field specimen plate`,
+      overviewAlt: (config) => `${config.identity.name} classification plate`,
     },
   },
 };

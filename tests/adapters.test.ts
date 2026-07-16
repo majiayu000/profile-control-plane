@@ -193,7 +193,11 @@ describe("preview server", () => {
     servers.push(preview);
     const gallery = await (await fetch(preview.url)).text();
     expect(gallery).toContain("Choose your profile");
+    expect(gallery).toContain(
+      `${THEME_PRESETS.length} distinct visual directions`,
+    );
     expect(gallery).toContain("/editorial/assets/hero-dark.svg");
+    expect(gallery).toContain("/field-specimen/assets/hero-dark.svg");
     expect(await (await fetch(`${preview.url}/light`)).text()).toContain(
       "hero-light.svg",
     );

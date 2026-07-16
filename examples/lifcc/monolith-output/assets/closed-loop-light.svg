@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc monolith strata index" data-mode="light">
+      <style>
+    .display{font-family:"Avenir Next Condensed","Helvetica Neue Condensed","Arial Narrow",sans-serif}.body{font-family:"Gill Sans","Trebuchet MS",sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .monolith-rise{animation:monolith-rise .72s cubic-bezier(.2,.76,.2,1) both}
+    @keyframes monolith-rise{from{opacity:.18;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.monolith-rise{animation:none}}
+  </style><rect width="1200" height="330" fill="#F0E8D9"/>
+      <text x="-18" y="279" class="display" font-size="276" font-weight="900" letter-spacing="-20" fill="#1B1A17">08</text>
+      <rect x="19" y="18" width="7" height="66" fill="#B24430"/><rect x="32" y="18" width="7" height="38" fill="#315A73"/>
+      <text x="280" y="35" class="mono" font-size="8" letter-spacing="2.6" fill="#B24430">MONOLITH / STRATA INDEX</text><text x="1170" y="35" text-anchor="end" class="mono" font-size="8" letter-spacing="1.8" fill="#6E675D">AI AGENT INFRASTRUCTURE</text>
+      <path d="M280 49H1170" stroke="#BDB2A1"/><path d="M300 64V302" stroke="#BDB2A1"/>
+      <g class="monolith-rise" style="animation-delay:0ms">
+        <path d="M342 100H722" stroke="#BDB2A1"/>
+        <rect x="342" y="65" width="3" height="30" fill="#00A7D1"/>
+        <text x="355" y="76" class="mono" font-size="8" letter-spacing="1.5" fill="#B24430">01</text>
+        <text x="392" y="76" class="body" font-size="12" font-weight="700" fill="#171613">DIRECT</text>
+        <text x="532" y="76" class="display" font-size="12" font-style="italic" fill="#171613">sage</text>
+        <text x="392" y="93" class="body" font-size="8.5" fill="#6E675D">A fast coding agent in pure Rust</text>
+      </g><g class="monolith-rise" style="animation-delay:45ms">
+        <path d="M342 150H722" stroke="#BDB2A1"/>
+        <rect x="342" y="115" width="3" height="30" fill="#00A7D1"/>
+        <text x="355" y="126" class="mono" font-size="8" letter-spacing="1.5" fill="#315A73">02</text>
+        <text x="392" y="126" class="body" font-size="12" font-weight="700" fill="#171613">EXTEND</text>
+        <text x="532" y="126" class="display" font-size="12" font-style="italic" fill="#171613">claude-skill-registry</text>
+        <text x="392" y="143" class="body" font-size="8.5" fill="#6E675D">Discovery and distribution for agent skills</text>
+      </g><g class="monolith-rise" style="animation-delay:90ms">
+        <path d="M342 200H722" stroke="#BDB2A1"/>
+        <rect x="342" y="165" width="3" height="30" fill="#00A7D1"/>
+        <text x="355" y="176" class="mono" font-size="8" letter-spacing="1.5" fill="#B24430">03</text>
+        <text x="392" y="176" class="body" font-size="12" font-weight="700" fill="#171613">TRUST</text>
+        <text x="532" y="176" class="display" font-size="12" font-style="italic" fill="#171613">vibeguard</text>
+        <text x="392" y="193" class="body" font-size="8.5" fill="#6E675D">Rules and guards against unverified changes</text>
+      </g><g class="monolith-rise" style="animation-delay:135ms">
+        <path d="M342 250H722" stroke="#BDB2A1"/>
+        <rect x="342" y="215" width="3" height="30" fill="#00A7D1"/>
+        <text x="355" y="226" class="mono" font-size="8" letter-spacing="1.5" fill="#315A73">04</text>
+        <text x="392" y="226" class="body" font-size="12" font-weight="700" fill="#171613">REMEMBER</text>
+        <text x="532" y="226" class="display" font-size="12" font-style="italic" fill="#171613">remem</text>
+        <text x="392" y="243" class="body" font-size="8.5" fill="#6E675D">Local-first auditable agent memory</text>
+      </g><g class="monolith-rise" style="animation-delay:180ms">
+        <path d="M760 100H1140" stroke="#BDB2A1"/>
+        <rect x="760" y="65" width="3" height="30" fill="#E84A8A"/>
+        <text x="773" y="76" class="mono" font-size="8" letter-spacing="1.5" fill="#B24430">05</text>
+        <text x="810" y="76" class="body" font-size="12" font-weight="700" fill="#171613">ORCHESTRATE</text>
+        <text x="950" y="76" class="display" font-size="12" font-style="italic" fill="#171613">harness</text>
+        <text x="810" y="93" class="body" font-size="8.5" fill="#6E675D">Governed fleets of parallel coding agents</text>
+      </g><g class="monolith-rise" style="animation-delay:225ms">
+        <path d="M760 150H1140" stroke="#BDB2A1"/>
+        <rect x="760" y="115" width="3" height="30" fill="#E84A8A"/>
+        <text x="773" y="126" class="mono" font-size="8" letter-spacing="1.5" fill="#315A73">06</text>
+        <text x="810" y="126" class="body" font-size="12" font-weight="700" fill="#171613">ROUTE</text>
+        <text x="950" y="126" class="display" font-size="12" font-style="italic" fill="#171613">litellm-rs</text>
+        <text x="810" y="143" class="body" font-size="8.5" fill="#6E675D">One high-performance gateway for 100+ LLM AP…</text>
+      </g><g class="monolith-rise" style="animation-delay:270ms">
+        <path d="M760 200H1140" stroke="#BDB2A1"/>
+        <rect x="760" y="165" width="3" height="30" fill="#E84A8A"/>
+        <text x="773" y="176" class="mono" font-size="8" letter-spacing="1.5" fill="#B24430">07</text>
+        <text x="810" y="176" class="body" font-size="12" font-weight="700" fill="#171613">GOVERN</text>
+        <text x="950" y="176" class="display" font-size="12" font-style="italic" fill="#171613">specrail</text>
+        <text x="810" y="193" class="body" font-size="8.5" fill="#6E675D">Spec-first repository workflow rails</text>
+      </g><g class="monolith-rise" style="animation-delay:315ms">
+        <path d="M760 250H1140" stroke="#BDB2A1"/>
+        <rect x="760" y="215" width="3" height="30" fill="#E84A8A"/>
+        <text x="773" y="226" class="mono" font-size="8" letter-spacing="1.5" fill="#315A73">08</text>
+        <text x="810" y="226" class="body" font-size="12" font-weight="700" fill="#171613">KEEP</text>
+        <text x="950" y="226" class="display" font-size="12" font-style="italic" fill="#171613">keepline</text>
+        <text x="810" y="243" class="body" font-size="8.5" fill="#6E675D">Monitor and recover long-running agent work</text>
+      </g>
+      <text x="76" y="307" transform="rotate(-90 76 307)" class="mono" font-size="8" letter-spacing="3.4" fill="#F0E8D9">ACTIVE STRATA</text>
+      <rect x="280" y="306" width="890" height="3" fill="#315A73"/><rect x="280" y="306" width="184" height="3" fill="#B24430"/>
+    </svg>

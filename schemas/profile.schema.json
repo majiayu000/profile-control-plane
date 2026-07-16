@@ -46,14 +46,18 @@
         "preset": {
           "enum": [
             "control-plane",
+            "command-deck",
+            "signal-grid",
             "editorial",
             "bento-grid",
             "terminal",
             "blueprint",
             "constellation",
             "metro",
-            "command-deck",
-            "signal-grid"
+            "monolith",
+            "interlace",
+            "cipher-print",
+            "field-specimen"
           ]
         },
         "primary": { "$ref": "#/definitions/color" },

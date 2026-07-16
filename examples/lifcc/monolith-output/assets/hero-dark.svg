@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc monolith profile" data-mode="dark">
+      <style>
+    .display{font-family:"Avenir Next Condensed","Helvetica Neue Condensed","Arial Narrow",sans-serif}.body{font-family:"Gill Sans","Trebuchet MS",sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .monolith-rise{animation:monolith-rise .72s cubic-bezier(.2,.76,.2,1) both}
+    @keyframes monolith-rise{from{opacity:.18;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.monolith-rise{animation:none}}
+  </style><rect width="1200" height="360" fill="#151411"/>
+      <text x="-26" y="303" class="display" font-size="348" font-weight="900" letter-spacing="-34" fill="#E8DFCF">M</text>
+      <rect x="17" y="19" width="8" height="72" fill="#AD4935"/><rect x="31" y="19" width="8" height="43" fill="#365A72"/>
+      <text x="91" y="327" transform="rotate(-90 91 327)" class="mono" font-size="8" letter-spacing="4" fill="#151411">MASS / FORM / EVIDENCE</text>
+      <g class="monolith-rise"><text x="252" y="34" class="mono" font-size="8" letter-spacing="2.5" fill="#AD4935">MONOLITH / MASS STUDY</text>
+      <text x="706" y="34" text-anchor="end" class="mono" font-size="8" letter-spacing="1.8" fill="#A0988C">LIFCC</text><path d="M252 48H706" stroke="#4A463F"/>
+      <text x="248" y="121" class="display" font-size="43" font-weight="700" letter-spacing="-1.8" fill="#F0E8D9">AI AGENT INFRASTRUCTURE</text>
+      <path d="M252 232H292" stroke="#365A72" stroke-width="5"/><text x="252" y="260" class="body" font-size="11" fill="#A0988C">Building the systems around coding agents — from skills and trust t…</text></g>
+      <text x="754" y="34" class="mono" font-size="8" letter-spacing="2.2" fill="#365A72">PROOF INDEX / 06</text><g class="monolith-rise" style="animation-delay:120ms">
+        <path d="M754 65H944" stroke="#4A463F"/>
+        <rect x="754" y="69" width="4" height="28" fill="#00A7D1"/>
+        <text x="767" y="79" class="mono" font-size="7.5" letter-spacing="1.4" fill="#AD4935">01 / EXTEND</text>
+        <text x="767" y="98" class="body" font-size="13" font-weight="700" fill="#F0E8D9">claude-skill-regist…</text>
+        <text x="767" y="115" class="body" font-size="8.5" fill="#A0988C">The comprehensive discover…</text>
+      </g><g class="monolith-rise" style="animation-delay:175ms">
+        <path d="M754 147H944" stroke="#4A463F"/>
+        <rect x="754" y="151" width="4" height="28" fill="#00A7D1"/>
+        <text x="767" y="161" class="mono" font-size="7.5" letter-spacing="1.4" fill="#365A72">02 / EXTEND</text>
+        <text x="767" y="180" class="body" font-size="13" font-weight="700" fill="#F0E8D9">spellbook</text>
+        <text x="767" y="197" class="body" font-size="8.5" fill="#A0988C">Cross-runtime skills for C…</text>
+      </g><g class="monolith-rise" style="animation-delay:230ms">
+        <path d="M754 229H944" stroke="#4A463F"/>
+        <rect x="754" y="233" width="4" height="28" fill="#E84A8A"/>
+        <text x="767" y="243" class="mono" font-size="7.5" letter-spacing="1.4" fill="#AD4935">03 / ROUTE</text>
+        <text x="767" y="262" class="body" font-size="13" font-weight="700" fill="#F0E8D9">litellm-rs</text>
+        <text x="767" y="279" class="body" font-size="8.5" fill="#A0988C">High-performance Rust gate…</text>
+      </g><g class="monolith-rise" style="animation-delay:285ms">
+        <path d="M974 65H1164" stroke="#4A463F"/>
+        <rect x="974" y="69" width="4" height="28" fill="#E84A8A"/>
+        <text x="987" y="79" class="mono" font-size="7.5" letter-spacing="1.4" fill="#365A72">04 / ORCHESTRATE</text>
+        <text x="987" y="98" class="body" font-size="13" font-weight="700" fill="#F0E8D9">harness</text>
+        <text x="987" y="115" class="body" font-size="8.5" fill="#A0988C">Governed fleets of paralle…</text>
+      </g><g class="monolith-rise" style="animation-delay:340ms">
+        <path d="M974 147H1164" stroke="#4A463F"/>
+        <rect x="974" y="151" width="4" height="28" fill="#E84A8A"/>
+        <text x="987" y="161" class="mono" font-size="7.5" letter-spacing="1.4" fill="#AD4935">05 / TRUST</text>
+        <text x="987" y="180" class="body" font-size="13" font-weight="700" fill="#F0E8D9">vibeguard</text>
+        <text x="987" y="197" class="body" font-size="8.5" fill="#A0988C">Rules, hooks, and guards a…</text>
+      </g><g class="monolith-rise" style="animation-delay:395ms">
+        <path d="M974 229H1164" stroke="#4A463F"/>
+        <rect x="974" y="233" width="4" height="28" fill="#E84A8A"/>
+        <text x="987" y="243" class="mono" font-size="7.5" letter-spacing="1.4" fill="#365A72">06 / REMEMBER</text>
+        <text x="987" y="262" class="body" font-size="13" font-weight="700" fill="#F0E8D9">remem</text>
+        <text x="987" y="279" class="body" font-size="8.5" fill="#A0988C">Local-first, auditable mem…</text>
+      </g>
+      <path d="M236 316H1172" stroke="#4A463F"/><rect x="236" y="313" width="78" height="6" fill="#AD4935"/><rect x="314" y="313" width="42" height="6" fill="#365A72"/>
+      <text x="706" y="337" text-anchor="end" class="mono" font-size="8" letter-spacing="1.6" fill="#F0E8D9">08 STRATA</text><text x="1172" y="337" text-anchor="end" class="mono" font-size="8" letter-spacing="1.6" fill="#A0988C">06 FLAGSHIP WORKS</text><text x="252" y="337" class="mono" font-size="8" letter-spacing="1.8" fill="#A0988C">BEIJING · UTC+8</text>
+    </svg>
