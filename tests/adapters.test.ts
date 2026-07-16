@@ -5,11 +5,13 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { writeCompiledProfile } from "../src/adapters/output.js";
 import {
   startPreviewServer,
+  startTemplatePreviewServer,
   type PreviewServer,
 } from "../src/adapters/preview.js";
 import { checkCompiledProfile } from "../src/application/checker.js";
 import { compileProfile } from "../src/application/compiler.js";
 import type { CompiledProfile } from "../src/core/types.js";
+import { THEME_PRESETS } from "../src/themes/registry.js";
 import { validConfig } from "./fixtures.js";
 
 const servers: PreviewServer[] = [];
@@ -146,6 +148,46 @@ describe("preview server", () => {
     const port = Number(new URL(first.url).port);
     await expect(
       startPreviewServer(compileProfile(validConfig), port),
+    ).rejects.toMatchObject({ code: "PREVIEW_FAILED" });
+  });
+
+  it("serves a comparison gallery and namespaced template previews", async () => {
+    const templates = THEME_PRESETS.map((preset) => {
+      const config = {
+        ...validConfig,
+        theme: { ...validConfig.theme, preset },
+      };
+      return { preset, profile: compileProfile(config) };
+    });
+    const preview = await startTemplatePreviewServer(templates, 0);
+    servers.push(preview);
+    const gallery = await (await fetch(preview.url)).text();
+    expect(gallery).toContain("Choose your profile");
+    expect(gallery).toContain("/editorial/assets/hero-dark.svg");
+    expect(await (await fetch(`${preview.url}/light`)).text()).toContain(
+      "hero-light.svg",
+    );
+    expect(
+      await (await fetch(`${preview.url}/bento-grid/light`)).text(),
+    ).toContain("/bento-grid/assets/closed-loop-light.svg");
+    expect((await fetch(`${preview.url}/editorial/README.md`)).status).toBe(
+      200,
+    );
+  });
+
+  it("rejects empty and duplicate template comparisons", async () => {
+    await expect(startTemplatePreviewServer([], 0)).rejects.toMatchObject({
+      code: "PREVIEW_FAILED",
+    });
+    const profile = compileProfile(validConfig);
+    await expect(
+      startTemplatePreviewServer(
+        [
+          { preset: "control-plane", profile },
+          { preset: "control-plane", profile },
+        ],
+        0,
+      ),
     ).rejects.toMatchObject({ code: "PREVIEW_FAILED" });
   });
 });

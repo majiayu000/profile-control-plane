@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc editorial profile" data-mode="dark">
+      <defs>
+    <pattern id="paper-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#45463E" stroke-opacity=".17"/></pattern>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".82" numOctaves="2" seed="7"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .045 0"/></filter>
+  </defs><style>
+    .display{font-family:Georgia,"Times New Roman",serif}.grotesk{font-family:"Arial Narrow","Avenir Next Condensed",Impact,sans-serif}.body{font-family:"Avenir Next",Avenir,Helvetica,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .enter{animation:enter .65s cubic-bezier(.2,.8,.2,1)}.scan{stroke-dasharray:3 8;animation:scan 9s linear infinite}
+    @keyframes enter{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes scan{to{stroke-dashoffset:-120}}
+    @media(prefers-reduced-motion:reduce){.enter,.scan{animation:none}}
+  </style><rect width="1200" height="360" fill="#0D0E0C"/><rect x="13" y="13" width="1174" height="334" fill="#191A16" stroke="#45463E"/><rect x="13" y="13" width="1174" height="334" fill="url(#paper-grid)"/>
+      <rect x="13" y="13" width="156" height="334" fill="#E9E2D0"/><rect x="26" y="26" width="5" height="72" fill="#00A7D1"/><rect x="26" y="105" width="5" height="34" fill="#E84A8A"/>
+      <text x="91" y="220" text-anchor="middle" class="grotesk" font-size="164" font-weight="900" letter-spacing="-10" fill="#11120F">01</text><text x="91" y="253" text-anchor="middle" class="mono" font-size="8" letter-spacing="3" fill="#11120F">SYSTEMS REVIEW</text>
+      <path d="M52 281H130" stroke="#11120F"/><text x="91" y="307" text-anchor="middle" class="mono" font-size="8" letter-spacing="2" fill="#11120F">06 WORKS</text><text x="91" y="326" text-anchor="middle" class="mono" font-size="8" letter-spacing="2" fill="#11120F">BEIJING · UTC+8</text>
+      <g class="enter"><text x="199" y="48" class="mono" font-size="8" letter-spacing="2.5" fill="#00A7D1">PROFILE DOSSIER / LIFCC</text><path d="M199 62H730" stroke="#45463E"/>
+      <text x="196" y="122" class="display" font-size="46" font-weight="700" letter-spacing="-1" fill="#F4EEDC">AI AGENT</text><text x="196" y="168" class="display" font-size="46" font-style="italic" letter-spacing="-1" fill="#F4EEDC">INFRASTRUCTURE</text>
+      <rect x="199" y="218" width="42" height="4" fill="#E84A8A"/><text x="199" y="250" class="body" font-size="12" fill="#AAA797">Building the systems around coding agents — from skills and trust to memor…</text>
+      <text x="199" y="294" class="mono" font-size="8" letter-spacing="2" fill="#F4EEDC">AUTHORED SYSTEMS · OPEN SOURCE · 08 ACTIVE LAYERS</text><path class="scan" d="M199 314H730" stroke="#00A7D1" stroke-width="2"/></g>
+      <path d="M758 30V330" stroke="#45463E"/><text x="790" y="47" class="display" font-size="17" font-style="italic" fill="#F4EEDC">Editor&apos;s selection</text><text x="1152" y="47" text-anchor="end" class="mono" font-size="8" letter-spacing="2" fill="#AAA797">VOL. 01 / 06</text><g class="enter" style="animation-delay:120ms">
+        <text x="790" y="93" class="grotesk" font-size="30" font-weight="900" fill="#00A7D1" opacity=".82">01</text>
+        <text x="850" y="87" class="body" font-size="15" font-weight="800" fill="#F4EEDC">claude-skill-registry</text>
+        <text x="850" y="106" class="mono" font-size="8" letter-spacing="1.5" fill="#00A7D1">EXTEND / SELECTED SYSTEM</text>
+        <text x="850" y="127" class="body" font-size="10" fill="#AAA797">The comprehensive discovery layer for Claude Co…</text>
+        <path d="M790 140H1152" stroke="#45463E"/>
+      </g><g class="enter" style="animation-delay:190ms">
+        <text x="790" y="163" class="grotesk" font-size="30" font-weight="900" fill="#00A7D1" opacity=".82">02</text>
+        <text x="850" y="157" class="body" font-size="15" font-weight="800" fill="#F4EEDC">spellbook</text>
+        <text x="850" y="176" class="mono" font-size="8" letter-spacing="1.5" fill="#00A7D1">EXTEND / SELECTED SYSTEM</text>
+        <text x="850" y="197" class="body" font-size="10" fill="#AAA797">Cross-runtime skills for Claude Code, Codex, an…</text>
+        <path d="M790 210H1152" stroke="#45463E"/>
+      </g><g class="enter" style="animation-delay:260ms">
+        <text x="790" y="233" class="grotesk" font-size="30" font-weight="900" fill="#E84A8A" opacity=".82">03</text>
+        <text x="850" y="227" class="body" font-size="15" font-weight="800" fill="#F4EEDC">litellm-rs</text>
+        <text x="850" y="246" class="mono" font-size="8" letter-spacing="1.5" fill="#E84A8A">ROUTE / SELECTED SYSTEM</text>
+        <text x="850" y="267" class="body" font-size="10" fill="#AAA797">High-performance Rust gateway for 100+ LLM APIs…</text>
+        <path d="M790 280H1152" stroke="#45463E"/>
+      </g>
+      <rect x="1157" y="317" width="5" height="5" fill="#00A7D1"/><rect x="1145" y="317" width="5" height="5" fill="#E84A8A"/><rect x="13" y="13" width="1174" height="334" filter="url(#grain)" opacity=".28" pointer-events="none"/>
+    </svg>

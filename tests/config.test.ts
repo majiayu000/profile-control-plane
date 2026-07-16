@@ -28,6 +28,27 @@ describe("profile schema", () => {
     ).rejects.toMatchObject({
       code: "CONFIG_INVALID",
     });
+    await expect(
+      assertProfileConfig({
+        ...validConfig,
+        theme: { ...validConfig.theme, preset: "unknown" },
+      }),
+    ).rejects.toMatchObject({ code: "CONFIG_INVALID" });
+  });
+
+  it("accepts every supported template preset", async () => {
+    for (const preset of [
+      "control-plane",
+      "editorial",
+      "bento-grid",
+    ] as const) {
+      await expect(
+        assertProfileConfig({
+          ...validConfig,
+          theme: { ...validConfig.theme, preset },
+        }),
+      ).resolves.toMatchObject({ theme: { preset } });
+    }
   });
 
   it("rejects duplicate case-insensitive identifiers", async () => {

@@ -12,18 +12,78 @@ Compile a GitHub identity into an animated, dark/light, self-hosted profile READ
   <img alt="Profile Control Plane example" src="examples/lifcc/output/assets/hero-light.svg" width="100%">
 </picture>
 
-Most profile generators render a banner or assemble remote widgets. Profile Control Plane treats your
-repositories as one visual system: a hero, an execution path, a closed-loop architecture map, flagship
-projects, and an expandable module registry—all generated from one reviewed YAML file.
+Most profile generators render a banner or assemble remote widgets. Profile Control Plane turns your
+repositories into a coherent visual system: a hero, a project map, flagship work, and an expandable module
+registry—all generated from one reviewed YAML file and one of three distinct templates.
 
 ## What you get
 
 - One declarative `profile.yaml` as the authoring source of truth.
-- Four animated SVGs with native dark/light variants and reduced-motion support.
+- Three templates, each producing four SVGs with native dark/light variants and reduced-motion support.
 - A generated GitHub-safe `README.md` with escaped metadata and optional star badges.
 - `init`, `build`, `preview`, and `check` commands with typed, fail-closed errors.
-- A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill.
+- A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill for evidence-backed
+  positioning, profile archetype selection, visual review, and safe staging.
 - No hosted image API, database, analytics, or required token at render time.
+
+## Template gallery
+
+Every preview below is generated from the same
+[`examples/lifcc/profile.yaml`](examples/lifcc/profile.yaml). GitHub selects the matching dark or light asset
+automatically.
+
+### Control Plane
+
+The default Control Plane hero is shown at the top of this README.
+
+<details>
+<summary>View the closed-loop architecture map</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/output/assets/closed-loop-light.svg">
+  <img alt="Control Plane architecture map" src="examples/lifcc/output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Editorial
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/editorial-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/editorial-output/assets/hero-light.svg">
+  <img alt="Editorial template" src="examples/lifcc/editorial-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the working index</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/editorial-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/editorial-output/assets/closed-loop-light.svg">
+  <img alt="Editorial working index" src="examples/lifcc/editorial-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Developer Workbench (`bento-grid`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/bento-grid-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/bento-grid-output/assets/hero-light.svg">
+  <img alt="Developer Workbench template" src="examples/lifcc/bento-grid-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the connected build map</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg">
+  <img alt="Developer Workbench build map" src="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
 
 ## Quick start
 
@@ -41,10 +101,11 @@ Create a starter configuration from public GitHub metadata:
 ```bash
 profilectl init YOUR_GITHUB_USERNAME
 profilectl check
-profilectl preview
+profilectl preview --all-templates
 ```
 
-Open the printed local URL, edit `profile.yaml` until the architecture tells the right story, then build:
+Open the printed comparison page, choose a direction, set `theme.preset`, and refine `profile.yaml` until it
+tells the right story. Then build:
 
 ```bash
 profilectl build --out .profile-output
@@ -94,14 +155,27 @@ uses factual GitHub names, descriptions, languages, stars, and timestamps. It de
 
 See the curated [lifcc configuration](examples/lifcc/profile.yaml) and its [generated output](examples/lifcc/output/README.md).
 
+### Templates
+
+| Preset          | Best fit                                         | Visual language                        |
+| --------------- | ------------------------------------------------ | -------------------------------------- |
+| `control-plane` | Infrastructure, agent systems, connected tooling | Animated control room and systems loop |
+| `editorial`     | Maintainers, researchers, selected body of work  | Technical journal and working index    |
+| `bento-grid`    | Product builders and modular project portfolios  | Connected workbench and signal map     |
+
+The bundled agent skill can recommend a preset from repository evidence. The user remains the decision
+maker: `profilectl preview --all-templates` renders the same configuration in all three directions before
+anything is built or staged.
+
 ## Commands
 
-| Command                      | Purpose                                                                |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `profilectl init <username>` | Import public metadata into a reviewable starter config.               |
-| `profilectl build`           | Compile README and SVGs into a dedicated output directory.             |
-| `profilectl preview`         | Serve dark/light output from memory at `127.0.0.1`.                    |
-| `profilectl check`           | Validate schema, generated XML, references, and optional online links. |
+| Command                              | Purpose                                                                |
+| ------------------------------------ | ---------------------------------------------------------------------- |
+| `profilectl init <username>`         | Import public metadata into a reviewable starter config.               |
+| `profilectl build`                   | Compile README and SVGs into a dedicated output directory.             |
+| `profilectl preview`                 | Serve the selected template in dark/light mode at `127.0.0.1`.         |
+| `profilectl preview --all-templates` | Compare every template using the same configuration.                   |
+| `profilectl check`                   | Validate schema, generated XML, references, and optional online links. |
 
 Use `--help` on any command for options. `build --force` refuses to replace the current directory, a
 filesystem root, or any directory containing `.git`.
@@ -128,8 +202,13 @@ cp -R skills/design-github-profile ~/.codex/skills/
 ```
 
 Then ask: `Use $design-github-profile to redesign my GitHub profile.` The skill audits existing profile
-files, separates factual imports from semantic labels, validates both color modes, and prepares a preview
-branch without publishing it.
+files, separates verified facts from interpretations and user intent, proposes an evidence-backed profile
+direction, and evaluates the rendered result before preparing a preview branch. Detailed archetypes, visual
+guidelines, and the publication rubric load only when the task needs them.
+
+The agent recommends a narrative and a supported preset, explains its evidence, and can render all templates
+for user choice. If the desired visual direction is outside the declared presets, it reports the capability
+gap instead of inventing a `theme.preset` or forcing the account into an unsupported metaphor.
 
 ## Design and safety
 

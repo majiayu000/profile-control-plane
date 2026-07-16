@@ -43,7 +43,9 @@
       "additionalProperties": false,
       "required": ["preset", "primary", "secondary"],
       "properties": {
-        "preset": { "const": "control-plane" },
+        "preset": {
+          "enum": ["control-plane", "editorial", "bento-grid"]
+        },
         "primary": { "$ref": "#/definitions/color" },
         "secondary": { "$ref": "#/definitions/color" }
       }

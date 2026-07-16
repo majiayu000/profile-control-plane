@@ -3,8 +3,8 @@ import type {
   ColorMode,
   ProfileConfig,
   ThemeRenderer,
-  Tone,
 } from "../../core/types.js";
+import { shorten, toneColor } from "../shared.js";
 import { createPalette, type Palette } from "./palette.js";
 
 const WIDTH = 1200;
@@ -29,16 +29,6 @@ function definitions(palette: Palette): string {
     <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <clipPath id="frame"><rect x="1" y="1" width="1198" height="358" rx="18"/></clipPath>
   </defs>`;
-}
-
-function toneColor(tone: Tone, palette: Palette): string {
-  return tone === "primary" ? palette.primary : palette.secondary;
-}
-
-function shorten(value: string, maximumLength: number): string {
-  return value.length <= maximumLength
-    ? value
-    : `${value.slice(0, maximumLength - 1).trimEnd()}…`;
 }
 
 function headlineLines(value: string): readonly [string, string] {

@@ -9,12 +9,16 @@ import {
   writeProfileConfig,
 } from "./adapters/config-file.js";
 import { writeCompiledProfile } from "./adapters/output.js";
-import { startPreviewServer } from "./adapters/preview.js";
+import {
+  startPreviewServer,
+  startTemplatePreviewServer,
+} from "./adapters/preview.js";
 import { checkCompiledProfile } from "./application/checker.js";
 import { compileProfile } from "./application/compiler.js";
 import { createStarterConfig } from "./application/starter.js";
 import { ProfileError, asProfileError } from "./core/errors.js";
 import { assertProfileConfig } from "./config/schema.js";
+import { THEME_PRESETS } from "./themes/registry.js";
 
 function integer(value: string): number {
   const parsed = Number(value);
@@ -103,18 +107,40 @@ export function createProgram(): Command {
       integer,
       4173,
     )
-    .action(async (options: { config: string; port: number }) => {
-      const preview = await startPreviewServer(
-        compileProfile(await loadProfileConfig(options.config)),
-        options.port,
-      );
-      process.stdout.write(`Preview: ${preview.url}\nPress Ctrl+C to stop.\n`);
-      const close = (): void => {
-        preview.server.close(() => process.exit(0));
-      };
-      process.once("SIGINT", close);
-      process.once("SIGTERM", close);
-    });
+    .option(
+      "--all-templates",
+      "compare every template using the same configuration",
+      false,
+    )
+    .action(
+      async (options: {
+        config: string;
+        port: number;
+        allTemplates: boolean;
+      }) => {
+        const config = await loadProfileConfig(options.config);
+        const preview = options.allTemplates
+          ? await startTemplatePreviewServer(
+              THEME_PRESETS.map((preset) => {
+                const candidate = {
+                  ...config,
+                  theme: { ...config.theme, preset },
+                };
+                return { preset, profile: compileProfile(candidate) };
+              }),
+              options.port,
+            )
+          : await startPreviewServer(compileProfile(config), options.port);
+        process.stdout.write(
+          `Preview: ${preview.url}\nPress Ctrl+C to stop.\n`,
+        );
+        const close = (): void => {
+          preview.server.close(() => process.exit(0));
+        };
+        process.once("SIGINT", close);
+        process.once("SIGTERM", close);
+      },
+    );
 
   program
     .command("check")

@@ -6,6 +6,15 @@ const execute = promisify(execFile);
 const command = ["--import", "tsx", "src/cli.ts"];
 
 describe("CLI process", () => {
+  it("advertises the all-template comparison option", async () => {
+    const result = await execute(process.execPath, [
+      ...command,
+      "preview",
+      "--help",
+    ]);
+    expect(result.stdout).toContain("--all-templates");
+  });
+
   it("checks a valid profile and prints the result", async () => {
     const result = await execute(process.execPath, [
       ...command,
