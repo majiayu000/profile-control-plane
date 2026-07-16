@@ -1,34 +1,74 @@
 ---
 name: design-github-profile
-description: Audit, design, generate, and safely stage an animated GitHub profile README with Profile Control Plane. Use when a user asks to improve a GitHub profile, turn repositories into a visual architecture story, generate dark/light profile SVGs, preview profile changes, or prepare a profile README branch without directly publishing to main.
+description: Audit, position, design, generate, evaluate, and safely stage an evidence-backed GitHub profile README with Profile Control Plane. Use when a user asks to create, improve, redesign, or review a GitHub profile; choose a coherent profile story or archetype; turn repositories into credible proof; generate dark/light profile SVGs; or prepare a reviewed profile branch without directly publishing to main.
 ---
 
 # Design GitHub Profile
 
-Turn a GitHub account into a reviewed profile system: factual repository data, human-meaningful architecture
-labels, animated dark/light SVGs, and a safe preview branch.
+Act as both a profile design lead and an evidence auditor. Establish who the profile is for and what its
+repositories prove before selecting copy or visual structure. Use Profile Control Plane for deterministic
+rendering after the user has reviewed the semantic positioning.
+
+## Core contract
+
+- Separate verified facts, evidence-supported interpretations, and user-authored intentions.
+- Keep GitHub names, descriptions, links, languages, stars, and timestamps factual.
+- Present positioning as a hypothesis when repositories support more than one credible story.
+- Ask before applying a semantic choice that materially changes how the user is represented.
+- Leave unsupported claims blank; never manufacture experience, impact, roles, metrics, or project purpose.
+- Treat `profile.yaml` as the reviewed authoring source and the current JSON Schema as the capability boundary.
+- Never write an undeclared theme preset or imply that a proposed visual direction is already renderable.
+
+## Reference routing
+
+- Read [evidence-and-positioning.md](references/evidence-and-positioning.md) when creating or materially
+  changing the profile's audience, promise, headline, flagship selection, or repository roles.
+- Read [archetypes.md](references/archetypes.md) when choosing a profile structure, comparing multiple
+  credible narratives, or deciding whether the control-plane metaphor fits the account.
+- Read [visual-and-content-guidelines.md](references/visual-and-content-guidelines.md) before rewriting copy,
+  changing visual direction, or conducting the final dark/light and mobile review.
+- Read [evaluation-rubric.md](references/evaluation-rubric.md) before declaring a redesigned profile ready to
+  stage or publish.
+- Skip references that do not apply when rebuilding an already approved `profile.yaml` without design changes.
 
 ## Workflow
 
 1. Inspect before creating.
    - Locate the target `USERNAME/USERNAME` profile repository and any existing `README.md`, `assets/`, or
      `profile.yaml`.
-   - Preserve existing user content until the generated result has been reviewed.
-   - Locate `profilectl`; in this repository use `npm ci && npm run build` followed by `node dist/cli.js`.
+   - Search for existing profile generators, workflows, and generated assets before adding new ones.
+   - Preserve existing user content until the replacement has been reviewed.
+   - Locate `profilectl`; in this repository run `npm ci && npm run build`, then use `node dist/cli.js`.
 
 2. Import factual metadata.
    - Run `profilectl init USERNAME --output profile.yaml` in a separate working directory.
    - If GitHub returns 403 due to public API limits, rerun with an existing `GITHUB_TOKEN` environment
      variable. Never print or write the token.
-   - Do not continue after pagination, HTTP, parse, or schema errors.
+   - Stop after pagination, HTTP, parse, or schema errors; do not continue with partial metadata.
 
-3. Establish the architecture story.
-   - Read the account profile plus README files for repositories being labeled.
+3. Build the evidence inventory.
+   - Read the account profile, existing profile README, and README files for likely flagship repositories.
+   - Classify important statements using [evidence-and-positioning.md](references/evidence-and-positioning.md).
+   - Exclude forks, archived experiments, duplicated projects, and stale work unless they are material to the
+     user's intended story.
+
+4. Establish the profile direction.
+   - Produce one recommended design brief and at most one credible alternative.
+   - State the audience, one-sentence promise, three strongest proofs, profile archetype, information order,
+     visual direction, and content to omit.
+   - Prefer the narrative best supported by current evidence, not the most fashionable visual style.
+   - Obtain user approval before applying a material career, product, or identity positioning decision.
+
+5. Translate the approved direction into the supported contract.
+   - Keep one primary narrative; use a secondary archetype only to refine emphasis.
    - Replace generic `SYSTEM 01` and `PROJECT 01` labels only when repository evidence supports the role.
-   - Keep GitHub names, descriptions, links, languages, and stars factual. Leave uncertain descriptions blank.
-   - Ask the user before making a semantic choice that materially changes their positioning.
+   - Use `layers` for a real sequence or system relationship, `flagships` for the strongest proof, and
+     `module_groups` for meaningful supporting collections.
+   - Inspect `schemas/profile.schema.json` before selecting a renderer preset. If the desired direction is not
+     supported, do not invent a preset: either adapt it to a supported renderer with user approval or stop at
+     the reviewed design brief and report the rendering gap.
 
-4. Compile and validate.
+6. Compile and validate.
 
    ```bash
    profilectl check --config profile.yaml
@@ -39,9 +79,19 @@ labels, animated dark/light SVGs, and a safe preview branch.
    - Inspect both `/` and `/light` in the preview.
    - Check headline wrapping, long repository names, node collisions, contrast, reduced-motion behavior, and
      every outbound link.
+   - Inspect remote image and badge URLs separately, including encoded owner and repository path segments;
+     `check --online` does not prove that every embedded image contains the intended result.
    - Use `profilectl check --online` only when network verification is appropriate.
 
-5. Stage safely.
+7. Evaluate profile quality.
+   - Apply [evaluation-rubric.md](references/evaluation-rubric.md) to the rendered result and cite concrete
+     evidence for each score.
+   - Compare the candidate with the existing profile. Reject a generated replacement that loses stronger
+     user-authored hierarchy, visuals, evidence, or accessibility.
+   - Revise the profile when any category scores zero or the publication threshold is not met.
+   - Do not use technical validity as a substitute for positioning clarity or visual quality.
+
+8. Stage safely.
    - Create a new branch in the profile repository.
    - Copy only `.profile-output/README.md` and `.profile-output/assets/` into the profile repository.
    - Run `git diff --check`, inspect the full diff, and confirm no unrelated files changed.
@@ -50,17 +100,22 @@ labels, animated dark/light SVGs, and a safe preview branch.
 
 ## Editing rules
 
-- Treat `profile.yaml` as the authoring source; never hand-edit generated SVGs.
+- Never hand-edit generated SVGs.
 - Preserve dark and light variants together.
-- Prefer one coherent system metaphor over a list of technologies.
+- Prefer one coherent story over a technology list, badge wall, or collection of unrelated widgets.
 - Keep the hero legible at GitHub's narrow mobile width.
 - Do not add dynamic hosted widgets, tracking pixels, secrets, or scheduled jobs without explicit scope.
-- If existing profile work is stronger in one section, retain it rather than forcing a full replacement.
+- Retain strong existing sections when they support the approved direction.
+- Report evidence gaps and renderer limitations explicitly; do not silently degrade the result.
 
 ## Done when
 
+- The user-approved direction is traceable to repository evidence.
 - `profilectl check` passes from the final config.
 - The four SVGs are valid and reviewed in dark and light modes.
+- The quality rubric reaches its publication threshold with no zero category.
+- The generated candidate does not regress any material quality category from the existing profile.
 - The generated README references only files that will be staged.
 - The preview branch diff contains no unrelated or secret material.
-- Semantic labels are supported by repository evidence or explicitly approved by the user.
+- The handoff identifies the chosen direction, supporting evidence, verification commands, and any remaining
+  limitations.

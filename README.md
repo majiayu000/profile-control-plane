@@ -22,7 +22,8 @@ projects, and an expandable module registry—all generated from one reviewed YA
 - Four animated SVGs with native dark/light variants and reduced-motion support.
 - A generated GitHub-safe `README.md` with escaped metadata and optional star badges.
 - `init`, `build`, `preview`, and `check` commands with typed, fail-closed errors.
-- A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill.
+- A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill for evidence-backed
+  positioning, profile archetype selection, visual review, and safe staging.
 - No hosted image API, database, analytics, or required token at render time.
 
 ## Quick start
@@ -128,8 +129,13 @@ cp -R skills/design-github-profile ~/.codex/skills/
 ```
 
 Then ask: `Use $design-github-profile to redesign my GitHub profile.` The skill audits existing profile
-files, separates factual imports from semantic labels, validates both color modes, and prepares a preview
-branch without publishing it.
+files, separates verified facts from interpretations and user intent, proposes an evidence-backed profile
+direction, and evaluates the rendered result before preparing a preview branch. Detailed archetypes, visual
+guidelines, and the publication rubric load only when the task needs them.
+
+The agent may recommend a narrative or visual direction that the current compiler cannot render. In that
+case it must report the capability gap instead of inventing a `theme.preset` or forcing the account into an
+unsupported metaphor.
 
 ## Design and safety
 

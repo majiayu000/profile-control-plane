@@ -5,7 +5,9 @@
 Profile Control Plane compiles one declarative profile document into static,
 self-hosted GitHub README assets. The compiler must be deterministic, safe for
 untrusted GitHub metadata, usable without secrets, and testable without network
-or browser access.
+or browser access. Its bundled agent skill establishes an evidence-backed,
+user-reviewed profile direction before compilation; design judgment never
+expands the compiler's declared schema or renderer capabilities.
 
 ## Current evidence
 
@@ -50,13 +52,13 @@ into non-zero exit codes.
 
 ## Source of truth
 
-| Contract                | Source                                  | Consumers           | Rule                                     |
-| ----------------------- | --------------------------------------- | ------------------- | ---------------------------------------- |
-| Public configuration    | `schemas/profile.schema.json`           | loader, docs, tests | Types must match schema.                 |
-| Runtime profile         | validated `ProfileConfig`               | compiler and theme  | No unvalidated object enters rendering.  |
-| Theme geometry          | `src/themes/control-plane`              | compiler            | Dark/light variants share geometry.      |
-| Generated README/assets | compiler output                         | writer and preview  | Generated files are never authoritative. |
-| Skill workflow          | `skills/design-github-profile/SKILL.md` | Codex               | Skill calls CLI; it does not render.     |
+| Contract                | Source                         | Consumers           | Rule                                        |
+| ----------------------- | ------------------------------ | ------------------- | ------------------------------------------- |
+| Public configuration    | `schemas/profile.schema.json`  | loader, docs, tests | Types must match schema.                    |
+| Runtime profile         | validated `ProfileConfig`      | compiler and theme  | No unvalidated object enters rendering.     |
+| Theme geometry          | `src/themes/control-plane`     | compiler            | Dark/light variants share geometry.         |
+| Generated README/assets | compiler output                | writer and preview  | Generated files are never authoritative.    |
+| Skill workflow          | `skills/design-github-profile` | Codex               | Skill positions and evaluates; CLI renders. |
 
 ## Boundary contracts
 
@@ -83,8 +85,8 @@ into non-zero exit codes.
 | Priority | Work                                               | Done when                                   | Verification                     |
 | -------- | -------------------------------------------------- | ------------------------------------------- | -------------------------------- |
 | P0       | Schema, compiler, control-plane theme, build/check | Example produces four valid SVGs and README | typecheck, tests, XML parse      |
-| P1       | GitHub init, preview, Skill                        | Fresh user reaches a preview branch         | mocked REST and Skill validation |
-| P2       | More themes, web playground, npm release           | Contracts remain stable across themes       | compatibility fixtures           |
+| P1       | GitHub init, preview, guided design Skill          | Evidence-backed profile reaches preview     | mocked REST and Skill validation |
+| P2       | Validated archetypes, more themes, playground, npm | Contracts remain stable across themes       | compatibility fixtures           |
 
 ## Non-goals
 
