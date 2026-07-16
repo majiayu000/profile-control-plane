@@ -8,6 +8,7 @@ import {
 } from "../src/adapters/config-file.js";
 import { assertProfileConfig } from "../src/config/schema.js";
 import { ProfileError, asProfileError } from "../src/core/errors.js";
+import { THEME_PRESETS } from "../src/themes/registry.js";
 import { validConfig } from "./fixtures.js";
 
 describe("profile schema", () => {
@@ -37,11 +38,7 @@ describe("profile schema", () => {
   });
 
   it("accepts every supported template preset", async () => {
-    for (const preset of [
-      "control-plane",
-      "editorial",
-      "bento-grid",
-    ] as const) {
+    for (const preset of THEME_PRESETS) {
       await expect(
         assertProfileConfig({
           ...validConfig,

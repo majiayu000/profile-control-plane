@@ -14,12 +14,12 @@ Compile a GitHub identity into an animated, dark/light, self-hosted profile READ
 
 Most profile generators render a banner or assemble remote widgets. Profile Control Plane turns your
 repositories into a coherent visual system: a hero, a project map, flagship work, and an expandable module
-registry—all generated from one reviewed YAML file and one of three distinct templates.
+registry—all generated from one reviewed YAML file and one of nine distinct templates.
 
 ## What you get
 
 - One declarative `profile.yaml` as the authoring source of truth.
-- Three templates, each producing four SVGs with native dark/light variants and reduced-motion support.
+- Nine templates, each producing four SVGs with native dark/light variants and reduced-motion support.
 - A generated GitHub-safe `README.md` with escaped metadata and optional star badges.
 - `init`, `build`, `preview`, and `check` commands with typed, fail-closed errors.
 - A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill for evidence-backed
@@ -43,6 +43,44 @@ The default Control Plane hero is shown at the top of this README.
   <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/output/assets/closed-loop-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/output/assets/closed-loop-light.svg">
   <img alt="Control Plane architecture map" src="examples/lifcc/output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Command Deck (`command-deck`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/command-deck-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/command-deck-output/assets/hero-light.svg">
+  <img alt="Command Deck template" src="examples/lifcc/command-deck-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the execution deck</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/command-deck-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/command-deck-output/assets/closed-loop-light.svg">
+  <img alt="Command Deck execution map" src="examples/lifcc/command-deck-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Signal Grid (`signal-grid`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/signal-grid-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/signal-grid-output/assets/hero-light.svg">
+  <img alt="Signal Grid template" src="examples/lifcc/signal-grid-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the signal topology</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/signal-grid-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/signal-grid-output/assets/closed-loop-light.svg">
+  <img alt="Signal Grid topology map" src="examples/lifcc/signal-grid-output/assets/closed-loop-light.svg" width="100%">
 </picture>
 
 </details>
@@ -81,6 +119,82 @@ The default Control Plane hero is shown at the top of this README.
   <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg">
   <img alt="Developer Workbench build map" src="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Terminal
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/terminal-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/terminal-output/assets/hero-light.svg">
+  <img alt="Terminal template" src="examples/lifcc/terminal-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the process tree</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/terminal-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/terminal-output/assets/closed-loop-light.svg">
+  <img alt="Terminal process tree" src="examples/lifcc/terminal-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Blueprint
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/blueprint-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/blueprint-output/assets/hero-light.svg">
+  <img alt="Blueprint template" src="examples/lifcc/blueprint-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the assembly drawing</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/blueprint-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/blueprint-output/assets/closed-loop-light.svg">
+  <img alt="Blueprint assembly drawing" src="examples/lifcc/blueprint-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Constellation
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/constellation-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/constellation-output/assets/hero-light.svg">
+  <img alt="Constellation template" src="examples/lifcc/constellation-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the star chart</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/constellation-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/constellation-output/assets/closed-loop-light.svg">
+  <img alt="Constellation star chart" src="examples/lifcc/constellation-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Metro Map (`metro`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/metro-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/metro-output/assets/hero-light.svg">
+  <img alt="Metro Map template" src="examples/lifcc/metro-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the network map</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/metro-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/metro-output/assets/closed-loop-light.svg">
+  <img alt="Metro network map" src="examples/lifcc/metro-output/assets/closed-loop-light.svg" width="100%">
 </picture>
 
 </details>
@@ -157,14 +271,20 @@ See the curated [lifcc configuration](examples/lifcc/profile.yaml) and its [gene
 
 ### Templates
 
-| Preset          | Best fit                                         | Visual language                        |
-| --------------- | ------------------------------------------------ | -------------------------------------- |
-| `control-plane` | Infrastructure, agent systems, connected tooling | Animated control room and systems loop |
-| `editorial`     | Maintainers, researchers, selected body of work  | Technical journal and working index    |
-| `bento-grid`    | Product builders and modular project portfolios  | Connected workbench and signal map     |
+| Preset          | Best fit                                          | Visual language                         |
+| --------------- | ------------------------------------------------- | --------------------------------------- |
+| `control-plane` | Infrastructure, agent systems, connected tooling  | Animated control room and systems loop  |
+| `command-deck`  | Operations-heavy systems and flagship execution   | Mission console and command bus         |
+| `signal-grid`   | Networked projects and relationship-heavy systems | Signal topology and connected mesh      |
+| `editorial`     | Maintainers, researchers, selected body of work   | Technical journal and working index     |
+| `bento-grid`    | Product builders and modular project portfolios   | Connected workbench and signal map      |
+| `terminal`      | CLI tools, daemons, and hands-on builders         | Live shell session and process tree     |
+| `blueprint`     | Spec-driven engineering and deliberate systems    | Engineering drawing and assembly map    |
+| `constellation` | Broad portfolios with a few standout projects     | Animated star atlas and signal chain    |
+| `metro`         | Many repositories grouped into clear domains      | Transit network with moving train paths |
 
 The bundled agent skill can recommend a preset from repository evidence. The user remains the decision
-maker: `profilectl preview --all-templates` renders the same configuration in all three directions before
+maker: `profilectl preview --all-templates` renders the same configuration in all nine directions before
 anything is built or staged.
 
 ## Commands

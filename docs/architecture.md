@@ -87,7 +87,7 @@ into non-zero exit codes.
 | -------- | -------------------------------------------------- | --------------------------------------------- | -------------------------------- |
 | P0       | Schema, compiler, control-plane theme, build/check | Example produces four valid SVGs and README   | typecheck, tests, XML parse      |
 | P1       | GitHub init, preview, guided design Skill          | Evidence-backed profile reaches preview       | mocked REST and Skill validation |
-| P2       | Template registry and comparison preview           | Three presets share one stable file contract  | compatibility and route fixtures |
+| P2       | Template registry and comparison preview           | Nine presets share one stable file contract   | compatibility and route fixtures |
 | P3       | Additional validated templates and npm release     | New presets preserve schema and accessibility | visual and package verification  |
 
 ## Non-goals

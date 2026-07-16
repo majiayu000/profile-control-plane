@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc command deck" data-mode="light">
+      <defs>
+    <linearGradient id="industrial-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F6FBFD"/><stop offset="1" stop-color="#FFF6FA"/></linearGradient>
+    <linearGradient id="industrial-accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00A7D1"/><stop offset="1" stop-color="#E84A8A"/></linearGradient>
+    <pattern id="industrial-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#D7E7ED" stroke-width="1"/></pattern>
+    <pattern id="industrial-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#D7E7ED"/></pattern>
+    <filter id="industrial-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs><style>
+    text{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .micro{font-size:9px;letter-spacing:2px}.label{font-size:11px;letter-spacing:2.5px;font-weight:700}
+    .flow{stroke-dasharray:6 9;animation:flow 7s linear infinite}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}
+    .scan{animation:scan 5s ease-in-out infinite}.flicker{animation:flicker 2.2s ease-in-out infinite}.boot{animation:boot .8s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes flow{to{stroke-dashoffset:-150}}@keyframes pulse{50%{opacity:.35;transform:scale(.72)}}
+    @keyframes scan{50%{opacity:.28;transform:translateX(24px)}}@keyframes flicker{50%{opacity:.38}}@keyframes boot{from{opacity:0}to{opacity:1}}
+    @media(prefers-reduced-motion:reduce){.flow,.pulse,.scan,.flicker,.boot{animation:none}}
+  </style><rect width="1200" height="360" rx="18" fill="url(#industrial-bg)"/><rect width="1200" height="360" rx="18" fill="url(#industrial-grid)" opacity=".68"/>
+      <path d="M0 1H1200" stroke="url(#industrial-accent)" stroke-width="2"/><path d="M720 44V344" stroke="#A9C4CF"/><path d="M730 44V344" stroke="#D7E7ED"/>
+      <g transform="translate(20 22)"><circle cx="0" cy="0" r="4" fill="#EF4B5A"/><circle cx="18" cy="0" r="4" fill="#E6A425"/><circle cx="36" cy="0" r="4" fill="#22A447"/><text x="58" y="4" class="micro" fill="#506D7A">LIFCC / COMMAND_DECK</text></g>
+      <g transform="translate(1046 22)"><circle class="flicker" r="4" fill="#00A7D1" filter="url(#industrial-glow)"/><text x="14" y="4" class="micro" fill="#506D7A">MISSION READY</text></g><path d="M0 44H1200" stroke="#A9C4CF"/>
+      <g class="boot"><text x="38" y="82" class="label" fill="#00A7D1">// OPERATOR IDENTITY / SYSTEM COMMAND</text><text x="38" y="139" font-size="43" font-weight="900" letter-spacing="-1.6" fill="#102934">AI AGENT</text><text x="38" y="182" font-size="43" font-weight="900" letter-spacing="-1.6" fill="#102934">INFRASTRUCTURE</text>
+      <path d="M38 223H650" stroke="#A9C4CF"/><path class="scan" d="M38 223H270" stroke="#00A7D1" stroke-width="2"/><text x="38" y="250" font-size="11" letter-spacing="1.5" fill="#506D7A">BUILDING THE SYSTEMS AROUND CODING AGENTS — FROM SKILLS A… · Beijing · UTC+8</text><g transform="translate(38 282)"><path d="M0 0H188L198 10V42H0Z" fill="#FFFFFF" stroke="#A9C4CF"/><text x="14" y="16" font-size="7" letter-spacing="1.5" fill="#506D7A">LAYERS</text><text x="14" y="34" font-size="15" font-weight="900" fill="#00A7D1">08</text><path d="M164 30h18" stroke="#00A7D1"/><circle cx="182" cy="30" r="3" fill="#00A7D1"/></g><g transform="translate(243 282)"><path d="M0 0H188L198 10V42H0Z" fill="#FFFFFF" stroke="#A9C4CF"/><text x="14" y="16" font-size="7" letter-spacing="1.5" fill="#506D7A">FLAGSHIPS</text><text x="14" y="34" font-size="15" font-weight="900" fill="#E84A8A">06</text><path d="M164 30h18" stroke="#E84A8A"/><circle cx="182" cy="30" r="3" fill="#E84A8A"/></g><g transform="translate(448 282)"><path d="M0 0H188L198 10V42H0Z" fill="#FFFFFF" stroke="#A9C4CF"/><text x="14" y="16" font-size="7" letter-spacing="1.5" fill="#506D7A">STATUS</text><text x="14" y="34" font-size="15" font-weight="900" fill="#00A7D1">READY</text><path d="M164 30h18" stroke="#00A7D1"/><circle cx="182" cy="30" r="3" fill="#00A7D1"/></g></g>
+      <text x="760" y="64" class="label" fill="#E84A8A">FLAGSHIP CHANNELS</text><text x="1148" y="64" text-anchor="end" class="micro" fill="#506D7A">03 PRIORITY SIGNALS</text><g class="boot" style="animation-delay:0.00s"><path d="M760 72H1148V127H780L760 107Z" fill="#FFFFFF" fill-opacity=".88" stroke="#00A7D1" stroke-opacity=".72"/>
+        <text x="778" y="92" font-size="8" font-weight="700" letter-spacing="1.5" fill="#00A7D1">01 / EXTEND</text>
+        <text x="778" y="111" font-size="13" font-weight="800" fill="#102934">claude-skill-registry</text><text x="1131" y="111" text-anchor="end" font-size="8" fill="#506D7A">CHANNEL 01</text>
+        <circle class="pulse" cx="1129" cy="89" r="3" fill="#00A7D1"/></g><g class="boot" style="animation-delay:0.18s"><path d="M760 146H1148V201H780L760 181Z" fill="#FFFFFF" fill-opacity=".88" stroke="#00A7D1" stroke-opacity=".72"/>
+        <text x="778" y="166" font-size="8" font-weight="700" letter-spacing="1.5" fill="#00A7D1">02 / EXTEND</text>
+        <text x="778" y="185" font-size="13" font-weight="800" fill="#102934">spellbook</text><text x="1131" y="185" text-anchor="end" font-size="8" fill="#506D7A">CHANNEL 02</text>
+        <circle class="pulse" cx="1129" cy="163" r="3" fill="#00A7D1"/></g><g class="boot" style="animation-delay:0.36s"><path d="M760 220H1148V275H780L760 255Z" fill="#FFFFFF" fill-opacity=".88" stroke="#E84A8A" stroke-opacity=".72"/>
+        <text x="778" y="240" font-size="8" font-weight="700" letter-spacing="1.5" fill="#E84A8A">03 / ROUTE</text>
+        <text x="778" y="259" font-size="13" font-weight="800" fill="#102934">litellm-rs</text><text x="1131" y="259" text-anchor="end" font-size="8" fill="#506D7A">CHANNEL 03</text>
+        <circle class="pulse" cx="1129" cy="237" r="3" fill="#E84A8A"/></g>
+      <g transform="translate(1083 310)"><circle r="29" fill="#FFFFFF" stroke="#A9C4CF"/><circle r="20" fill="none" stroke="url(#industrial-accent)" stroke-dasharray="5 5"/><path d="M0-16V16M-16 0H16" stroke="#00A7D1"/><circle class="pulse" r="4" fill="#E84A8A"/></g><text x="760" y="322" class="micro" fill="#506D7A">CONTROL BUS / ONLINE</text>
+      <rect x="1" y="1" width="1198" height="358" rx="18" fill="none" stroke="#00A7D1" stroke-opacity=".72"/></svg>

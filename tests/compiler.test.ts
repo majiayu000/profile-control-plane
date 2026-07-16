@@ -50,6 +50,8 @@ describe("profile compiler", () => {
       ["blueprint", "## Primary assemblies"],
       ["constellation", "## Brightest stars"],
       ["metro", "## Interchange stations"],
+      ["command-deck", "## Mission-critical systems"],
+      ["signal-grid", "## Primary signals"],
     ]);
     const heroes = THEME_PRESETS.map((preset) => {
       const output = compileProfile({
@@ -130,6 +132,8 @@ describe("profile compiler", () => {
       ["blueprint", [">PART<", ">SPEC<"]],
       ["constellation", ["LEGEND", "STAR"]],
       ["metro", ["NETWORK MAP", "DEPOT"]],
+      ["command-deck", ["COMMAND_DECK", "COMMAND BUS"]],
+      ["signal-grid", ["SIGNAL_GRID", "NETWORK TOPOLOGY"]],
     ]);
     for (const [preset, probes] of signatures) {
       const output = compileProfile({
@@ -263,6 +267,12 @@ describe("escaping and palette utilities", () => {
     expect(publicApi.ControlPlaneRenderer).toBeTypeOf("function");
     expect(publicApi.EditorialRenderer).toBeTypeOf("function");
     expect(publicApi.BentoGridRenderer).toBeTypeOf("function");
+    expect(publicApi.TerminalRenderer).toBeTypeOf("function");
+    expect(publicApi.BlueprintRenderer).toBeTypeOf("function");
+    expect(publicApi.ConstellationRenderer).toBeTypeOf("function");
+    expect(publicApi.MetroRenderer).toBeTypeOf("function");
+    expect(publicApi.CommandDeckRenderer).toBeTypeOf("function");
+    expect(publicApi.SignalGridRenderer).toBeTypeOf("function");
     expect(publicApi.THEME_PRESETS).toEqual(THEME_PRESETS);
   });
 });

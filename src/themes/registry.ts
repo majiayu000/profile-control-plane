@@ -2,14 +2,18 @@ import { ProfileError } from "../core/errors.js";
 import type { ThemeDefinition, ThemePreset } from "../core/types.js";
 import { BentoGridRenderer } from "./bento-grid/bento-grid.js";
 import { BlueprintRenderer } from "./blueprint/blueprint.js";
+import { CommandDeckRenderer } from "./command-deck/command-deck.js";
 import { ConstellationRenderer } from "./constellation/constellation.js";
 import { ControlPlaneRenderer } from "./control-plane/control-plane.js";
 import { EditorialRenderer } from "./editorial/editorial.js";
 import { MetroRenderer } from "./metro/metro.js";
+import { SignalGridRenderer } from "./signal-grid/signal-grid.js";
 import { TerminalRenderer } from "./terminal/terminal.js";
 
 export const THEME_PRESETS = [
   "control-plane",
+  "command-deck",
+  "signal-grid",
   "editorial",
   "bento-grid",
   "terminal",
@@ -116,6 +120,36 @@ const themes: Record<ThemePreset, ThemeDefinition> = {
       emptyModules: "No lines in service.",
       heroAlt: (config) => `${config.identity.name} metro map`,
       overviewAlt: (config) => `${config.identity.name} network map`,
+    },
+  },
+  "command-deck": {
+    preset: "command-deck",
+    label: "Command Deck",
+    description:
+      "An operations console for flagship systems and execution status.",
+    renderer: new CommandDeckRenderer(),
+    copy: {
+      flagshipHeading: "Mission-critical systems",
+      overviewHeading: "Execution deck",
+      modulesHeading: "Supporting systems",
+      emptyModules: "No supporting systems declared.",
+      heroAlt: (config) => `${config.identity.name} command deck`,
+      overviewAlt: (config) => `${config.identity.name} execution deck`,
+    },
+  },
+  "signal-grid": {
+    preset: "signal-grid",
+    label: "Signal Grid",
+    description:
+      "A network topology for connected projects and system relationships.",
+    renderer: new SignalGridRenderer(),
+    copy: {
+      flagshipHeading: "Primary signals",
+      overviewHeading: "Signal topology",
+      modulesHeading: "Network registry",
+      emptyModules: "No additional signals declared.",
+      heroAlt: (config) => `${config.identity.name} signal grid`,
+      overviewAlt: (config) => `${config.identity.name} signal topology`,
     },
   },
 };

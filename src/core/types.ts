@@ -7,7 +7,9 @@ export type ThemePreset =
   | "terminal"
   | "blueprint"
   | "constellation"
-  | "metro";
+  | "metro"
+  | "command-deck"
+  | "signal-grid";
 
 export interface ProfileLink {
   readonly label: string;

@@ -46,6 +46,8 @@ typing gimmicks, exhaustive technology lists, or generic enthusiasm.
 | Preset          | Prefer when the evidence shows                               | Reject when                                     |
 | --------------- | ------------------------------------------------------------ | ----------------------------------------------- |
 | `control-plane` | Connected systems, infrastructure, orchestration, flow       | The repositories do not form an explainable map |
+| `command-deck`  | Operational systems with a few mission-critical flagships    | The work lacks a clear execution hierarchy      |
+| `signal-grid`   | Projects whose relationships and shared signals matter       | The projects are mostly independent             |
 | `editorial`     | A curated body of authored or maintained work                | The account needs dense product comparison      |
 | `bento-grid`    | Distinct products or modules that deserve equal scanning     | The work is one continuous system narrative     |
 | `terminal`      | CLI tools, shells, daemons, a hands-on-keyboard identity     | The audience is non-technical or design-first   |

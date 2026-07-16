@@ -75,11 +75,12 @@ rendering after the user has reviewed the semantic positioning.
      profilectl preview --config profile.yaml --all-templates
      ```
 
-   - Use `control-plane` for evidence of connected infrastructure or execution flow, `editorial` for a
-     curated body of authored work, `bento-grid` for distinct modular products, `terminal` for a
-     CLI-and-tooling identity, `blueprint` for deliberate spec-driven engineering, `constellation` for a
-     broad body of work with a few standout stars, and `metro` for many repositories that organize into
-     clear language or domain lines (see the template table in
+   - Use `control-plane` for evidence of connected infrastructure or execution flow, `command-deck` for
+     operations-heavy systems with a few mission-critical flagships, `signal-grid` for relationship-heavy
+     networks, `editorial` for a curated body of authored work, `bento-grid` for distinct modular products,
+     `terminal` for a CLI-and-tooling identity, `blueprint` for deliberate spec-driven engineering,
+     `constellation` for a broad body of work with a few standout stars, and `metro` for many repositories
+     that organize into clear language or domain lines (see the template table in
      `references/visual-and-content-guidelines.md`). Do not treat these as identity labels; repository
      evidence and user preference take precedence.
 
