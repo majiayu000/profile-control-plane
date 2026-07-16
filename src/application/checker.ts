@@ -1,6 +1,8 @@
 import { ProfileError } from "../core/errors.js";
 import type { CompiledProfile, ProfileConfig } from "../core/types.js";
 
+const ONLINE_REQUEST_TIMEOUT_MS = 10_000;
+
 export interface CheckResult {
   readonly fileCount: number;
   readonly onlineUrlCount: number;
@@ -51,6 +53,7 @@ function onlineUrls(config: ProfileConfig): readonly string[] {
 async function assertOnlineUrls(
   urls: readonly string[],
   fetchImpl: typeof fetch,
+  timeoutMs: number,
 ): Promise<void> {
   const failures: string[] = [];
   await Promise.all(
@@ -59,6 +62,7 @@ async function assertOnlineUrls(
         const response = await fetchImpl(url, {
           method: "HEAD",
           redirect: "follow",
+          signal: AbortSignal.timeout(timeoutMs),
         });
         if (!response.ok)
           failures.push(`${url} returned HTTP ${response.status}`);
@@ -81,10 +85,16 @@ export async function checkCompiledProfile(
   options: {
     readonly online?: boolean;
     readonly fetchImpl?: typeof fetch;
+    readonly onlineTimeoutMs?: number;
   } = {},
 ): Promise<CheckResult> {
   assertCompiledFiles(profile);
   const urls = options.online ? onlineUrls(config) : [];
-  if (options.online) await assertOnlineUrls(urls, options.fetchImpl ?? fetch);
+  if (options.online)
+    await assertOnlineUrls(
+      urls,
+      options.fetchImpl ?? fetch,
+      options.onlineTimeoutMs ?? ONLINE_REQUEST_TIMEOUT_MS,
+    );
   return { fileCount: profile.files.length, onlineUrlCount: urls.length };
 }
