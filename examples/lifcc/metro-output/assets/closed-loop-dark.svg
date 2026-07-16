@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc network map" data-mode="dark">
+      <style>
+    .sans{font-family:Helvetica,Arial,sans-serif}
+    .flow{stroke-dasharray:4 22;animation:flow 14s linear infinite}
+    @keyframes flow{to{stroke-dashoffset:-260}}
+    @media(prefers-reduced-motion:reduce){.flow{animation:none}}
+  </style><rect width="1200" height="330" fill="#0E1420"/>
+      <text x="1160" y="40" text-anchor="end" class="sans" font-size="16" font-weight="900" letter-spacing="4" fill="#F2F5FA">NETWORK MAP</text>
+      <text x="1160" y="58" text-anchor="end" class="sans" font-size="9" letter-spacing="2" fill="#7C8698">LIFCC · 3 LINES</text>
+      <path d="M84 130H130L174.0 86H1150" fill="none" stroke="#00a7d1" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="430.0" cy="86" r="4.5" fill="#0E1420" stroke="#00a7d1" stroke-width="2.2"/><text transform="translate(434.0 77.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">awesome-goal-…</text><circle cx="640.0" cy="86" r="4.5" fill="#0E1420" stroke="#00a7d1" stroke-width="2.2"/><text transform="translate(644.0 77.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">argus</text><circle cx="850.0" cy="86" r="4.5" fill="#0E1420" stroke="#00a7d1" stroke-width="2.2"/><text transform="translate(854.0 77.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">specrail</text><circle cx="1060.0" cy="86" r="4.5" fill="#0E1420" stroke="#00a7d1" stroke-width="2.2"/><text transform="translate(1064.0 77.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">keepline</text><path d="M84 146H170L276.0 252H1150" fill="none" stroke="#7479ae" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="444.0" cy="252" r="4.5" fill="#0E1420" stroke="#7479ae" stroke-width="2.2"/><text transform="translate(448.0 243.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">sage</text><circle cx="598.0" cy="252" r="4.5" fill="#0E1420" stroke="#7479ae" stroke-width="2.2"/><text transform="translate(602.0 243.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">rnk</text><circle cx="752.0" cy="252" r="4.5" fill="#0E1420" stroke="#7479ae" stroke-width="2.2"/><text transform="translate(756.0 243.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">ccstats</text><circle cx="906.0" cy="252" r="4.5" fill="#0E1420" stroke="#7479ae" stroke-width="2.2"/><text transform="translate(910.0 243.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">jsonrepair-rs</text><circle cx="1060.0" cy="252" r="4.5" fill="#0E1420" stroke="#7479ae" stroke-width="2.2"/><text transform="translate(1064.0 243.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">rekey</text><path d="M84 162H300L314.0 148H1150" fill="none" stroke="#e84a8a" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="458.0" cy="148" r="4.5" fill="#0E1420" stroke="#e84a8a" stroke-width="2.2"/><text transform="translate(462.0 139.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">loom</text><circle cx="658.7" cy="148" r="4.5" fill="#0E1420" stroke="#e84a8a" stroke-width="2.2"/><text transform="translate(662.7 139.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">claude-skill-…</text><circle cx="859.3" cy="148" r="4.5" fill="#0E1420" stroke="#e84a8a" stroke-width="2.2"/><text transform="translate(863.3 139.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">refine</text><circle cx="1060.0" cy="148" r="4.5" fill="#0E1420" stroke="#e84a8a" stroke-width="2.2"/><text transform="translate(1064.0 139.0) rotate(-45)" class="sans" font-size="8" fill="#F2F5FA">chat-archive-…</text>
+      <g class="sans">
+    <rect x="38" y="116" width="46" height="92" rx="6" fill="#1A2232" stroke="#2A3446"/>
+    <text transform="translate(66 190) rotate(-90)" font-size="9" letter-spacing="3" font-weight="700" fill="#F2F5FA">DEPOT</text>
+  </g>
+      <g>
+    <rect x="30" y="240" width="234" height="72" rx="6" fill="#0E1420" stroke="#2A3446"/>
+    <text x="42" y="256" class="sans" font-size="8" font-weight="700" letter-spacing="2" fill="#7C8698">LINE DIRECTORY</text>
+    <rect x="42" y="262" width="18" height="6" rx="3" fill="#00a7d1"/>
+      <text x="68" y="270" class="sans" font-size="9" font-weight="700" fill="#F2F5FA">Core loop</text>
+      <text x="252" y="270" text-anchor="end" class="sans" font-size="9" fill="#7C8698">4 stn</text><rect x="42" y="278" width="18" height="6" rx="3" fill="#7479ae"/>
+      <text x="68" y="286" class="sans" font-size="9" font-weight="700" fill="#F2F5FA">Rust systems</text>
+      <text x="252" y="286" text-anchor="end" class="sans" font-size="9" fill="#7C8698">5 stn</text><rect x="42" y="294" width="18" height="6" rx="3" fill="#e84a8a"/>
+      <text x="68" y="302" class="sans" font-size="9" font-weight="700" fill="#F2F5FA">Agent tooling</text>
+      <text x="252" y="302" text-anchor="end" class="sans" font-size="9" fill="#7C8698">4 stn</text>
+  </g>
+    </svg>

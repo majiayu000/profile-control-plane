@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc assembly drawing" data-mode="light">
+      <defs>
+    <linearGradient id="bp-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F9FB"/><stop offset="1" stop-color="#EFF3F7"/></linearGradient>
+    <pattern id="bp-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1F4E79" stroke-opacity=".08"/></pattern>
+    <pattern id="bp-grid-major" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#1F4E79" stroke-opacity=".14"/></pattern>
+    <marker id="bp-arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#1F4E79"/></marker>
+  </defs><style>
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .cline{stroke-dasharray:14 4 2 4;animation:cdrift 14s linear infinite}
+    @keyframes cdrift{to{stroke-dashoffset:-96}}
+    @media(prefers-reduced-motion:reduce){.cline{animation:none}}
+  </style><rect width="1200" height="330" fill="url(#bp-bg)"/>
+    <rect x="10" y="10" width="1180" height="310" fill="none" stroke="#1F4E79" stroke-width="1.5"/>
+    <rect x="16" y="16" width="1168" height="298" fill="url(#bp-grid)" stroke="#1F4E79" stroke-width=".5"/>
+    <rect x="16" y="16" width="1168" height="298" fill="url(#bp-grid-major)"/>
+      <text x="40" y="46" class="mono" font-size="12" font-weight="700" letter-spacing="3" fill="#1F4E79">EXPLODED ASSEMBLY — 08 PARTS</text>
+      <text x="40" y="62" class="mono" font-size="8.5" letter-spacing="1.5" fill="#54749B">AI AGENT INFRASTRUCTURE</text>
+      <path class="cline" d="M50 165H610" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".9"/>
+      <path d="M610 165H618" stroke="#1F4E79" stroke-width=".9" marker-end="url(#bp-arr)"/>
+      <g>
+        <path d="M127.77777777777777 165V131" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <rect x="111.77777777777777" y="118" width="32" height="26" fill="#E7EEF5" fill-opacity=".6" stroke="#00A7D1" stroke-width="1.4"/>
+        <text x="127.77777777777777" y="111" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">01</text>
+        <path d="M145.77777777777777 131L606 131L628 106L640 106" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="145.77777777777777" cy="131" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M185.55555555555554 165V199" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <circle cx="185.55555555555554" cy="199" r="15" fill="#E7EEF5" fill-opacity=".6" stroke="#00A7D1" stroke-width="1.4"/>
+        <text x="185.55555555555554" y="227" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">02</text>
+        <path d="M203.55555555555554 199L615 199L637 130L640 130" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="203.55555555555554" cy="199" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M243.33333333333334 165V131" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <rect x="227.33333333333334" y="118" width="32" height="26" fill="#E7EEF5" fill-opacity=".6" stroke="#00A7D1" stroke-width="1.4"/>
+        <text x="243.33333333333334" y="111" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">03</text>
+        <path d="M261.33333333333337 131L624 131L646 154L640 154" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="261.33333333333337" cy="131" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M301.1111111111111 165V199" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <circle cx="301.1111111111111" cy="199" r="15" fill="#E7EEF5" fill-opacity=".6" stroke="#00A7D1" stroke-width="1.4"/>
+        <text x="301.1111111111111" y="227" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">04</text>
+        <path d="M319.1111111111111 199L606 199L628 178L640 178" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="319.1111111111111" cy="199" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M358.8888888888889 165V131" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <rect x="342.8888888888889" y="118" width="32" height="26" fill="#E7EEF5" fill-opacity=".6" stroke="#E84A8A" stroke-width="1.4"/>
+        <text x="358.8888888888889" y="111" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">05</text>
+        <path d="M376.8888888888889 131L615 131L637 202L640 202" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="376.8888888888889" cy="131" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M416.6666666666667 165V199" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <circle cx="416.6666666666667" cy="199" r="15" fill="#E7EEF5" fill-opacity=".6" stroke="#E84A8A" stroke-width="1.4"/>
+        <text x="416.6666666666667" y="227" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">06</text>
+        <path d="M434.6666666666667 199L624 199L646 226L640 226" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="434.6666666666667" cy="199" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M474.44444444444446 165V131" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <rect x="458.44444444444446" y="118" width="32" height="26" fill="#E7EEF5" fill-opacity=".6" stroke="#E84A8A" stroke-width="1.4"/>
+        <text x="474.44444444444446" y="111" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">07</text>
+        <path d="M492.44444444444446 131L606 131L628 250L640 250" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="492.44444444444446" cy="131" r="1.6" fill="#1F4E79"/>
+      </g><g>
+        <path d="M532.2222222222222 165V199" stroke="#1F4E79" stroke-width=".7" stroke-dasharray="3 3"/>
+        <circle cx="532.2222222222222" cy="199" r="15" fill="#E7EEF5" fill-opacity=".6" stroke="#E84A8A" stroke-width="1.4"/>
+        <text x="532.2222222222222" y="227" text-anchor="middle" class="mono" font-size="8.5" font-weight="700" fill="#1F4E79">08</text>
+        <path d="M550.2222222222222 199L615 199L637 274L640 274" fill="none" stroke="#1F4E79" stroke-width=".6" stroke-opacity=".65"/>
+        <circle cx="550.2222222222222" cy="199" r="1.6" fill="#1F4E79"/>
+      </g><rect x="640" y="72" width="520" height="214" fill="#E7EEF5" fill-opacity=".5" stroke="#1F4E79" stroke-width="1.2"/>
+    <text x="650" y="87" class="mono" font-size="8" letter-spacing="2" fill="#1F4E79">NO.</text>
+    <text x="688" y="87" class="mono" font-size="8" letter-spacing="2" fill="#1F4E79">PART</text>
+    <text x="850" y="87" class="mono" font-size="8" letter-spacing="2" fill="#1F4E79">SPEC</text>
+    <path d="M680 72V286M842 72V286" stroke="#1F4E79" stroke-width=".5"/><path d="M640 94H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="112" class="mono" font-size="9" font-weight="700" fill="#00A7D1">01</text>
+      <text x="688" y="112" class="mono" font-size="9" fill="#1F4E79">DIRECT</text>
+      <text x="850" y="112" class="mono" font-size="8.5" fill="#54749B">sage — A fast coding agent in pure R…</text><path d="M640 118H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="136" class="mono" font-size="9" font-weight="700" fill="#00A7D1">02</text>
+      <text x="688" y="136" class="mono" font-size="9" fill="#1F4E79">EXTEND</text>
+      <text x="850" y="136" class="mono" font-size="8.5" fill="#54749B">claude-skill-registry — Discovery and distribution fo…</text><path d="M640 142H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="160" class="mono" font-size="9" font-weight="700" fill="#00A7D1">03</text>
+      <text x="688" y="160" class="mono" font-size="9" fill="#1F4E79">TRUST</text>
+      <text x="850" y="160" class="mono" font-size="8.5" fill="#54749B">vibeguard — Rules and guards against unve…</text><path d="M640 166H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="184" class="mono" font-size="9" font-weight="700" fill="#00A7D1">04</text>
+      <text x="688" y="184" class="mono" font-size="9" fill="#1F4E79">REMEMBER</text>
+      <text x="850" y="184" class="mono" font-size="8.5" fill="#54749B">remem — Local-first auditable agent m…</text><path d="M640 190H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="208" class="mono" font-size="9" font-weight="700" fill="#E84A8A">05</text>
+      <text x="688" y="208" class="mono" font-size="9" fill="#1F4E79">ORCHESTRATE</text>
+      <text x="850" y="208" class="mono" font-size="8.5" fill="#54749B">harness — Governed fleets of parallel c…</text><path d="M640 214H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="232" class="mono" font-size="9" font-weight="700" fill="#E84A8A">06</text>
+      <text x="688" y="232" class="mono" font-size="9" fill="#1F4E79">ROUTE</text>
+      <text x="850" y="232" class="mono" font-size="8.5" fill="#54749B">litellm-rs — One high-performance gateway…</text><path d="M640 238H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="256" class="mono" font-size="9" font-weight="700" fill="#E84A8A">07</text>
+      <text x="688" y="256" class="mono" font-size="9" fill="#1F4E79">GOVERN</text>
+      <text x="850" y="256" class="mono" font-size="8.5" fill="#54749B">specrail — Spec-first repository workflo…</text><path d="M640 262H1160" stroke="#1F4E79" stroke-width=".5" stroke-opacity=".7"/>
+      <text x="650" y="280" class="mono" font-size="9" font-weight="700" fill="#E84A8A">08</text>
+      <text x="688" y="280" class="mono" font-size="9" fill="#1F4E79">KEEP</text>
+      <text x="850" y="280" class="mono" font-size="8.5" fill="#54749B">keepline — Monitor and recover long-runn…</text>
+      <text x="40" y="306" class="mono" font-size="8" letter-spacing="2" fill="#54749B">ALL DIMENSIONS NOMINAL · DO NOT SCALE DRAWING</text>
+    </svg>

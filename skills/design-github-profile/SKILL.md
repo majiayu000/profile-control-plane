@@ -76,8 +76,12 @@ rendering after the user has reviewed the semantic positioning.
      ```
 
    - Use `control-plane` for evidence of connected infrastructure or execution flow, `editorial` for a
-     curated body of authored work, and `bento-grid` for distinct modular products. Do not treat these as
-     identity labels; repository evidence and user preference take precedence.
+     curated body of authored work, `bento-grid` for distinct modular products, `terminal` for a
+     CLI-and-tooling identity, `blueprint` for deliberate spec-driven engineering, `constellation` for a
+     broad body of work with a few standout stars, and `metro` for many repositories that organize into
+     clear language or domain lines (see the template table in
+     `references/visual-and-content-guidelines.md`). Do not treat these as identity labels; repository
+     evidence and user preference take precedence.
 
 6. Compile and validate.
 

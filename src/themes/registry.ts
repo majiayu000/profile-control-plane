@@ -1,13 +1,21 @@
 import { ProfileError } from "../core/errors.js";
 import type { ThemeDefinition, ThemePreset } from "../core/types.js";
 import { BentoGridRenderer } from "./bento-grid/bento-grid.js";
+import { BlueprintRenderer } from "./blueprint/blueprint.js";
+import { ConstellationRenderer } from "./constellation/constellation.js";
 import { ControlPlaneRenderer } from "./control-plane/control-plane.js";
 import { EditorialRenderer } from "./editorial/editorial.js";
+import { MetroRenderer } from "./metro/metro.js";
+import { TerminalRenderer } from "./terminal/terminal.js";
 
 export const THEME_PRESETS = [
   "control-plane",
   "editorial",
   "bento-grid",
+  "terminal",
+  "blueprint",
+  "constellation",
+  "metro",
 ] as const satisfies readonly ThemePreset[];
 
 const themes: Record<ThemePreset, ThemeDefinition> = {
@@ -52,6 +60,62 @@ const themes: Record<ThemePreset, ThemeDefinition> = {
       emptyModules: "No additional builds selected.",
       heroAlt: (config) => `${config.identity.name} bento portfolio`,
       overviewAlt: (config) => `${config.identity.name} modular build map`,
+    },
+  },
+  terminal: {
+    preset: "terminal",
+    label: "Terminal",
+    description: "A live shell session for CLI tools and daemon builders.",
+    renderer: new TerminalRenderer(),
+    copy: {
+      flagshipHeading: "Foreground jobs",
+      overviewHeading: "Process tree",
+      modulesHeading: "Background jobs",
+      emptyModules: "No background jobs.",
+      heroAlt: (config) => `${config.identity.name} terminal session`,
+      overviewAlt: (config) => `${config.identity.name} process tree`,
+    },
+  },
+  blueprint: {
+    preset: "blueprint",
+    label: "Blueprint",
+    description: "An engineering drawing for deliberate, spec-driven work.",
+    renderer: new BlueprintRenderer(),
+    copy: {
+      flagshipHeading: "Primary assemblies",
+      overviewHeading: "Assembly drawing",
+      modulesHeading: "Parts index",
+      emptyModules: "No auxiliary parts.",
+      heroAlt: (config) => `${config.identity.name} engineering blueprint`,
+      overviewAlt: (config) => `${config.identity.name} assembly drawing`,
+    },
+  },
+  constellation: {
+    preset: "constellation",
+    label: "Constellation",
+    description: "A star chart for a broad body of connected work.",
+    renderer: new ConstellationRenderer(),
+    copy: {
+      flagshipHeading: "Brightest stars",
+      overviewHeading: "Star chart",
+      modulesHeading: "Deep-sky catalog",
+      emptyModules: "No catalog entries.",
+      heroAlt: (config) => `${config.identity.name} constellation`,
+      overviewAlt: (config) => `${config.identity.name} star chart`,
+    },
+  },
+  metro: {
+    preset: "metro",
+    label: "Metro Map",
+    description: "A transit network for many repositories on clear lines.",
+    renderer: new MetroRenderer(),
+    copy: {
+      flagshipHeading: "Interchange stations",
+      overviewHeading: "Network map",
+      modulesHeading: "Line directory",
+      emptyModules: "No lines in service.",
+      heroAlt: (config) => `${config.identity.name} metro map`,
+      overviewAlt: (config) => `${config.identity.name} network map`,
     },
   },
 };

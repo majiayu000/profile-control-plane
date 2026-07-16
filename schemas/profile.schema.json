@@ -44,7 +44,15 @@
       "required": ["preset", "primary", "secondary"],
       "properties": {
         "preset": {
-          "enum": ["control-plane", "editorial", "bento-grid"]
+          "enum": [
+            "control-plane",
+            "editorial",
+            "bento-grid",
+            "terminal",
+            "blueprint",
+            "constellation",
+            "metro"
+          ]
         },
         "primary": { "$ref": "#/definitions/color" },
         "secondary": { "$ref": "#/definitions/color" }

@@ -7,7 +7,11 @@ import {
   escapeMarkdownLabel,
   escapeXml,
 } from "../src/core/escape.js";
-import type { ProfileConfig, ThemeRenderer } from "../src/core/types.js";
+import type {
+  ProfileConfig,
+  ThemePreset,
+  ThemeRenderer,
+} from "../src/core/types.js";
 import { createPalette } from "../src/themes/control-plane/palette.js";
 import { THEME_PRESETS } from "../src/themes/registry.js";
 import { getThemeDefinition } from "../src/themes/registry.js";
@@ -42,6 +46,10 @@ describe("profile compiler", () => {
       ["control-plane", "## Flagship systems"],
       ["editorial", "## Selected work"],
       ["bento-grid", "## Featured builds"],
+      ["terminal", "## Foreground jobs"],
+      ["blueprint", "## Primary assemblies"],
+      ["constellation", "## Brightest stars"],
+      ["metro", "## Interchange stations"],
     ]);
     const heroes = THEME_PRESETS.map((preset) => {
       const output = compileProfile({
@@ -57,6 +65,26 @@ describe("profile compiler", () => {
       return hero?.content;
     });
     expect(new Set(heroes).size).toBe(THEME_PRESETS.length);
+  });
+
+  it("renders each new template's signature structure", () => {
+    const signatures = new Map([
+      ["terminal", ["whoami", "tree layers"]],
+      ["blueprint", [">PART<", ">SPEC<"]],
+      ["constellation", ["LEGEND", "STAR"]],
+      ["metro", ["NETWORK MAP", "DEPOT"]],
+    ]);
+    for (const [preset, probes] of signatures) {
+      const output = compileProfile({
+        ...validConfig,
+        theme: { ...validConfig.theme, preset: preset as ThemePreset },
+      });
+      const svg = output.files
+        .filter((file) => file.path.endsWith("-dark.svg"))
+        .map((file) => file.content)
+        .join("");
+      for (const probe of probes ?? []) expect(svg).toContain(probe);
+    }
   });
 
   it("rejects unsupported presets at the public registry boundary", () => {

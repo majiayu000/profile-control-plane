@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc engineering drawing" data-mode="light">
+      <defs>
+    <linearGradient id="bp-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F9FB"/><stop offset="1" stop-color="#EFF3F7"/></linearGradient>
+    <pattern id="bp-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1F4E79" stroke-opacity=".08"/></pattern>
+    <pattern id="bp-grid-major" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#1F4E79" stroke-opacity=".14"/></pattern>
+    <marker id="bp-arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#1F4E79"/></marker>
+  </defs><style>
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .cline{stroke-dasharray:14 4 2 4;animation:cdrift 14s linear infinite}
+    @keyframes cdrift{to{stroke-dashoffset:-96}}
+    @media(prefers-reduced-motion:reduce){.cline{animation:none}}
+  </style><rect width="1200" height="360" fill="url(#bp-bg)"/>
+    <rect x="10" y="10" width="1180" height="340" fill="none" stroke="#1F4E79" stroke-width="1.5"/>
+    <rect x="16" y="16" width="1168" height="328" fill="url(#bp-grid)" stroke="#1F4E79" stroke-width=".5"/>
+    <rect x="16" y="16" width="1168" height="328" fill="url(#bp-grid-major)"/>
+      <text x="40" y="48" class="mono" font-size="14" font-weight="700" letter-spacing="3" fill="#1F4E79">LIFCC — GENERAL ARRANGEMENT</text>
+      <text x="40" y="66" class="mono" font-size="9" letter-spacing="1.5" fill="#54749B">Building the systems around coding agents — from skills and trust to memory and orchest…</text>
+      <path d="M40 76H600" stroke="#1F4E79" stroke-width=".7"/>
+      <text x="1160" y="48" text-anchor="end" class="mono" font-size="9" letter-spacing="2" fill="#54749B">DWG NO. MAJIAYU000-001</text>
+      <g>
+    <path class="cline" d="M38 131H242" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="56" y="102" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M64 152L80 136M64 140L76 128" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="140" cy="131" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="52" cy="98" r="12" fill="#F7F9FB" stroke="#00A7D1" stroke-width="1.6"/>
+    <text x="52" y="101" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">01</text>
+    <path d="M56 176H224" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M56 171V181M224 171V181" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="140" y="190" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">claude-skill-registry</text>
+  </g><g>
+    <path class="cline" d="M290 131H494" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="308" y="102" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M316 152L332 136M316 140L328 128" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="392" cy="131" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="304" cy="98" r="12" fill="#F7F9FB" stroke="#00A7D1" stroke-width="1.6"/>
+    <text x="304" y="101" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">02</text>
+    <path d="M308 176H476" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M308 171V181M476 171V181" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="392" y="190" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">spellbook</text>
+  </g><g>
+    <path class="cline" d="M542 131H746" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="560" y="102" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M568 152L584 136M568 140L580 128" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="644" cy="131" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="556" cy="98" r="12" fill="#F7F9FB" stroke="#E84A8A" stroke-width="1.6"/>
+    <text x="556" y="101" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">03</text>
+    <path d="M560 176H728" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M560 171V181M728 171V181" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="644" y="190" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">litellm-rs</text>
+  </g><g>
+    <path class="cline" d="M38 249H242" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="56" y="220" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M64 270L80 254M64 258L76 246" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="140" cy="249" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="52" cy="216" r="12" fill="#F7F9FB" stroke="#E84A8A" stroke-width="1.6"/>
+    <text x="52" y="219" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">04</text>
+    <path d="M56 294H224" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M56 289V299M224 289V299" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="140" y="308" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">harness</text>
+  </g><g>
+    <path class="cline" d="M290 249H494" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="308" y="220" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M316 270L332 254M316 258L328 246" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="392" cy="249" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="304" cy="216" r="12" fill="#F7F9FB" stroke="#E84A8A" stroke-width="1.6"/>
+    <text x="304" y="219" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">05</text>
+    <path d="M308 294H476" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M308 289V299M476 289V299" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="392" y="308" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">vibeguard</text>
+  </g><g>
+    <path class="cline" d="M542 249H746" stroke="#1F4E79" stroke-opacity=".55" stroke-width=".8"/>
+    <rect x="560" y="220" width="168" height="58" fill="#E7EEF5" fill-opacity=".55" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M568 270L584 254M568 258L580 246" stroke="#1F4E79" stroke-opacity=".4" stroke-width=".7"/>
+    <circle cx="644" cy="249" r="2.4" fill="none" stroke="#1F4E79" stroke-width=".8"/>
+    <circle cx="556" cy="216" r="12" fill="#F7F9FB" stroke="#E84A8A" stroke-width="1.6"/>
+    <text x="556" y="219" text-anchor="middle" class="mono" font-size="9" font-weight="700" fill="#1F4E79">06</text>
+    <path d="M560 294H728" stroke="#1F4E79" stroke-width=".8" marker-start="url(#bp-arr)" marker-end="url(#bp-arr)"/>
+    <path d="M560 289V299M728 289V299" stroke="#1F4E79" stroke-width=".6"/>
+    <text x="644" y="308" text-anchor="middle" class="mono" font-size="9" fill="#1F4E79">remem</text>
+  </g><rect x="854" y="218" width="330" height="126" fill="#E7EEF5" stroke="#1F4E79" stroke-width="1.2"/>
+    <path d="M954 218V344" stroke="#1F4E79" stroke-width=".6"/><path d="M854 218H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="232" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">DRAWN BY</text>
+      <text x="962" y="232" class="mono" font-size="9.5" fill="#1F4E79">LIFCC</text><path d="M854 239H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="253" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">PROJECT</text>
+      <text x="962" y="253" class="mono" font-size="9.5" fill="#1F4E79">AI AGENT INFRASTRUCTURE</text><path d="M854 260H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="274" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">LOCATION</text>
+      <text x="962" y="274" class="mono" font-size="9.5" fill="#1F4E79">BEIJING · UTC+8</text><path d="M854 281H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="295" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">SHEET</text>
+      <text x="962" y="295" class="mono" font-size="9.5" fill="#1F4E79">01 OF 01</text><path d="M854 302H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="316" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">REV</text>
+      <text x="962" y="316" class="mono" font-size="9.5" fill="#1F4E79">08</text><path d="M854 323H1184" stroke="#1F4E79" stroke-width=".6"/>
+      <text x="864" y="337" class="mono" font-size="8" letter-spacing="1.5" fill="#54749B">SCALE</text>
+      <text x="962" y="337" class="mono" font-size="9.5" fill="#1F4E79">NTS</text>
+    </svg>

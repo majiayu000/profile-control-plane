@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc constellation profile" data-mode="dark">
+      <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#050814"/><stop offset="1" stop-color="#0B1026"/></linearGradient>
+    <linearGradient id="cline" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00A7D1"/><stop offset="1" stop-color="#E84A8A"/></linearGradient>
+    <filter id="star-glow" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs><style>
+    .display{font-family:Georgia,"Times New Roman",serif}.body{font-family:"Avenir Next",Avenir,Helvetica,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .tw{animation:tw 3.4s ease-in-out infinite}
+    @keyframes tw{50%{opacity:.2}}
+    @media(prefers-reduced-motion:reduce){.tw{animation:none}}
+  </style><rect width="1200" height="360" fill="url(#sky)"/>
+      <circle class="tw" style="animation-delay:3.40s" cx="1104.8" cy="330.0" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="549.1" cy="166.1" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="909.4" cy="271.4" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:1.37s" cx="353.3" cy="107.4" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="226.1" cy="66.4" r="1.7" fill="#E8ECFF" opacity=".85"/><circle class="tw" style="animation-delay:2.52s" cx="945.4" cy="285.0" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="30.7" cy="7.8" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="750.3" cy="226.5" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="392.2" cy="116.3" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:3.31s" cx="1036.5" cy="312.4" r="1.1" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:2.52s" cx="906.8" cy="273.4" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="262.5" cy="77.4" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="705.2" cy="213.0" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="67.1" cy="18.7" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:0.35s" cx="103.1" cy="32.3" r="1.1" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:1.81s" cx="583.9" cy="173.8" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="1102.2" cy="332.1" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="388.4" cy="115.1" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="419.4" cy="127.2" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="980.9" cy="292.9" r="1.1" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:3.16s" cx="1172.3" cy="350.3" r="1.1" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:1.89s" cx="610.7" cy="184.6" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="971.0" cy="289.9" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="415.0" cy="125.9" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="293.6" cy="86.7" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="1007.1" cy="303.5" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="92.4" cy="26.3" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:1.93s" cx="812.0" cy="245.0" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="453.9" cy="134.8" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="1098.2" cy="330.9" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="1007.4" cy="303.6" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="287.7" cy="84.9" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:3.25s" cx="2.4" cy="2.1" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:1.32s" cx="483.2" cy="143.5" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:2.10s" cx="610.3" cy="184.5" r="1.7" fill="#E8ECFF" opacity=".85"/><circle class="tw" style="animation-delay:3.15s" cx="1166.4" cy="348.5" r="1.7" fill="#E8ECFF" opacity=".85"/><circle class="tw" style="animation-delay:2.02s" cx="806.1" cy="243.2" r="1.7" fill="#E8ECFF" opacity=".85"/><circle class="tw" style="animation-delay:0.72s" cx="161.8" cy="47.1" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="289.0" cy="88.1" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="769.4" cy="229.4" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:0.20s" cx="1140.6" cy="340.8" r="1.7" fill="#E8ECFF" opacity=".85"/><circle cx="660.2" cy="199.5" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="141.8" cy="41.1" r="0.7" fill="#E8ECFF" opacity=".55"/><circle class="tw" style="animation-delay:2.28s" cx="861.1" cy="259.7" r="1.7" fill="#E8ECFF" opacity=".85"/><circle class="tw" style="animation-delay:2.18s" cx="825.0" cy="246.1" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="263.2" cy="80.4" r="1.1" fill="#E8ECFF" opacity=".55"/><circle cx="1020.5" cy="304.7" r="0.7" fill="#E8ECFF" opacity=".55"/><circle cx="464.8" cy="140.8" r="0.7" fill="#E8ECFF" opacity=".55"/>
+      <text x="60" y="96" class="mono" font-size="9" letter-spacing="3" fill="#E84A8A">STAR ATLAS / AI AGENT INFRASTRUCTURE</text>
+      <text x="58" y="164" class="display" font-size="58" font-weight="700" letter-spacing="-1" fill="#E8ECFF">lifcc</text>
+      <path d="M60 190H340" stroke="#00A7D1" stroke-opacity=".7"/>
+      <text x="60" y="222" class="body" font-size="13" fill="#8B93B8">Building the systems around coding agents — from skills and trust to…</text>
+      <text x="60" y="258" class="mono" font-size="9" letter-spacing="2" fill="#E8ECFF">08 MAJOR STARS CHARTED</text>
+      <text x="60" y="322" class="mono" font-size="9" letter-spacing="2" fill="#8B93B8">OBSERVED FROM BEIJING · UTC+8</text><path d="M643.9 96.6L792.6 96.7L941.4 96.3L1090.1 96.4L1089.8 178.5L940.5 178.7L791.2 178.2L641.9 178.4" fill="none" stroke="url(#cline)" stroke-width="1.3" stroke-opacity=".55"/><g>
+        <circle cx="643.9" cy="96.6" r="8.5" fill="#00A7D1" filter="url(#star-glow)"/>
+        <text x="643.9" y="81.1" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">sage</text>
+      </g><g>
+        <circle cx="792.6" cy="96.7" r="8.0" fill="#00A7D1" filter="url(#star-glow)"/>
+        <text x="792.6" y="81.7" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">claude-skill-regi…</text>
+      </g><g>
+        <circle cx="941.4" cy="96.3" r="7.5" fill="#00A7D1" filter="url(#star-glow)"/>
+        <text x="941.4" y="81.8" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">vibeguard</text>
+      </g><g>
+        <circle cx="1090.1" cy="96.4" r="7.0" fill="#00A7D1" filter="url(#star-glow)"/>
+        <text x="1090.1" y="82.4" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">remem</text>
+      </g><g>
+        <circle cx="1089.8" cy="178.5" r="6.5" fill="#E84A8A" filter="url(#star-glow)"/>
+        <text x="1089.8" y="165.0" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">harness</text>
+      </g><g>
+        <circle cx="940.5" cy="178.7" r="6.0" fill="#E84A8A" filter="url(#star-glow)"/>
+        <text x="940.5" y="165.7" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">litellm-rs</text>
+      </g><g>
+        <circle cx="791.2" cy="178.2" r="5.5" fill="#E84A8A" filter="url(#star-glow)"/>
+        <text x="791.2" y="165.7" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">specrail</text>
+      </g><g>
+        <circle cx="641.9" cy="178.4" r="5.0" fill="#E84A8A" filter="url(#star-glow)"/>
+        <text x="641.9" y="166.4" text-anchor="middle" class="mono" font-size="8" letter-spacing="1" fill="#8B93B8">keepline</text>
+      </g>
+    </svg>

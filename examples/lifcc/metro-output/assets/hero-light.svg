@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc metro map profile" data-mode="light">
+      <style>
+    .sans{font-family:Helvetica,Arial,sans-serif}
+    .flow{stroke-dasharray:4 22;animation:flow 14s linear infinite}
+    @keyframes flow{to{stroke-dashoffset:-260}}
+    @media(prefers-reduced-motion:reduce){.flow{animation:none}}
+  </style><rect width="1200" height="360" fill="#FAFAF8"/>
+      <g class="sans">
+    <rect x="40" y="26" width="1120" height="96" rx="14" fill="#22262B"/>
+    <rect x="40" y="26" width="1120" height="96" rx="14" fill="none" stroke="#DEDED8"/>
+    <circle cx="106" cy="74" r="30" fill="#00A7D1"/>
+    <circle cx="106" cy="74" r="30" fill="none" stroke="#FAFAF8" stroke-width="3"/>
+    <text x="106" y="83" text-anchor="middle" font-size="26" font-weight="900" fill="#FAFAF8">08</text>
+    <text x="162" y="70" font-size="40" font-weight="900" letter-spacing="1" fill="#FAFAF8">lifcc</text>
+    <text x="162" y="102" font-size="15" letter-spacing="2" fill="#FAFAF8" opacity=".75">AI AGENT INFRASTRUCTURE</text>
+    <text x="1132" y="102" text-anchor="end" font-size="10" letter-spacing="2" fill="#FAFAF8" opacity=".6">METRO · MAJIAYU000</text>
+  </g>
+      <path d="M40 236H240L300 176H760L830 246H1094" fill="none" stroke="#00a7d1" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M40 296H420L500 216H972" fill="none" stroke="#7479ae" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M40 186H140L220 266H600L670 196H1094" fill="none" stroke="#e84a8a" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M40 236H240L300 176H760L830 246H1094" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M1094 236L1116 246L1094 256Z" fill="#00a7d1"/><path d="M1094 186L1116 196L1094 206Z" fill="#e84a8a"/><rect x="972" y="207" width="18" height="18" rx="3" fill="#7479ae" stroke="#2B2B2B" stroke-width="2"/>
+      <g class="sans">
+        <circle cx="380" cy="176" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(387.0 163.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">claude-skill-regi…</text>
+      </g><g class="sans">
+        <circle cx="620" cy="216" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(627.0 203.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">spellbook</text>
+      </g><g class="sans">
+        <circle cx="940" cy="246" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(947.0 233.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">litellm-rs</text>
+      </g><g class="sans">
+        <circle cx="300" cy="266" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(307.0 253.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">harness</text>
+      </g><g class="sans">
+        <circle cx="800" cy="196" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(807.0 183.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">vibeguard</text>
+      </g><g class="sans">
+        <circle cx="200" cy="296" r="9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="3.5"/>
+        <text transform="translate(207.0 283.0) rotate(-45)" font-size="11" font-weight="700" fill="#2B2B2B">remem</text>
+      </g><circle cx="150" cy="236" r="4.5" fill="#00a7d1" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="520" cy="176" r="4.5" fill="#00a7d1" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="320" cy="296" r="4.5" fill="#7479ae" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="780" cy="216" r="4.5" fill="#7479ae" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="90" cy="186" r="4.5" fill="#e84a8a" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="450" cy="266" r="4.5" fill="#e84a8a" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="660" cy="176" r="4.5" fill="#00a7d1" stroke="#FAFAF8" stroke-width="1.5"/><circle cx="560" cy="266" r="4.5" fill="#e84a8a" stroke="#FAFAF8" stroke-width="1.5"/>
+      <text x="40" y="344" class="sans" font-size="10" letter-spacing="1" fill="#8A8A85">Building the systems around coding agents — from skills and trust to memory and orchestra…</text>
+      <text x="1160" y="344" text-anchor="end" class="sans" font-size="9" letter-spacing="2" fill="#8A8A85">06 INTERCHANGES</text>
+    </svg>
