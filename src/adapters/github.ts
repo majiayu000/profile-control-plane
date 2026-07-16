@@ -71,6 +71,22 @@ export class GitHubClient {
       );
     }
     if (!response.ok) {
+      if (
+        (response.status === 403 || response.status === 429) &&
+        response.headers.get("x-ratelimit-remaining") === "0"
+      ) {
+        const reset = response.headers.get("x-ratelimit-reset");
+        throw new ProfileError(
+          "GITHUB_RATE_LIMITED",
+          `GitHub API rate limit exhausted for ${path}`,
+          [
+            this.#token
+              ? "the authenticated rate limit is exhausted; wait for the reset window"
+              : "unauthenticated requests are limited to 60 per hour; set GITHUB_TOKEN to raise the limit",
+            ...(reset ? [`the limit resets at unix time ${reset}`] : []),
+          ],
+        );
+      }
       throw new ProfileError(
         "GITHUB_REQUEST_FAILED",
         `GitHub request returned HTTP ${response.status} for ${path}`,

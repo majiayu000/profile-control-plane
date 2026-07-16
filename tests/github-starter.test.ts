@@ -55,6 +55,50 @@ describe("GitHub client", () => {
     ).rejects.toMatchObject({ code: "GITHUB_REQUEST_FAILED" });
   });
 
+  it("reports exhausted rate limits with an actionable token hint", async () => {
+    const rateLimited = () =>
+      new Response("", {
+        status: 403,
+        headers: {
+          "x-ratelimit-remaining": "0",
+          "x-ratelimit-reset": "1800000000",
+        },
+      });
+    await expect(
+      new GitHubClient({
+        fetchImpl: vi.fn().mockResolvedValue(rateLimited()),
+      }).snapshot("x"),
+    ).rejects.toMatchObject({
+      code: "GITHUB_RATE_LIMITED",
+      details: [
+        expect.stringContaining("set GITHUB_TOKEN"),
+        expect.stringContaining("1800000000"),
+      ],
+    });
+    await expect(
+      new GitHubClient({
+        fetchImpl: vi.fn().mockResolvedValue(rateLimited()),
+        token: "t",
+      }).snapshot("x"),
+    ).rejects.toMatchObject({
+      code: "GITHUB_RATE_LIMITED",
+      details: [
+        expect.stringContaining("wait for the reset window"),
+        expect.stringContaining("1800000000"),
+      ],
+    });
+    await expect(
+      new GitHubClient({
+        fetchImpl: vi.fn().mockResolvedValue(
+          new Response("", {
+            status: 403,
+            headers: { "x-ratelimit-remaining": "37" },
+          }),
+        ),
+      }).snapshot("x"),
+    ).rejects.toMatchObject({ code: "GITHUB_REQUEST_FAILED" });
+  });
+
   it("fails instead of returning partial data after the pagination ceiling", async () => {
     const fullPage = Array.from({ length: 100 }, (_, index) =>
       repository({ name: `repo-${index}` }),
