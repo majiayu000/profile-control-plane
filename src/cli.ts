@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command, InvalidArgumentError } from "commander";
 import { realpathSync } from "node:fs";
+import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GitHubClient } from "./adapters/github.js";
@@ -19,6 +20,21 @@ import { createStarterConfig } from "./application/starter.js";
 import { ProfileError, asProfileError } from "./core/errors.js";
 import { assertProfileConfig } from "./config/schema.js";
 import { THEME_PRESETS } from "./themes/registry.js";
+
+function readPackageVersion(): string {
+  const metadata: unknown = createRequire(import.meta.url)("../package.json");
+  if (
+    typeof metadata !== "object" ||
+    metadata === null ||
+    !("version" in metadata) ||
+    typeof metadata.version !== "string"
+  ) {
+    throw new Error("package.json is missing a string version");
+  }
+  return metadata.version;
+}
+
+const PACKAGE_VERSION = readPackageVersion();
 
 function integer(value: string): number {
   const parsed = Number(value);
@@ -41,7 +57,7 @@ export function createProgram(): Command {
     .description(
       "Compile a GitHub identity into a self-hosted profile control plane",
     )
-    .version("0.1.0")
+    .version(PACKAGE_VERSION)
     .showHelpAfterError();
 
   program

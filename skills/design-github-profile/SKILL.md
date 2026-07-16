@@ -80,7 +80,6 @@ rendering after the user has reviewed the semantic positioning.
      matters more than sequence. Do not treat these as identity labels.
    - Present the evidence-based recommendation first, then show every supported template when the user wants
      to choose. The user's visual preference takes precedence when it stays within the factual contract.
-
 6. Compile and validate.
 
    ```bash

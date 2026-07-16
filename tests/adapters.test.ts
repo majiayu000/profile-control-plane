@@ -90,6 +90,36 @@ describe("compiled profile checker", () => {
     expect(fetchImpl).toHaveBeenCalledTimes(3);
   });
 
+  it("aborts online checks that exceed the request timeout", async () => {
+    const fetchImpl = vi.fn<typeof fetch>((_input, init) => {
+      return new Promise<Response>((_resolve, reject) => {
+        const signal = init?.signal;
+        if (!signal) {
+          reject(new Error("missing abort signal"));
+          return;
+        }
+        signal.addEventListener("abort", () => reject(signal.reason), {
+          once: true,
+        });
+      });
+    });
+
+    await expect(
+      checkCompiledProfile(validConfig, compileProfile(validConfig), {
+        online: true,
+        onlineTimeoutMs: 1,
+        fetchImpl,
+      }),
+    ).rejects.toMatchObject({
+      code: "OUTPUT_INVALID",
+      message: "online link checks failed",
+    });
+    expect(fetchImpl).toHaveBeenCalledTimes(3);
+    expect(
+      fetchImpl.mock.calls.every(([, init]) => init?.signal !== undefined),
+    ).toBe(true);
+  });
+
   it("rejects duplicate paths, missing README, missing references, and broken links", async () => {
     await expect(
       checkCompiledProfile(validConfig, {
