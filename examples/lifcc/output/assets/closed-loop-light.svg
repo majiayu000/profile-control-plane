@@ -1,47 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc closed loop architecture" data-mode="light">
-      <defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc closed loop architecture" data-mode="light" data-route-clearance="card-ports">
+    <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F6FBFD"/><stop offset="1" stop-color="#FFF6FA"/></linearGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00A7D1"/><stop offset="1" stop-color="#E84A8A"/></linearGradient>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#D7E7ED" stroke-width="1"/></pattern>
     <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="loop-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#00A7D1"/></marker>
     <clipPath id="frame"><rect x="1" y="1" width="1198" height="358" rx="18"/></clipPath>
   </defs><style>
     text{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
     .label{font-size:12px;letter-spacing:3px;font-weight:700}.micro{font-size:10px;letter-spacing:2px}
     .flow{stroke-dasharray:7 9;animation:flow 8s linear infinite}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}
-    .orbit{transform-box:fill-box;transform-origin:center;animation:orbit 24s linear infinite}.blink{animation:blink 2s ease-in-out infinite}
+    .orbit{transform-box:fill-box;transform-origin:center;animation:orbit 24s linear infinite}.blink{animation:blink 2s ease-in-out infinite}.hot{animation:hot 3.2s ease-in-out infinite}
     @keyframes flow{to{stroke-dashoffset:-160}}@keyframes pulse{50%{opacity:.35;transform:scale(.72)}}
-    @keyframes orbit{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.35}}
-    @media(prefers-reduced-motion:reduce){.flow,.pulse,.orbit,.blink{animation:none}}
-  </style><rect width="1200" height="330" rx="18" fill="url(#bg)"/><rect width="1200" height="330" rx="18" fill="url(#grid)" opacity=".7"/>
-      <text x="28" y="34" class="label" fill="#00A7D1">CLOSED LOOP / ARCHITECTURE MAP</text><text x="1170" y="34" text-anchor="end" class="micro" fill="#506D7A">08 NODES · ONE SYSTEM</text>
-      <path d="M600.0 60.0L904.1 90.5L1030.0 164.0L904.1 237.5L600.0 268.0L295.9 237.5L170.0 164.0L295.9 90.5Z" fill="none" stroke="#A9C4CF" stroke-width="2"/><path class="flow" d="M600.0 60.0L904.1 90.5L1030.0 164.0L904.1 237.5L600.0 268.0L295.9 237.5L170.0 164.0L295.9 90.5Z" fill="none" stroke="url(#accent)" stroke-width="2"/>
-      <g transform="translate(600 164)"><circle r="62" fill="#FFFFFF" stroke="#A9C4CF"/><circle class="orbit" r="48" fill="none" stroke="url(#accent)" stroke-width="2" stroke-dasharray="5 8"/>
-      <circle r="23" fill="#F6FBFD" stroke="#00A7D1" filter="url(#glow)"/><circle class="pulse" r="6" fill="#00A7D1"/>
-      <text y="84" text-anchor="middle" class="micro" fill="#506D7A">AI AGENT INFRASTRUCTURE</text></g><g><circle cx="600.0" cy="60.0" r="15" fill="#FFFFFF" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="600.0" cy="60.0" r="4" fill="#00A7D1"/>
-        <text x="600.0" y="42.0" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">DIRECT</text>
-        <text x="600.0" y="54.0" text-anchor="middle" font-size="8" fill="#506D7A">sage</text>
-        <text x="600.0" y="63.0" text-anchor="middle" font-size="8" fill="#00A7D1">01</text></g><g><circle cx="904.1" cy="90.5" r="15" fill="#FFFFFF" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="904.1" cy="90.5" r="4" fill="#00A7D1"/>
-        <text x="904.1" y="72.5" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">EXTEND</text>
-        <text x="904.1" y="84.5" text-anchor="middle" font-size="8" fill="#506D7A">claude-skill-registry</text>
-        <text x="904.1" y="93.5" text-anchor="middle" font-size="8" fill="#00A7D1">02</text></g><g><circle cx="1030.0" cy="164.0" r="15" fill="#FFFFFF" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="1030.0" cy="164.0" r="4" fill="#00A7D1"/>
-        <text x="1030.0" y="194.0" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">TRUST</text>
-        <text x="1030.0" y="206.0" text-anchor="middle" font-size="8" fill="#506D7A">vibeguard</text>
-        <text x="1030.0" y="167.0" text-anchor="middle" font-size="8" fill="#00A7D1">03</text></g><g><circle cx="904.1" cy="237.5" r="15" fill="#FFFFFF" stroke="#00A7D1" stroke-width="2"/><circle class="pulse" cx="904.1" cy="237.5" r="4" fill="#00A7D1"/>
-        <text x="904.1" y="267.5" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">REMEMBER</text>
-        <text x="904.1" y="279.5" text-anchor="middle" font-size="8" fill="#506D7A">remem</text>
-        <text x="904.1" y="240.5" text-anchor="middle" font-size="8" fill="#00A7D1">04</text></g><g><circle cx="600.0" cy="268.0" r="15" fill="#FFFFFF" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="600.0" cy="268.0" r="4" fill="#E84A8A"/>
-        <text x="600.0" y="298.0" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">ORCHESTRATE</text>
-        <text x="600.0" y="310.0" text-anchor="middle" font-size="8" fill="#506D7A">harness</text>
-        <text x="600.0" y="271.0" text-anchor="middle" font-size="8" fill="#E84A8A">05</text></g><g><circle cx="295.9" cy="237.5" r="15" fill="#FFFFFF" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="295.9" cy="237.5" r="4" fill="#E84A8A"/>
-        <text x="295.9" y="267.5" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">ROUTE</text>
-        <text x="295.9" y="279.5" text-anchor="middle" font-size="8" fill="#506D7A">litellm-rs</text>
-        <text x="295.9" y="240.5" text-anchor="middle" font-size="8" fill="#E84A8A">06</text></g><g><circle cx="170.0" cy="164.0" r="15" fill="#FFFFFF" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="170.0" cy="164.0" r="4" fill="#E84A8A"/>
-        <text x="170.0" y="194.0" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">GOVERN</text>
-        <text x="170.0" y="206.0" text-anchor="middle" font-size="8" fill="#506D7A">specrail</text>
-        <text x="170.0" y="167.0" text-anchor="middle" font-size="8" fill="#E84A8A">07</text></g><g><circle cx="295.9" cy="90.5" r="15" fill="#FFFFFF" stroke="#E84A8A" stroke-width="2"/><circle class="pulse" cx="295.9" cy="90.5" r="4" fill="#E84A8A"/>
-        <text x="295.9" y="72.5" text-anchor="middle" font-size="10" font-weight="700" fill="#102934">KEEP</text>
-        <text x="295.9" y="84.5" text-anchor="middle" font-size="8" fill="#506D7A">keepline</text>
-        <text x="295.9" y="93.5" text-anchor="middle" font-size="8" fill="#E84A8A">08</text></g>
-      <rect x="1" y="1" width="1198" height="328" rx="18" fill="none" stroke="#E84A8A" stroke-opacity=".55"/>
-    </svg>
+    @keyframes orbit{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.35}}@keyframes hot{50%{opacity:.72}}
+    @media(prefers-reduced-motion:reduce){.flow,.pulse,.orbit,.blink,.hot{animation:none}}
+  </style><rect width="1200" height="330" rx="18" fill="url(#bg)"/><rect width="1200" height="330" rx="18" fill="url(#grid)" opacity=".45"/>
+    <text x="28" y="34" class="label" fill="#00A7D1">// THE_CLOSED_LOOP</text><text x="245" y="34" font-size="10" letter-spacing="1.4" fill="#506D7A">INDEPENDENT SYSTEMS / SHARED CONTRACT / VERIFIED EXECUTION</text>
+    <circle class="blink" cx="1125" cy="30" r="4" fill="#E84A8A" filter="url(#glow)"/><text x="1138" y="34" font-size="9" letter-spacing="1.3" fill="#506D7A">LIVE</text>
+    <path d="M240 115H268M472 115H500M704 115H732M936 115H964M1168 115H1180V237H1168M964 237H936M732 237H704M500 237H20V174H138V154" fill="none" stroke="#A9C4CF" stroke-width="3"/><path class="flow" d="M240 115H268M472 115H500M704 115H732M936 115H964M1168 115H1180V237H1168M964 237H936M732 237H704M500 237H20V174H138V154" fill="none" stroke="url(#accent)" stroke-width="1.6" marker-end="url(#loop-arrow)"/>
+    <clipPath id="card-copy-0"><rect x="48" y="84" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:0s" data-layer-index="0">
+        <rect x="36" y="76" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#00A7D1" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-0)"><text x="52" y="97" font-size="9" letter-spacing="1.7" fill="#00A7D1">01 / DIRECT</text>
+        <text x="52" y="124" font-size="13" font-weight="700" fill="#102934">A fast coding agent i…</text>
+        <text x="52" y="142" font-size="9" fill="#506D7A">sage</text></g>
+      </g><clipPath id="card-copy-1"><rect x="280" y="84" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:0.24s" data-layer-index="1">
+        <rect x="268" y="76" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#00A7D1" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-1)"><text x="284" y="97" font-size="9" letter-spacing="1.7" fill="#00A7D1">02 / EXTEND</text>
+        <text x="284" y="124" font-size="13" font-weight="700" fill="#102934">Discovery and distrib…</text>
+        <text x="284" y="142" font-size="9" fill="#506D7A">claude-skill-registry</text></g>
+      </g><clipPath id="card-copy-2"><rect x="512" y="84" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:0.48s" data-layer-index="2">
+        <rect x="500" y="76" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#00A7D1" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-2)"><text x="516" y="97" font-size="9" letter-spacing="1.7" fill="#00A7D1">03 / TRUST</text>
+        <text x="516" y="124" font-size="13" font-weight="700" fill="#102934">Rules and guards agai…</text>
+        <text x="516" y="142" font-size="9" fill="#506D7A">vibeguard</text></g>
+      </g><clipPath id="card-copy-3"><rect x="744" y="84" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:0.72s" data-layer-index="3">
+        <rect x="732" y="76" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#00A7D1" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-3)"><text x="748" y="97" font-size="9" letter-spacing="1.7" fill="#00A7D1">04 / REMEMBER</text>
+        <text x="748" y="124" font-size="13" font-weight="700" fill="#102934">Local-first auditable…</text>
+        <text x="748" y="142" font-size="9" fill="#506D7A">remem</text></g>
+      </g><clipPath id="card-copy-4"><rect x="976" y="84" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:0.96s" data-layer-index="4">
+        <rect x="964" y="76" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#E84A8A" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-4)"><text x="980" y="97" font-size="9" letter-spacing="1.7" fill="#E84A8A">05 / ORCHESTRATE</text>
+        <text x="980" y="124" font-size="13" font-weight="700" fill="#102934">Governed fleets of pa…</text>
+        <text x="980" y="142" font-size="9" fill="#506D7A">harness</text></g>
+      </g><clipPath id="card-copy-5"><rect x="976" y="206" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:1.2s" data-layer-index="5">
+        <rect x="964" y="198" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#E84A8A" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-5)"><text x="980" y="219" font-size="9" letter-spacing="1.7" fill="#E84A8A">06 / ROUTE</text>
+        <text x="980" y="246" font-size="13" font-weight="700" fill="#102934">One high-performance…</text>
+        <text x="980" y="264" font-size="9" fill="#506D7A">litellm-rs</text></g>
+      </g><clipPath id="card-copy-6"><rect x="744" y="206" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:1.44s" data-layer-index="6">
+        <rect x="732" y="198" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#E84A8A" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-6)"><text x="748" y="219" font-size="9" letter-spacing="1.7" fill="#E84A8A">07 / GOVERN</text>
+        <text x="748" y="246" font-size="13" font-weight="700" fill="#102934">Spec-first repository…</text>
+        <text x="748" y="264" font-size="9" fill="#506D7A">specrail</text></g>
+      </g><clipPath id="card-copy-7"><rect x="512" y="206" width="180" height="64"/></clipPath><g class="hot" style="animation-delay:1.68s" data-layer-index="7">
+        <rect x="500" y="198" width="204" height="78" rx="6" fill="#FFFFFF" stroke="#E84A8A" stroke-opacity=".72"/>
+        <g clip-path="url(#card-copy-7)"><text x="516" y="219" font-size="9" letter-spacing="1.7" fill="#E84A8A">08 / KEEP</text>
+        <text x="516" y="246" font-size="13" font-weight="700" fill="#102934">Monitor and recover l…</text>
+        <text x="516" y="264" font-size="9" fill="#506D7A">keepline</text></g>
+      </g><text x="36" y="309" font-size="9" letter-spacing="1.6" fill="#506D7A">INPUT: INTENT</text><text x="1164" y="309" text-anchor="end" font-size="9" letter-spacing="1.6" fill="#506D7A">OUTPUT: PROOF</text>
+    <rect x="1" y="1" width="1198" height="328" rx="18" fill="none" stroke="#E84A8A" stroke-opacity=".55"/></svg>

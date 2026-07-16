@@ -75,9 +75,11 @@ rendering after the user has reviewed the semantic positioning.
      profilectl preview --config profile.yaml --all-templates
      ```
 
-   - Use `control-plane` for evidence of connected infrastructure or execution flow, `editorial` for a
-     curated body of authored work, and `bento-grid` for distinct modular products. Do not treat these as
-     identity labels; repository evidence and user preference take precedence.
+   - Use `control-plane` for an end-to-end system whose steps form a credible closed loop, `command-deck`
+     for flagship operations and execution status, and `signal-grid` for connected projects whose topology
+     matters more than sequence. Do not treat these as identity labels.
+   - Present the evidence-based recommendation first, then show every supported template when the user wants
+     to choose. The user's visual preference takes precedence when it stays within the factual contract.
 
 6. Compile and validate.
 

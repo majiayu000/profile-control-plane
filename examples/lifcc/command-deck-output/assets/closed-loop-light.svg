@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc execution deck" data-mode="light">
+      <defs>
+    <linearGradient id="industrial-bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F6FBFD"/><stop offset="1" stop-color="#FFF6FA"/></linearGradient>
+    <linearGradient id="industrial-accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00A7D1"/><stop offset="1" stop-color="#E84A8A"/></linearGradient>
+    <pattern id="industrial-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#D7E7ED" stroke-width="1"/></pattern>
+    <pattern id="industrial-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#D7E7ED"/></pattern>
+    <filter id="industrial-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs><style>
+    text{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .micro{font-size:9px;letter-spacing:2px}.label{font-size:11px;letter-spacing:2.5px;font-weight:700}
+    .flow{stroke-dasharray:6 9;animation:flow 7s linear infinite}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}.scan{animation:scan 5s ease-in-out infinite}.flicker{animation:flicker 2.2s ease-in-out infinite}
+    @keyframes flow{to{stroke-dashoffset:-150}}@keyframes pulse{50%{opacity:.35;transform:scale(.72)}}@keyframes scan{50%{opacity:.28;transform:translateX(24px)}}@keyframes flicker{50%{opacity:.38}}
+    @media(prefers-reduced-motion:reduce){.flow,.pulse,.scan,.flicker{animation:none}}
+  </style><rect width="1200" height="330" rx="18" fill="url(#industrial-bg)"/><rect width="1200" height="330" rx="18" fill="url(#industrial-grid)" opacity=".68"/>
+      <text x="28" y="33" class="label" fill="#00A7D1">EXECUTION DECK / MISSION BUS</text><text x="1170" y="33" text-anchor="end" class="micro" fill="#506D7A">08 CHANNELS · STATUS READY</text>
+      <path d="M42 164H1158" stroke="#A9C4CF" stroke-width="5"/><path class="flow" d="M42 164H1158" stroke="url(#industrial-accent)" stroke-width="2"/><path d="M42 151V177M1158 151V177" stroke="#00A7D1"/><g><path d="M100.0 164V122" stroke="#00A7D1" stroke-opacity=".66"/><circle cx="100.0" cy="164" r="4" fill="#00A7D1"/>
+          <path d="M18.0 50H172.0L182.0 60V106H18.0Z" fill="#FFFFFF" stroke="#00A7D1"/>
+          <text x="34.0" y="70" font-size="8" letter-spacing="1.2" fill="#00A7D1">01 / DIRECT</text><text x="34.0" y="91" font-size="10" font-weight="800" fill="#102934">sage</text><circle class="pulse" cx="161.0" cy="89" r="3" fill="#00A7D1"/></g><g><path d="M100.0 164V208" stroke="#00A7D1" stroke-opacity=".66"/><circle cx="100.0" cy="164" r="4" fill="#00A7D1"/>
+          <path d="M18.0 204H172.0L182.0 214V260H18.0Z" fill="#FFFFFF" stroke="#00A7D1"/>
+          <text x="34.0" y="224" font-size="8" letter-spacing="1.2" fill="#00A7D1">02 / EXTEND</text><text x="34.0" y="245" font-size="10" font-weight="800" fill="#102934">claude-skill-regist…</text><circle class="pulse" cx="161.0" cy="243" r="3" fill="#00A7D1"/></g><g><path d="M433.3 164V122" stroke="#00A7D1" stroke-opacity=".66"/><circle cx="433.3" cy="164" r="4" fill="#00A7D1"/>
+          <path d="M351.3 50H505.3L515.3 60V106H351.3Z" fill="#FFFFFF" stroke="#00A7D1"/>
+          <text x="367.3" y="70" font-size="8" letter-spacing="1.2" fill="#00A7D1">03 / TRUST</text><text x="367.3" y="91" font-size="10" font-weight="800" fill="#102934">vibeguard</text><circle class="pulse" cx="494.3" cy="89" r="3" fill="#00A7D1"/></g><g><path d="M433.3 164V208" stroke="#00A7D1" stroke-opacity=".66"/><circle cx="433.3" cy="164" r="4" fill="#00A7D1"/>
+          <path d="M351.3 204H505.3L515.3 214V260H351.3Z" fill="#FFFFFF" stroke="#00A7D1"/>
+          <text x="367.3" y="224" font-size="8" letter-spacing="1.2" fill="#00A7D1">04 / REMEMBER</text><text x="367.3" y="245" font-size="10" font-weight="800" fill="#102934">remem</text><circle class="pulse" cx="494.3" cy="243" r="3" fill="#00A7D1"/></g><g><path d="M766.7 164V122" stroke="#E84A8A" stroke-opacity=".66"/><circle cx="766.7" cy="164" r="4" fill="#E84A8A"/>
+          <path d="M684.7 50H838.7L848.7 60V106H684.7Z" fill="#FFFFFF" stroke="#E84A8A"/>
+          <text x="700.7" y="70" font-size="8" letter-spacing="1.2" fill="#E84A8A">05 / ORCHESTRATE</text><text x="700.7" y="91" font-size="10" font-weight="800" fill="#102934">harness</text><circle class="pulse" cx="827.7" cy="89" r="3" fill="#E84A8A"/></g><g><path d="M766.7 164V208" stroke="#E84A8A" stroke-opacity=".66"/><circle cx="766.7" cy="164" r="4" fill="#E84A8A"/>
+          <path d="M684.7 204H838.7L848.7 214V260H684.7Z" fill="#FFFFFF" stroke="#E84A8A"/>
+          <text x="700.7" y="224" font-size="8" letter-spacing="1.2" fill="#E84A8A">06 / ROUTE</text><text x="700.7" y="245" font-size="10" font-weight="800" fill="#102934">litellm-rs</text><circle class="pulse" cx="827.7" cy="243" r="3" fill="#E84A8A"/></g><g><path d="M1100.0 164V122" stroke="#E84A8A" stroke-opacity=".66"/><circle cx="1100.0" cy="164" r="4" fill="#E84A8A"/>
+          <path d="M1018.0 50H1172.0L1182.0 60V106H1018.0Z" fill="#FFFFFF" stroke="#E84A8A"/>
+          <text x="1034.0" y="70" font-size="8" letter-spacing="1.2" fill="#E84A8A">07 / GOVERN</text><text x="1034.0" y="91" font-size="10" font-weight="800" fill="#102934">specrail</text><circle class="pulse" cx="1161.0" cy="89" r="3" fill="#E84A8A"/></g><g><path d="M1100.0 164V208" stroke="#E84A8A" stroke-opacity=".66"/><circle cx="1100.0" cy="164" r="4" fill="#E84A8A"/>
+          <path d="M1018.0 204H1172.0L1182.0 214V260H1018.0Z" fill="#FFFFFF" stroke="#E84A8A"/>
+          <text x="1034.0" y="224" font-size="8" letter-spacing="1.2" fill="#E84A8A">08 / KEEP</text><text x="1034.0" y="245" font-size="10" font-weight="800" fill="#102934">keepline</text><circle class="pulse" cx="1161.0" cy="243" r="3" fill="#E84A8A"/></g>
+      <rect x="542" y="153" width="116" height="22" rx="4" fill="#F6FBFD" stroke="#A9C4CF"/><text x="600" y="168" text-anchor="middle" font-size="8" font-weight="700" letter-spacing="2" fill="#506D7A">COMMAND BUS</text><rect x="1" y="1" width="1198" height="328" rx="18" fill="none" stroke="#E84A8A" stroke-opacity=".6"/></svg>

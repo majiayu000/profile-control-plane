@@ -1,13 +1,13 @@
 import { ProfileError } from "../core/errors.js";
 import type { ThemeDefinition, ThemePreset } from "../core/types.js";
-import { BentoGridRenderer } from "./bento-grid/bento-grid.js";
+import { CommandDeckRenderer } from "./command-deck/command-deck.js";
 import { ControlPlaneRenderer } from "./control-plane/control-plane.js";
-import { EditorialRenderer } from "./editorial/editorial.js";
+import { SignalGridRenderer } from "./signal-grid/signal-grid.js";
 
 export const THEME_PRESETS = [
   "control-plane",
-  "editorial",
-  "bento-grid",
+  "command-deck",
+  "signal-grid",
 ] as const satisfies readonly ThemePreset[];
 
 const themes: Record<ThemePreset, ThemeDefinition> = {
@@ -25,33 +25,34 @@ const themes: Record<ThemePreset, ThemeDefinition> = {
       overviewAlt: (config) => `${config.identity.name} architecture map`,
     },
   },
-  editorial: {
-    preset: "editorial",
-    label: "Editorial",
-    description: "A restrained, typographic portfolio for selected work.",
-    renderer: new EditorialRenderer(),
+  "command-deck": {
+    preset: "command-deck",
+    label: "Command Deck",
+    description:
+      "An operations console for flagship systems and execution status.",
+    renderer: new CommandDeckRenderer(),
     copy: {
-      flagshipHeading: "Selected work",
-      overviewHeading: "Working index",
-      modulesHeading: "Project archive",
-      emptyModules: "No supporting projects selected.",
-      heroAlt: (config) => `${config.identity.name} editorial profile`,
-      overviewAlt: (config) => `${config.identity.name} project index`,
+      flagshipHeading: "Mission-critical systems",
+      overviewHeading: "Execution deck",
+      modulesHeading: "Supporting systems",
+      emptyModules: "No supporting systems declared.",
+      heroAlt: (config) => `${config.identity.name} command deck`,
+      overviewAlt: (config) => `${config.identity.name} execution deck`,
     },
   },
-  "bento-grid": {
-    preset: "bento-grid",
-    label: "Developer Workbench",
+  "signal-grid": {
+    preset: "signal-grid",
+    label: "Signal Grid",
     description:
-      "A connected modular workbench for builders and product systems.",
-    renderer: new BentoGridRenderer(),
+      "A network topology for connected projects and system relationships.",
+    renderer: new SignalGridRenderer(),
     copy: {
-      flagshipHeading: "Featured builds",
-      overviewHeading: "Build map",
-      modulesHeading: "More from the workshop",
-      emptyModules: "No additional builds selected.",
-      heroAlt: (config) => `${config.identity.name} bento portfolio`,
-      overviewAlt: (config) => `${config.identity.name} modular build map`,
+      flagshipHeading: "Primary signals",
+      overviewHeading: "Signal topology",
+      modulesHeading: "Network registry",
+      emptyModules: "No additional signals declared.",
+      heroAlt: (config) => `${config.identity.name} signal grid`,
+      overviewAlt: (config) => `${config.identity.name} signal topology`,
     },
   },
 };

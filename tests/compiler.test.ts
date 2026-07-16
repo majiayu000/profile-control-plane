@@ -40,8 +40,8 @@ describe("profile compiler", () => {
   it("renders every declared template with distinct visuals and copy", () => {
     const expectedHeadings = new Map([
       ["control-plane", "## Flagship systems"],
-      ["editorial", "## Selected work"],
-      ["bento-grid", "## Featured builds"],
+      ["command-deck", "## Mission-critical systems"],
+      ["signal-grid", "## Primary signals"],
     ]);
     const heroes = THEME_PRESETS.map((preset) => {
       const output = compileProfile({
@@ -125,6 +125,32 @@ describe("profile compiler", () => {
     }
   });
 
+  it("keeps control-plane routes outside card copy for one through ten layers", () => {
+    for (const layerCount of [1, 10]) {
+      const layers = Array.from({ length: layerCount }, (_, index) => ({
+        name: `NODE ${index + 1}`,
+        project: `repository-with-a-very-long-name-${index + 1}`,
+        description:
+          "Evidence-backed system description that must stay inside its card",
+        tone: index < 5 ? ("primary" as const) : ("secondary" as const),
+      }));
+      const output = compileProfile({
+        ...validConfig,
+        layers,
+        theme: { ...validConfig.theme, preset: "control-plane" },
+      });
+      const loop =
+        output.files.find((file) => file.path === "assets/closed-loop-dark.svg")
+          ?.content ?? "";
+
+      expect(loop).toContain('data-route-clearance="card-ports"');
+      expect(loop.match(/data-layer-index=/g)).toHaveLength(layerCount);
+      expect(loop.match(/id="card-copy-/g)).toHaveLength(layerCount);
+      expect(loop).not.toContain(layers[0]!.description);
+      expect(XMLValidator.validate(loop)).toBe(true);
+    }
+  });
+
   it("keeps repository hyphens intact in GitHub and Shields paths", () => {
     const output = compileProfile({
       ...validConfig,
@@ -176,8 +202,8 @@ describe("escaping and palette utilities", () => {
     );
     expect(publicApi.compileProfile).toBeTypeOf("function");
     expect(publicApi.ControlPlaneRenderer).toBeTypeOf("function");
-    expect(publicApi.EditorialRenderer).toBeTypeOf("function");
-    expect(publicApi.BentoGridRenderer).toBeTypeOf("function");
+    expect(publicApi.CommandDeckRenderer).toBeTypeOf("function");
+    expect(publicApi.SignalGridRenderer).toBeTypeOf("function");
     expect(publicApi.THEME_PRESETS).toEqual(THEME_PRESETS);
   });
 });

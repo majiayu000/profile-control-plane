@@ -163,14 +163,14 @@ describe("preview server", () => {
     servers.push(preview);
     const gallery = await (await fetch(preview.url)).text();
     expect(gallery).toContain("Choose your profile");
-    expect(gallery).toContain("/editorial/assets/hero-dark.svg");
+    expect(gallery).toContain("/command-deck/assets/hero-dark.svg");
     expect(await (await fetch(`${preview.url}/light`)).text()).toContain(
       "hero-light.svg",
     );
     expect(
-      await (await fetch(`${preview.url}/bento-grid/light`)).text(),
-    ).toContain("/bento-grid/assets/closed-loop-light.svg");
-    expect((await fetch(`${preview.url}/editorial/README.md`)).status).toBe(
+      await (await fetch(`${preview.url}/signal-grid/light`)).text(),
+    ).toContain("/signal-grid/assets/closed-loop-light.svg");
+    expect((await fetch(`${preview.url}/command-deck/README.md`)).status).toBe(
       200,
     );
   });

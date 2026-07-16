@@ -43,11 +43,11 @@ typing gimmicks, exhaustive technology lists, or generic enthusiasm.
 
 ### Supported template directions
 
-| Preset          | Prefer when the evidence shows                           | Reject when                                     |
-| --------------- | -------------------------------------------------------- | ----------------------------------------------- |
-| `control-plane` | Connected systems, infrastructure, orchestration, flow   | The repositories do not form an explainable map |
-| `editorial`     | A curated body of authored or maintained work            | The account needs dense product comparison      |
-| `bento-grid`    | Distinct products or modules that deserve equal scanning | The work is one continuous system narrative     |
+| Preset          | Prefer when the evidence shows                                 | Reject when                                         |
+| --------------- | -------------------------------------------------------------- | --------------------------------------------------- |
+| `control-plane` | A sequence of systems forms an explainable end-to-end loop     | The repositories do not support a credible flow     |
+| `command-deck`  | A few flagship systems deserve operational status and priority | The account lacks clear flagship work               |
+| `signal-grid`   | Connected projects are best understood as a topology           | Sequence and handoff matter more than relationships |
 
 Recommend the strongest evidence fit, then use the all-template preview when another direction remains
 credible. The user's explicit visual preference overrides the recommendation as long as it does not require

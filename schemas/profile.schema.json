@@ -44,7 +44,7 @@
       "required": ["preset", "primary", "secondary"],
       "properties": {
         "preset": {
-          "enum": ["control-plane", "editorial", "bento-grid"]
+          "enum": ["control-plane", "command-deck", "signal-grid"]
         },
         "primary": { "$ref": "#/definitions/color" },
         "secondary": { "$ref": "#/definitions/color" }

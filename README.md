@@ -47,40 +47,40 @@ The default Control Plane hero is shown at the top of this README.
 
 </details>
 
-### Editorial
+### Command Deck (`command-deck`)
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/editorial-output/assets/hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/editorial-output/assets/hero-light.svg">
-  <img alt="Editorial template" src="examples/lifcc/editorial-output/assets/hero-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/command-deck-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/command-deck-output/assets/hero-light.svg">
+  <img alt="Command Deck template" src="examples/lifcc/command-deck-output/assets/hero-light.svg" width="100%">
 </picture>
 
 <details>
-<summary>View the working index</summary>
+<summary>View the execution deck</summary>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/editorial-output/assets/closed-loop-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/editorial-output/assets/closed-loop-light.svg">
-  <img alt="Editorial working index" src="examples/lifcc/editorial-output/assets/closed-loop-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/command-deck-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/command-deck-output/assets/closed-loop-light.svg">
+  <img alt="Command Deck execution deck" src="examples/lifcc/command-deck-output/assets/closed-loop-light.svg" width="100%">
 </picture>
 
 </details>
 
-### Developer Workbench (`bento-grid`)
+### Signal Grid (`signal-grid`)
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/bento-grid-output/assets/hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/bento-grid-output/assets/hero-light.svg">
-  <img alt="Developer Workbench template" src="examples/lifcc/bento-grid-output/assets/hero-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/signal-grid-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/signal-grid-output/assets/hero-light.svg">
+  <img alt="Signal Grid template" src="examples/lifcc/signal-grid-output/assets/hero-light.svg" width="100%">
 </picture>
 
 <details>
-<summary>View the connected build map</summary>
+<summary>View the signal topology</summary>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg">
-  <img alt="Developer Workbench build map" src="examples/lifcc/bento-grid-output/assets/closed-loop-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/signal-grid-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/signal-grid-output/assets/closed-loop-light.svg">
+  <img alt="Signal Grid topology" src="examples/lifcc/signal-grid-output/assets/closed-loop-light.svg" width="100%">
 </picture>
 
 </details>
@@ -157,11 +157,11 @@ See the curated [lifcc configuration](examples/lifcc/profile.yaml) and its [gene
 
 ### Templates
 
-| Preset          | Best fit                                         | Visual language                        |
-| --------------- | ------------------------------------------------ | -------------------------------------- |
-| `control-plane` | Infrastructure, agent systems, connected tooling | Animated control room and systems loop |
-| `editorial`     | Maintainers, researchers, selected body of work  | Technical journal and working index    |
-| `bento-grid`    | Product builders and modular project portfolios  | Connected workbench and signal map     |
+| Preset          | Best fit                                       | Visual language                  |
+| --------------- | ---------------------------------------------- | -------------------------------- |
+| `control-plane` | End-to-end systems with a clear execution loop | Card-based closed loop           |
+| `command-deck`  | Flagship operations and execution status       | Dense industrial command console |
+| `signal-grid`   | Connected projects and system relationships    | Industrial network topology      |
 
 The bundled agent skill can recommend a preset from repository evidence. The user remains the decision
 maker: `profilectl preview --all-templates` renders the same configuration in all three directions before

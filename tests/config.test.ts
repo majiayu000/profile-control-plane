@@ -39,8 +39,8 @@ describe("profile schema", () => {
   it("accepts every supported template preset", async () => {
     for (const preset of [
       "control-plane",
-      "editorial",
-      "bento-grid",
+      "command-deck",
+      "signal-grid",
     ] as const) {
       await expect(
         assertProfileConfig({

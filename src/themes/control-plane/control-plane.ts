@@ -5,31 +5,11 @@ import type {
   ThemeRenderer,
 } from "../../core/types.js";
 import { shorten, toneColor } from "../shared.js";
+import { renderCardLoop } from "./card-loop.js";
 import { createPalette, type Palette } from "./palette.js";
+import { controlPlaneDefinitions, controlPlaneStyle } from "./primitives.js";
 
 const WIDTH = 1200;
-
-function commonStyle(palette: Palette): string {
-  return `<style>
-    text{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
-    .label{font-size:12px;letter-spacing:3px;font-weight:700}.micro{font-size:10px;letter-spacing:2px}
-    .flow{stroke-dasharray:7 9;animation:flow 8s linear infinite}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}
-    .orbit{transform-box:fill-box;transform-origin:center;animation:orbit 24s linear infinite}.blink{animation:blink 2s ease-in-out infinite}
-    @keyframes flow{to{stroke-dashoffset:-160}}@keyframes pulse{50%{opacity:.35;transform:scale(.72)}}
-    @keyframes orbit{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.35}}
-    @media(prefers-reduced-motion:reduce){.flow,.pulse,.orbit,.blink{animation:none}}
-  </style>`;
-}
-
-function definitions(palette: Palette): string {
-  return `<defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${palette.background}"/><stop offset="1" stop-color="${palette.backgroundEnd}"/></linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="${palette.primary}"/><stop offset="1" stop-color="${palette.secondary}"/></linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="${palette.grid}" stroke-width="1"/></pattern>
-    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <clipPath id="frame"><rect x="1" y="1" width="1198" height="358" rx="18"/></clipPath>
-  </defs>`;
-}
 
 function headlineLines(value: string): readonly [string, string] {
   const normalized = value.trim().replace(/\s+/g, " ");
@@ -86,7 +66,7 @@ export class ControlPlaneRenderer implements ThemeRenderer {
       : "";
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="360" viewBox="0 0 ${WIDTH} 360" role="img" aria-label="${escapeXml(config.identity.name)} profile control plane" data-mode="${mode}">
-      ${definitions(palette)}${commonStyle(palette)}
+      ${controlPlaneDefinitions(palette)}${controlPlaneStyle()}
       <g clip-path="url(#frame)"><rect width="1200" height="360" fill="url(#bg)"/><rect width="1200" height="360" fill="url(#grid)" opacity=".7"/>
       <path d="M0 292C240 250 360 176 566 84S930 20 1200 0V360H0Z" fill="${palette.primary}" opacity=".035"/>
       <path d="M660 0l290 360h250V0Z" fill="${palette.secondary}" opacity=".04"/>
@@ -111,44 +91,6 @@ export class ControlPlaneRenderer implements ThemeRenderer {
 
   renderLoop(config: ProfileConfig, mode: ColorMode): string {
     const palette = createPalette(config, mode);
-    const count = config.layers.length;
-    const centerX = 600;
-    const centerY = 164;
-    const radiusX = 430;
-    const radiusY = 104;
-    const points = config.layers.map((layer, index) => {
-      const angle = -Math.PI / 2 + (index * Math.PI * 2) / count;
-      return {
-        layer,
-        x: centerX + Math.cos(angle) * radiusX,
-        y: centerY + Math.sin(angle) * radiusY,
-      };
-    });
-    const path = points
-      .map(
-        (point, index) =>
-          `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`,
-      )
-      .join("");
-    const nodes = points
-      .map(({ layer, x, y }, index) => {
-        const color = toneColor(layer.tone, palette);
-        const labelY = y < centerY ? y - 18 : y + 30;
-        return `<g><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="15" fill="${palette.panel}" stroke="${color}" stroke-width="2"/><circle class="pulse" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="${color}"/>
-        <text x="${x.toFixed(1)}" y="${labelY.toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="${palette.text}">${escapeXml(layer.name)}</text>
-        <text x="${x.toFixed(1)}" y="${(labelY + 12).toFixed(1)}" text-anchor="middle" font-size="8" fill="${palette.muted}">${escapeXml(shorten(layer.project, 25))}</text>
-        <text x="${x.toFixed(1)}" y="${(y + 3).toFixed(1)}" text-anchor="middle" font-size="8" fill="${color}">${String(index + 1).padStart(2, "0")}</text></g>`;
-      })
-      .join("");
-
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="330" viewBox="0 0 ${WIDTH} 330" role="img" aria-label="${escapeXml(config.identity.name)} closed loop architecture" data-mode="${mode}">
-      ${definitions(palette)}${commonStyle(palette)}<rect width="1200" height="330" rx="18" fill="url(#bg)"/><rect width="1200" height="330" rx="18" fill="url(#grid)" opacity=".7"/>
-      <text x="28" y="34" class="label" fill="${palette.primary}">CLOSED LOOP / ARCHITECTURE MAP</text><text x="1170" y="34" text-anchor="end" class="micro" fill="${palette.muted}">${String(count).padStart(2, "0")} NODES · ONE SYSTEM</text>
-      <path d="${path}Z" fill="none" stroke="${palette.line}" stroke-width="2"/><path class="flow" d="${path}Z" fill="none" stroke="url(#accent)" stroke-width="2"/>
-      <g transform="translate(${centerX} ${centerY})"><circle r="62" fill="${palette.panel}" stroke="${palette.line}"/><circle class="orbit" r="48" fill="none" stroke="url(#accent)" stroke-width="2" stroke-dasharray="5 8"/>
-      <circle r="23" fill="${palette.background}" stroke="${palette.primary}" filter="url(#glow)"/><circle class="pulse" r="6" fill="${palette.primary}"/>
-      <text y="84" text-anchor="middle" class="micro" fill="${palette.muted}">${escapeXml(config.identity.headline)}</text></g>${nodes}
-      <rect x="1" y="1" width="1198" height="328" rx="18" fill="none" stroke="${palette.secondary}" stroke-opacity=".55"/>
-    </svg>`;
+    return renderCardLoop(config, palette, mode);
   }
 }

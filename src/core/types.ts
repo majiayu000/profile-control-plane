@@ -1,6 +1,6 @@
 export type Tone = "primary" | "secondary";
 export type ColorMode = "dark" | "light";
-export type ThemePreset = "control-plane" | "editorial" | "bento-grid";
+export type ThemePreset = "control-plane" | "command-deck" | "signal-grid";
 
 export interface ProfileLink {
   readonly label: string;
