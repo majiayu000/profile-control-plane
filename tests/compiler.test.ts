@@ -9,6 +9,8 @@ import {
 } from "../src/core/escape.js";
 import type { ProfileConfig, ThemeRenderer } from "../src/core/types.js";
 import { createPalette } from "../src/themes/control-plane/palette.js";
+import { THEME_PRESETS } from "../src/themes/registry.js";
+import { getThemeDefinition } from "../src/themes/registry.js";
 import * as publicApi from "../src/index.js";
 import { validConfig } from "./fixtures.js";
 
@@ -35,6 +37,34 @@ describe("profile compiler", () => {
     expect(first.files.at(-1)?.content).toContain("prefers-color-scheme: dark");
   });
 
+  it("renders every declared template with distinct visuals and copy", () => {
+    const expectedHeadings = new Map([
+      ["control-plane", "## Flagship systems"],
+      ["editorial", "## Selected work"],
+      ["bento-grid", "## Featured builds"],
+    ]);
+    const heroes = THEME_PRESETS.map((preset) => {
+      const output = compileProfile({
+        ...validConfig,
+        theme: { ...validConfig.theme, preset },
+      });
+      const hero = output.files.find(
+        (file) => file.path === "assets/hero-dark.svg",
+      );
+      const readme = output.files.find((file) => file.path === "README.md");
+      expect(hero?.content).toContain(`data-mode="dark"`);
+      expect(readme?.content).toContain(expectedHeadings.get(preset));
+      return hero?.content;
+    });
+    expect(new Set(heroes).size).toBe(THEME_PRESETS.length);
+  });
+
+  it("rejects unsupported presets at the public registry boundary", () => {
+    expect(() => getThemeDefinition("unknown" as never)).toThrow(
+      /unsupported theme preset/,
+    );
+  });
+
   it("escapes untrusted SVG and Markdown content", () => {
     const hostile = {
       ...validConfig,
@@ -51,13 +81,18 @@ describe("profile compiler", () => {
       ],
       module_groups: [],
     } satisfies ProfileConfig;
-    const output = compileProfile(hostile);
-    const combined = output.files.map((file) => file.content).join("\n");
-    expect(combined).not.toContain("<script onload");
-    expect(combined).toContain("&lt;script");
-    expect(
-      output.files.find((file) => file.path === "README.md")?.content,
-    ).toContain("\\<img src=x\\>");
+    for (const preset of THEME_PRESETS) {
+      const output = compileProfile({
+        ...hostile,
+        theme: { ...hostile.theme, preset },
+      });
+      const combined = output.files.map((file) => file.content).join("\n");
+      expect(combined).not.toContain("<script onload");
+      expect(combined).toContain("&lt;script");
+      expect(
+        output.files.find((file) => file.path === "README.md")?.content,
+      ).toContain("\\<img src=x\\>");
+    }
   });
 
   it("handles long single-word headlines, ten layers, and disabled optional sections", () => {
@@ -79,12 +114,32 @@ describe("profile compiler", () => {
       module_groups: [],
       settings: { show_stars: false, show_badges: false },
     };
-    const readme =
-      compileProfile(config).files.find((file) => file.path === "README.md")
-        ?.content ?? "";
-    expect(readme).not.toContain("img.shields.io/badge/profile");
-    expect(readme).not.toContain("img.shields.io/github/stars");
-    expect(readme).toContain("No modules declared.");
+    for (const preset of THEME_PRESETS) {
+      const readme =
+        compileProfile({
+          ...config,
+          theme: { ...config.theme, preset },
+        }).files.find((file) => file.path === "README.md")?.content ?? "";
+      expect(readme).not.toContain("img.shields.io/badge/profile");
+      expect(readme).not.toContain("img.shields.io/github/stars");
+    }
+  });
+
+  it("keeps repository hyphens intact in GitHub and Shields paths", () => {
+    const output = compileProfile({
+      ...validConfig,
+      flagships: [
+        {
+          ...validConfig.flagships[0]!,
+          repo: "claude-skill-registry",
+        },
+      ],
+    });
+    const readme = output.files.at(-1)?.content ?? "";
+    expect(readme).toContain(
+      "github/stars/octocat/claude-skill-registry?style=flat-square",
+    );
+    expect(readme).not.toContain("claude--skill--registry");
   });
 
   it("rejects malformed, non-SVG, and active renderer output", () => {
@@ -121,5 +176,8 @@ describe("escaping and palette utilities", () => {
     );
     expect(publicApi.compileProfile).toBeTypeOf("function");
     expect(publicApi.ControlPlaneRenderer).toBeTypeOf("function");
+    expect(publicApi.EditorialRenderer).toBeTypeOf("function");
+    expect(publicApi.BentoGridRenderer).toBeTypeOf("function");
+    expect(publicApi.THEME_PRESETS).toEqual(THEME_PRESETS);
   });
 });

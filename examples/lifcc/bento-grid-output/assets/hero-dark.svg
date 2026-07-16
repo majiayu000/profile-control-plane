@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc modular workbench" data-mode="dark">
+      <defs>
+    <pattern id="perf" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.15" fill="#30494C" opacity=".5"/></pattern>
+    <linearGradient id="board-glow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101619"/><stop offset=".62" stop-color="#101619"/><stop offset="1" stop-color="#00A7D1" stop-opacity=".07"/></linearGradient>
+    <filter id="module-shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#000000" flood-opacity=".34"/></filter>
+  </defs><style>
+    .display{font-family:"Arial Narrow","Avenir Next Condensed",Impact,sans-serif}.body{font-family:"Avenir Next",Avenir,Helvetica,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .boot{animation:boot .65s cubic-bezier(.2,.8,.2,1)}.signal{stroke-dasharray:4 8;animation:signal 7s linear infinite}.dial{transform-box:fill-box;transform-origin:center;animation:dial 14s linear infinite}
+    @keyframes boot{from{opacity:.3;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes signal{to{stroke-dashoffset:-120}}@keyframes dial{to{transform:rotate(360deg)}}
+    @media(prefers-reduced-motion:reduce){.boot,.signal,.dial{animation:none}}
+  </style><rect width="1200" height="360" fill="#080B0D"/><rect x="10" y="10" width="1180" height="340" rx="12" fill="url(#board-glow)" stroke="#30494C"/><rect x="10" y="10" width="1180" height="340" rx="12" fill="url(#perf)"/>
+      <path d="M690 48H706V68H724M690 156H706V176H724M690 264H706V284H724" fill="none" stroke="#30494C" stroke-width="2"/><path class="signal" d="M690 48H706V68H724M690 156H706V176H724M690 264H706V284H724" fill="none" stroke="#00A7D1"/>
+      <g class="boot" filter="url(#module-shadow)"><path d="M24 23H672L690 41V254H24Z" fill="#182125" stroke="#30494C"/><rect x="24" y="23" width="7" height="231" fill="#00A7D1"/><text x="52" y="55" class="mono" font-size="8" letter-spacing="2" fill="#00A7D1">IDENTITY MODULE / LIFCC</text>
+      <text x="50" y="113" class="display" font-size="45" font-weight="900" letter-spacing="-.8" fill="#EEF6F4">AI AGENT INFRASTRUCTURE</text>
+      <text x="52" y="210" class="body" font-size="11" fill="#8BA19F">Building the systems around coding agents — from skills and trust to memory a…</text><path d="M52 226H456" stroke="#30494C"/><text x="52" y="242" class="mono" font-size="8" letter-spacing="1.4" fill="#EEF6F4">OUTPUT / OPEN SOURCE SYSTEMS</text>
+      <g transform="translate(620 80)"><circle r="35" fill="#202C31" stroke="#30494C"/><circle class="dial" r="25" fill="none" stroke="#E84A8A" stroke-width="4" stroke-dasharray="7 6"/><circle r="8" fill="#E84A8A"/><path d="M0-20V-31" stroke="#EEF6F4" stroke-width="2"/></g></g>
+      <g class="boot" style="animation-delay:80ms" filter="url(#module-shadow)"><path d="M24 271H210L228 289V337H24Z" fill="#202C31" stroke="#30494C"/><text x="43" y="294" class="mono" font-size="8" letter-spacing="1.6" fill="#8BA19F">ACTIVE LAYERS</text><text x="43" y="322" class="display" font-size="23" font-weight="900" fill="#00A7D1">08</text><circle cx="204" cy="313" r="4" fill="#00A7D1"/></g>
+      <g class="boot" style="animation-delay:120ms" filter="url(#module-shadow)"><path d="M239 271H435L453 289V337H239Z" fill="#202C31" stroke="#30494C"/><text x="258" y="294" class="mono" font-size="8" letter-spacing="1.6" fill="#8BA19F">SELECTED SYSTEMS</text><text x="258" y="322" class="display" font-size="23" font-weight="900" fill="#E84A8A">06</text><circle cx="428" cy="313" r="4" fill="#E84A8A"/></g>
+      <g class="boot" style="animation-delay:160ms" filter="url(#module-shadow)"><path d="M464 271H672L690 289V337H464Z" fill="#202C31" stroke="#30494C"/><text x="483" y="294" class="mono" font-size="8" letter-spacing="1.6" fill="#8BA19F">WORKSTATION</text><text x="483" y="320" class="mono" font-size="10" font-weight="700" fill="#EEF6F4">BEIJING · UTC+8</text><path d="M650 297v20M642 307h16" stroke="#00A7D1"/></g>
+      <g class="boot" style="animation-delay:100ms" filter="url(#module-shadow)"><path d="M724 23H1158L1176 41V114H724Z" fill="#182125" stroke="#30494C"/>
+        <path d="M724 30H730" stroke="#00A7D1" stroke-width="4"/><circle cx="746" cy="67" r="10" fill="none" stroke="#00A7D1"/><circle cx="746" cy="67" r="3" fill="#00A7D1"/>
+        <text x="773" y="54" class="body" font-size="15" font-weight="800" fill="#EEF6F4">claude-skill-registry</text><text x="773" y="75" class="mono" font-size="8" letter-spacing="1.4" fill="#00A7D1">EXTEND / PORT 1</text>
+        <text x="773" y="95" class="body" font-size="10" fill="#8BA19F">The comprehensive discovery layer for Claude Code skills.</text><path d="M1149 52v35" stroke="#30494C"/><circle cx="1149" cy="46" r="3" fill="#00A7D1"/>
+      </g><g class="boot" style="animation-delay:175ms" filter="url(#module-shadow)"><path d="M724 131H1158L1176 149V222H724Z" fill="#182125" stroke="#30494C"/>
+        <path d="M724 138H786" stroke="#00A7D1" stroke-width="4"/><circle cx="746" cy="175" r="10" fill="none" stroke="#00A7D1"/><circle cx="746" cy="175" r="3" fill="#00A7D1"/>
+        <text x="773" y="162" class="body" font-size="15" font-weight="800" fill="#EEF6F4">spellbook</text><text x="773" y="183" class="mono" font-size="8" letter-spacing="1.4" fill="#00A7D1">EXTEND / PORT 2</text>
+        <text x="773" y="203" class="body" font-size="10" fill="#8BA19F">Cross-runtime skills for Claude Code, Codex, and multi-ag…</text><path d="M1149 160v35" stroke="#30494C"/><circle cx="1149" cy="154" r="3" fill="#00A7D1"/>
+      </g><g class="boot" style="animation-delay:250ms" filter="url(#module-shadow)"><path d="M724 239H1158L1176 257V330H724Z" fill="#182125" stroke="#30494C"/>
+        <path d="M724 246H842" stroke="#E84A8A" stroke-width="4"/><circle cx="746" cy="283" r="10" fill="none" stroke="#E84A8A"/><circle cx="746" cy="283" r="3" fill="#E84A8A"/>
+        <text x="773" y="270" class="body" font-size="15" font-weight="800" fill="#EEF6F4">litellm-rs</text><text x="773" y="291" class="mono" font-size="8" letter-spacing="1.4" fill="#E84A8A">ROUTE / PORT 3</text>
+        <text x="773" y="311" class="body" font-size="10" fill="#8BA19F">High-performance Rust gateway for 100+ LLM APIs through o…</text><path d="M1149 268v35" stroke="#30494C"/><circle cx="1149" cy="262" r="3" fill="#E84A8A"/>
+      </g>
+    </svg>

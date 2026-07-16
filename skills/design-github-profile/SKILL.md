@@ -57,6 +57,8 @@ rendering after the user has reviewed the semantic positioning.
    - State the audience, one-sentence promise, three strongest proofs, profile archetype, information order,
      visual direction, and content to omit.
    - Prefer the narrative best supported by current evidence, not the most fashionable visual style.
+   - Recommend one supported template and explain why it fits the evidence. Treat the recommendation as
+     guidance, not the user's final choice.
    - Obtain user approval before applying a material career, product, or identity positioning decision.
 
 5. Translate the approved direction into the supported contract.
@@ -67,6 +69,15 @@ rendering after the user has reviewed the semantic positioning.
    - Inspect `schemas/profile.schema.json` before selecting a renderer preset. If the desired direction is not
      supported, do not invent a preset: either adapt it to a supported renderer with user approval or stop at
      the reviewed design brief and report the rendering gap.
+   - When two or more presets remain credible, render the comparison page and let the user choose:
+
+     ```bash
+     profilectl preview --config profile.yaml --all-templates
+     ```
+
+   - Use `control-plane` for evidence of connected infrastructure or execution flow, `editorial` for a
+     curated body of authored work, and `bento-grid` for distinct modular products. Do not treat these as
+     identity labels; repository evidence and user preference take precedence.
 
 6. Compile and validate.
 

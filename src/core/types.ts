@@ -1,5 +1,6 @@
 export type Tone = "primary" | "secondary";
 export type ColorMode = "dark" | "light";
+export type ThemePreset = "control-plane" | "editorial" | "bento-grid";
 
 export interface ProfileLink {
   readonly label: string;
@@ -40,7 +41,7 @@ export interface ProfileConfig {
     readonly location?: string;
   };
   readonly theme: {
-    readonly preset: "control-plane";
+    readonly preset: ThemePreset;
     readonly primary: string;
     readonly secondary: string;
   };
@@ -92,4 +93,21 @@ export interface GitHubSnapshot {
 export interface ThemeRenderer {
   renderHero(config: ProfileConfig, mode: ColorMode): string;
   renderLoop(config: ProfileConfig, mode: ColorMode): string;
+}
+
+export interface ThemeCopy {
+  readonly flagshipHeading: string;
+  readonly overviewHeading: string;
+  readonly modulesHeading: string;
+  readonly emptyModules: string;
+  heroAlt(config: ProfileConfig): string;
+  overviewAlt(config: ProfileConfig): string;
+}
+
+export interface ThemeDefinition {
+  readonly preset: ThemePreset;
+  readonly label: string;
+  readonly description: string;
+  readonly renderer: ThemeRenderer;
+  readonly copy: ThemeCopy;
 }

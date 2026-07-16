@@ -41,6 +41,18 @@ typing gimmicks, exhaustive technology lists, or generic enthusiasm.
 - Respect `prefers-reduced-motion` and verify the static state remains meaningful.
 - Avoid collisions, clipped labels, tiny repository names, and diagrams that require hover interaction.
 
+### Supported template directions
+
+| Preset          | Prefer when the evidence shows                           | Reject when                                     |
+| --------------- | -------------------------------------------------------- | ----------------------------------------------- |
+| `control-plane` | Connected systems, infrastructure, orchestration, flow   | The repositories do not form an explainable map |
+| `editorial`     | A curated body of authored or maintained work            | The account needs dense product comparison      |
+| `bento-grid`    | Distinct products or modules that deserve equal scanning | The work is one continuous system narrative     |
+
+Recommend the strongest evidence fit, then use the all-template preview when another direction remains
+credible. The user's explicit visual preference overrides the recommendation as long as it does not require
+unsupported claims or an undeclared preset.
+
 ## External content
 
 - Prefer generated, self-hosted assets.

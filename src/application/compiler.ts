@@ -7,7 +7,7 @@ import type {
   ThemeRenderer,
 } from "../core/types.js";
 import { renderReadme } from "../render/readme.js";
-import { ControlPlaneRenderer } from "../themes/control-plane/control-plane.js";
+import { getThemeDefinition } from "../themes/registry.js";
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -56,26 +56,28 @@ function containsActiveContent(value: unknown): boolean {
 
 export function compileProfile(
   config: ProfileConfig,
-  renderer: ThemeRenderer = new ControlPlaneRenderer(),
+  renderer?: ThemeRenderer,
 ): CompiledProfile {
+  const theme = getThemeDefinition(config.theme.preset);
+  const selectedRenderer = renderer ?? theme.renderer;
   const files: CompiledFile[] = [
     {
       path: "assets/hero-dark.svg",
-      content: renderer.renderHero(config, "dark"),
+      content: selectedRenderer.renderHero(config, "dark"),
     },
     {
       path: "assets/hero-light.svg",
-      content: renderer.renderHero(config, "light"),
+      content: selectedRenderer.renderHero(config, "light"),
     },
     {
       path: "assets/closed-loop-dark.svg",
-      content: renderer.renderLoop(config, "dark"),
+      content: selectedRenderer.renderLoop(config, "dark"),
     },
     {
       path: "assets/closed-loop-light.svg",
-      content: renderer.renderLoop(config, "light"),
+      content: selectedRenderer.renderLoop(config, "light"),
     },
-    { path: "README.md", content: renderReadme(config) },
+    { path: "README.md", content: renderReadme(config, theme.copy) },
   ];
   for (const file of files.filter((candidate) =>
     candidate.path.endsWith(".svg"),
