@@ -1,50 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="lifcc survey map profile" data-mode="dark">
       <defs>
-    <pattern id="carto-grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#3A4A57" stroke-opacity=".14"/></pattern>
-    <g id="carto-hill" fill="none" stroke="#46616F"><path d="M0-26C15-26 26-13 26 0C26 15 13 26 0 26C-15 26-26 13-26 0C-26-15-13-26 0-26Z"/><path d="M0-15C9-15 15-8 15 0C15 9 8 15 0 15C-9 15-15 8-15 0C-15-9-8-15 0-15Z"/><path d="M0-5C3-5 5-2 5 0C5 3 2 5 0 5C-3 5-5 2-5 0C-5-3-2-5 0-5Z"/></g>
-    <g id="carto-trig"><path d="M0-7L6 5H-6Z" fill="none" stroke="#D08A3E" stroke-width="1.6"/><circle cy="-1" r="1.4" fill="#D08A3E"/></g>
+    <pattern id="carto-grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#27436E" stroke-opacity=".14"/></pattern>
+    <g id="carto-hill" fill="none" stroke="#31598C"><path d="M0-26C15-26 26-13 26 0C26 15 13 26 0 26C-15 26-26 13-26 0C-26-15-13-26 0-26Z"/><path d="M0-15C9-15 15-8 15 0C15 9 8 15 0 15C-9 15-15 8-15 0C-15-9-8-15 0-15Z"/><path d="M0-5C3-5 5-2 5 0C5 3 2 5 0 5C-3 5-5 2-5 0C-5-3-2-5 0-5Z"/></g>
+    <g id="carto-trig"><path d="M0-7L6 5H-6Z" fill="none" stroke="#F2A83E" stroke-width="1.6"/><circle cy="-1" r="1.4" fill="#F2A83E"/></g>
   </defs><style>
     .carto-serif{font-family:Iowan Old Style,Palatino Linotype,Book Antiqua,Georgia,serif}.carto-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.carto-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
     .carto-trace{stroke-dasharray:6 10;animation:carto-trace 10s linear infinite}.carto-beacon{transform-box:fill-box;transform-origin:center;animation:carto-beacon 3.4s ease-in-out infinite}.carto-rise{animation:carto-rise .66s cubic-bezier(.2,.75,.2,1) both}
     @keyframes carto-trace{to{stroke-dashoffset:-160}}@keyframes carto-beacon{50%{opacity:.35;transform:scale(.72)}}@keyframes carto-rise{from{opacity:.15;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
     @media(prefers-reduced-motion:reduce){.carto-trace,.carto-beacon,.carto-rise{animation:none}}
-  </style><rect width="1200" height="360" fill="#0F161D"/><rect x="14" y="14" width="1172" height="332" fill="#16222C" stroke="#3A4A57"/><rect x="14" y="14" width="1172" height="332" fill="url(#carto-grid)"/>
-      <rect x="30" y="30" width="500" height="300" fill="#1D2C38" fill-opacity=".58" stroke="#3A4A57"/><use href="#carto-hill" transform="translate(430 240)" opacity=".55"/><use href="#carto-hill" transform="translate(90 290) scale(.7)" opacity=".4"/><path d="M545 30V330" stroke="#3A4A57"/><path d="M560 30V330" stroke="#46616F" stroke-dasharray="2 6" stroke-opacity=".6"/>
-      <g transform="translate(486 62)"><circle r="13" fill="none" stroke="#63A894" stroke-width="1.4"/><path d="M0-8L4 6L0 2.5L-4 6Z" fill="#D08A3E"/></g>
-      <g class="carto-rise"><text x="50" y="49" class="carto-mono" font-size="8" letter-spacing="2.3" fill="#63A894">CARTOGRAPH / FIELD SURVEY</text><text x="50" y="82" class="carto-label" font-size="12" font-weight="800" letter-spacing="2" fill="#D08A3E">LIFCC</text>
-      <text x="48" y="133" class="carto-serif" font-size="36" font-weight="700" fill="#E7E1CE">AI AGENT</text><text x="48" y="169" class="carto-serif" font-size="36" font-style="italic" fill="#E7E1CE">INFRASTRUCTURE</text>
-      <path d="M50 210H132" stroke="#D08A3E" stroke-width="4"/><text x="50" y="238" class="carto-serif" font-size="12" font-style="italic" fill="#8FA0AC">Building the systems around coding agents — from skills and trust to me…</text>
-      <text x="50" y="276" class="carto-mono" font-size="8" letter-spacing="1.5" fill="#E7E1CE">06 SUMMITS · 08 CONTOUR LAYERS</text><text x="50" y="304" class="carto-mono" font-size="8" letter-spacing="1.6" fill="#8FA0AC">DATUM / BEIJING · UTC+8</text></g>
-      <text x="660" y="47" class="carto-serif" font-size="16" font-style="italic" fill="#E7E1CE">Surveyed summits</text><text x="1142" y="47" text-anchor="end" class="carto-mono" font-size="8" letter-spacing="1.4" fill="#8FA0AC">SHEET / MAJIAYU000</text><g class="carto-rise" style="animation-delay:100ms">
-        <path d="M560 151.5C610 151.5 640 70 688 70" fill="none" stroke="#D08A3E" stroke-opacity=".72"/><path class="carto-trace" d="M560 151.5C610 151.5 640 70 688 70" fill="none" stroke="#46616F" stroke-width="1.5"/>
+  </style><rect width="1200" height="360" fill="#081120"/><rect x="14" y="14" width="1172" height="332" fill="#0D1C33" stroke="#27436E"/><rect x="14" y="14" width="1172" height="332" fill="url(#carto-grid)"/>
+      <rect x="30" y="30" width="500" height="300" fill="#152847" fill-opacity=".58" stroke="#27436E"/><use href="#carto-hill" transform="translate(430 240)" opacity=".55"/><use href="#carto-hill" transform="translate(90 290) scale(.7)" opacity=".4"/><path d="M545 30V330" stroke="#27436E"/><path d="M560 30V330" stroke="#31598C" stroke-dasharray="2 6" stroke-opacity=".6"/>
+      <g transform="translate(486 62)"><circle r="13" fill="none" stroke="#46C1A0" stroke-width="1.4"/><path d="M0-8L4 6L0 2.5L-4 6Z" fill="#F2A83E"/></g>
+      <g class="carto-rise"><text x="50" y="49" class="carto-mono" font-size="8" letter-spacing="2.3" fill="#46C1A0">CARTOGRAPH / FIELD SURVEY</text><text x="50" y="82" class="carto-label" font-size="12" font-weight="800" letter-spacing="2" fill="#F2A83E">LIFCC</text>
+      <text x="48" y="133" class="carto-serif" font-size="36" font-weight="700" fill="#EDE5CB">AI AGENT</text><text x="48" y="169" class="carto-serif" font-size="36" font-style="italic" fill="#EDE5CB">INFRASTRUCTURE</text>
+      <path d="M50 210H132" stroke="#F2A83E" stroke-width="4"/><text x="50" y="238" class="carto-serif" font-size="12" font-style="italic" fill="#8FA6C9">Building the systems around coding agents — from skills and trust to me…</text>
+      <text x="50" y="276" class="carto-mono" font-size="8" letter-spacing="1.5" fill="#EDE5CB">06 SUMMITS · 08 CONTOUR LAYERS</text><text x="50" y="304" class="carto-mono" font-size="8" letter-spacing="1.6" fill="#8FA6C9">DATUM / BEIJING · UTC+8</text></g>
+      <text x="660" y="47" class="carto-serif" font-size="16" font-style="italic" fill="#EDE5CB">Surveyed summits</text><text x="1142" y="47" text-anchor="end" class="carto-mono" font-size="8" letter-spacing="1.4" fill="#8FA6C9">SHEET / MAJIAYU000</text><g class="carto-rise" style="animation-delay:100ms">
+        <path d="M560 151.5C610 151.5 640 70 688 70" fill="none" stroke="#F2A83E" stroke-opacity=".72"/><path class="carto-trace" d="M560 151.5C610 151.5 640 70 688 70" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 70)"><use class="carto-beacon" style="animation-delay:0.00s" href="#carto-trig"/></g>
-        <text x="722" y="66" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">claude-skill-registry</text><text x="1142" y="66" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#D08A3E">EXTEND</text>
-        <text x="722" y="83" class="carto-label" font-size="8.7" fill="#8FA0AC">The comprehensive discovery layer for Claude Code skills.</text><path d="M722 92H1142" stroke="#3A4A57"/>
+        <text x="722" y="66" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">claude-skill-registry</text><text x="1142" y="66" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#F2A83E">EXTEND</text>
+        <text x="722" y="83" class="carto-label" font-size="8.7" fill="#8FA6C9">The comprehensive discovery layer for Claude Code skills.</text><path d="M722 92H1142" stroke="#27436E"/>
       </g><g class="carto-rise" style="animation-delay:155ms">
-        <path d="M560 160.5C610 160.5 640 114 688 114" fill="none" stroke="#D08A3E" stroke-opacity=".72"/><path class="carto-trace" d="M560 160.5C610 160.5 640 114 688 114" fill="none" stroke="#46616F" stroke-width="1.5"/>
+        <path d="M560 160.5C610 160.5 640 114 688 114" fill="none" stroke="#F2A83E" stroke-opacity=".72"/><path class="carto-trace" d="M560 160.5C610 160.5 640 114 688 114" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 114)"><use class="carto-beacon" style="animation-delay:0.37s" href="#carto-trig"/></g>
-        <text x="722" y="110" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">spellbook</text><text x="1142" y="110" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#D08A3E">EXTEND</text>
-        <text x="722" y="127" class="carto-label" font-size="8.7" fill="#8FA0AC">Cross-runtime skills for Claude Code, Codex, and multi-age…</text><path d="M722 136H1142" stroke="#3A4A57"/>
+        <text x="722" y="110" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">spellbook</text><text x="1142" y="110" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#F2A83E">EXTEND</text>
+        <text x="722" y="127" class="carto-label" font-size="8.7" fill="#8FA6C9">Cross-runtime skills for Claude Code, Codex, and multi-age…</text><path d="M722 136H1142" stroke="#27436E"/>
       </g><g class="carto-rise" style="animation-delay:210ms">
-        <path d="M560 169.5C610 169.5 640 158 688 158" fill="none" stroke="#63A894" stroke-opacity=".72"/><path class="carto-trace" d="M560 169.5C610 169.5 640 158 688 158" fill="none" stroke="#46616F" stroke-width="1.5"/>
+        <path d="M560 169.5C610 169.5 640 158 688 158" fill="none" stroke="#46C1A0" stroke-opacity=".72"/><path class="carto-trace" d="M560 169.5C610 169.5 640 158 688 158" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 158)"><use class="carto-beacon" style="animation-delay:0.74s" href="#carto-trig"/></g>
-        <text x="722" y="154" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">litellm-rs</text><text x="1142" y="154" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#63A894">ROUTE</text>
-        <text x="722" y="171" class="carto-label" font-size="8.7" fill="#8FA0AC">High-performance Rust gateway for 100+ LLM APIs through on…</text><path d="M722 180H1142" stroke="#3A4A57"/>
+        <text x="722" y="154" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">litellm-rs</text><text x="1142" y="154" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#46C1A0">ROUTE</text>
+        <text x="722" y="171" class="carto-label" font-size="8.7" fill="#8FA6C9">High-performance Rust gateway for 100+ LLM APIs through on…</text><path d="M722 180H1142" stroke="#27436E"/>
       </g><g class="carto-rise" style="animation-delay:265ms">
-        <path d="M560 178.5C610 178.5 640 202 688 202" fill="none" stroke="#63A894" stroke-opacity=".72"/><path class="carto-trace" d="M560 178.5C610 178.5 640 202 688 202" fill="none" stroke="#46616F" stroke-width="1.5"/>
+        <path d="M560 178.5C610 178.5 640 202 688 202" fill="none" stroke="#46C1A0" stroke-opacity=".72"/><path class="carto-trace" d="M560 178.5C610 178.5 640 202 688 202" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 202)"><use class="carto-beacon" style="animation-delay:1.11s" href="#carto-trig"/></g>
-        <text x="722" y="198" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">harness</text><text x="1142" y="198" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#63A894">ORCHESTRATE</text>
-        <text x="722" y="215" class="carto-label" font-size="8.7" fill="#8FA0AC">Governed fleets of parallel coding agents, powered by a Ru…</text><path d="M722 224H1142" stroke="#3A4A57"/>
+        <text x="722" y="198" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">harness</text><text x="1142" y="198" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#46C1A0">ORCHESTRATE</text>
+        <text x="722" y="215" class="carto-label" font-size="8.7" fill="#8FA6C9">Governed fleets of parallel coding agents, powered by a Ru…</text><path d="M722 224H1142" stroke="#27436E"/>
       </g><g class="carto-rise" style="animation-delay:320ms">
-        <path d="M560 187.5C610 187.5 640 246 688 246" fill="none" stroke="#63A894" stroke-opacity=".72"/><path class="carto-trace" d="M560 187.5C610 187.5 640 246 688 246" fill="none" stroke="#46616F" stroke-width="1.5"/>
+        <path d="M560 187.5C610 187.5 640 246 688 246" fill="none" stroke="#46C1A0" stroke-opacity=".72"/><path class="carto-trace" d="M560 187.5C610 187.5 640 246 688 246" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 246)"><use class="carto-beacon" style="animation-delay:1.48s" href="#carto-trig"/></g>
-        <text x="722" y="242" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">vibeguard</text><text x="1142" y="242" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#63A894">TRUST</text>
-        <text x="722" y="259" class="carto-label" font-size="8.7" fill="#8FA0AC">Rules, hooks, and guards against hallucinated or unverifie…</text><path d="M722 268H1142" stroke="#3A4A57"/>
+        <text x="722" y="242" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">vibeguard</text><text x="1142" y="242" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#46C1A0">TRUST</text>
+        <text x="722" y="259" class="carto-label" font-size="8.7" fill="#8FA6C9">Rules, hooks, and guards against hallucinated or unverifie…</text><path d="M722 268H1142" stroke="#27436E"/>
       </g><g class="carto-rise" style="animation-delay:375ms">
-        <path d="M560 196.5C610 196.5 640 290 688 290" fill="none" stroke="#63A894" stroke-opacity=".72"/><path class="carto-trace" d="M560 196.5C610 196.5 640 290 688 290" fill="none" stroke="#46616F" stroke-width="1.5"/>
+        <path d="M560 196.5C610 196.5 640 290 688 290" fill="none" stroke="#46C1A0" stroke-opacity=".72"/><path class="carto-trace" d="M560 196.5C610 196.5 640 290 688 290" fill="none" stroke="#31598C" stroke-width="1.5"/>
         <g transform="translate(700 290)"><use class="carto-beacon" style="animation-delay:1.85s" href="#carto-trig"/></g>
-        <text x="722" y="286" class="carto-label" font-size="12" font-weight="800" fill="#E7E1CE">remem</text><text x="1142" y="286" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#63A894">REMEMBER</text>
-        <text x="722" y="303" class="carto-label" font-size="8.7" fill="#8FA0AC">Local-first, auditable memory for long-running Claude Code…</text><path d="M722 312H1142" stroke="#3A4A57"/>
+        <text x="722" y="286" class="carto-label" font-size="12" font-weight="800" fill="#EDE5CB">remem</text><text x="1142" y="286" text-anchor="end" class="carto-mono" font-size="7.5" letter-spacing="1.3" fill="#46C1A0">REMEMBER</text>
+        <text x="722" y="303" class="carto-label" font-size="8.7" fill="#8FA6C9">Local-first, auditable memory for long-running Claude Code…</text><path d="M722 312H1142" stroke="#27436E"/>
       </g>
       <circle cx="500" cy="315" r="3" fill="#00A7D1"/><circle cx="512" cy="315" r="3" fill="#E84A8A"/>
     </svg>

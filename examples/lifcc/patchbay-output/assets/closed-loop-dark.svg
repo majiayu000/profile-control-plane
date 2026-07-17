@@ -1,48 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc cable routing" data-mode="dark">
       <defs>
-    <pattern id="patch-grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#323C48" fill-opacity=".35"/></pattern>
-    <g id="patch-jack"><circle r="7.5" fill="none" stroke="#6E8296" stroke-width="2"/><circle r="3.1" fill="#0D0F12"/></g>
+    <pattern id="patch-grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#2B3543" fill-opacity=".35"/></pattern>
+    <g id="patch-jack"><circle r="7.5" fill="none" stroke="#7F96AC" stroke-width="2"/><circle r="3.1" fill="#090B0F"/></g>
   </defs><style>
     .patch-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.patch-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
     .patch-flow{stroke-dasharray:10 14;animation:patch-flow 6s linear infinite}.patch-led{animation:patch-led 2.6s ease-in-out infinite}.patch-vu{transform-box:fill-box;transform-origin:bottom;animation:patch-vu 1.9s ease-in-out infinite}.patch-rise{animation:patch-rise .6s cubic-bezier(.2,.75,.2,1) both}
     @keyframes patch-flow{to{stroke-dashoffset:-120}}@keyframes patch-led{50%{opacity:.2}}@keyframes patch-vu{0%,100%{transform:scaleY(.25)}45%{transform:scaleY(1)}70%{transform:scaleY(.55)}}@keyframes patch-rise{from{opacity:.15;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
     @media(prefers-reduced-motion:reduce){.patch-flow,.patch-led,.patch-vu,.patch-rise{animation:none}}
-  </style><rect width="1200" height="330" fill="#0D0F12"/><rect x="14" y="14" width="1172" height="302" fill="#151A20" stroke="#323C48"/><rect x="14" y="14" width="1172" height="302" fill="url(#patch-grid)"/>
-      <rect x="29" y="29" width="235" height="272" fill="#1C232C" fill-opacity=".66" stroke="#323C48"/><text x="50" y="54" class="patch-mono" font-size="8" letter-spacing="2.1" fill="#C9A227">CHANNEL STRIP</text><text x="50" y="90" class="patch-label" font-size="20" font-weight="800" fill="#E9E5D8">Cable routing</text>
-      <rect class="patch-vu" style="animation-delay:0.00s" x="50" y="134" width="5" height="34" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:0.23s" x="71" y="146" width="5" height="22" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:0.46s" x="92" y="140" width="5" height="28" rx="1" fill="#D96C4F"/><rect class="patch-vu" style="animation-delay:0.69s" x="113" y="152" width="5" height="16" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:0.92s" x="134" y="138" width="5" height="30" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:1.15s" x="155" y="148" width="5" height="20" rx="1" fill="#D96C4F"/><rect class="patch-vu" style="animation-delay:1.38s" x="176" y="142" width="5" height="26" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:1.61s" x="197" y="154" width="5" height="14" rx="1" fill="#C9A227"/><rect class="patch-vu" style="animation-delay:1.84s" x="218" y="134" width="5" height="34" rx="1" fill="#D96C4F"/>
-      <text x="146" y="222" text-anchor="middle" class="patch-label" font-size="52" font-weight="800" fill="#E9E5D8">08</text><text x="146" y="246" text-anchor="middle" class="patch-mono" font-size="8" letter-spacing="1.8" fill="#D96C4F">CHANNELS PATCHED</text><text x="50" y="280" class="patch-label" font-size="9" fill="#8E97A3">LIFCC</text>
-      <text x="309" y="40" class="patch-mono" font-size="10" letter-spacing="2" fill="#C9A227">PATCH BAY / CHANNEL MAP</text><text x="1146" y="40" text-anchor="end" class="patch-mono" font-size="8" letter-spacing="1.4" fill="#8E97A3">AI AGENT INFRASTRUCTURE</text><path d="M309 52H1146" stroke="#323C48"/><path d="M727 61V303" stroke="#323C48"/>
+  </style><rect width="1200" height="330" fill="#090B0F"/><rect x="14" y="14" width="1172" height="302" fill="#10151C" stroke="#2B3543"/><rect x="14" y="14" width="1172" height="302" fill="url(#patch-grid)"/>
+      <rect x="29" y="29" width="235" height="272" fill="#161C26" fill-opacity=".66" stroke="#2B3543"/><text x="50" y="54" class="patch-mono" font-size="8" letter-spacing="2.1" fill="#F2B23E">CHANNEL STRIP</text><text x="50" y="90" class="patch-label" font-size="20" font-weight="800" fill="#F2EFE3">Cable routing</text>
+      <rect class="patch-vu" style="animation-delay:0.00s" x="50" y="134" width="5" height="34" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:0.23s" x="71" y="146" width="5" height="22" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:0.46s" x="92" y="140" width="5" height="28" rx="1" fill="#F26A3D"/><rect class="patch-vu" style="animation-delay:0.69s" x="113" y="152" width="5" height="16" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:0.92s" x="134" y="138" width="5" height="30" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:1.15s" x="155" y="148" width="5" height="20" rx="1" fill="#F26A3D"/><rect class="patch-vu" style="animation-delay:1.38s" x="176" y="142" width="5" height="26" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:1.61s" x="197" y="154" width="5" height="14" rx="1" fill="#F2B23E"/><rect class="patch-vu" style="animation-delay:1.84s" x="218" y="134" width="5" height="34" rx="1" fill="#F26A3D"/>
+      <text x="146" y="222" text-anchor="middle" class="patch-label" font-size="52" font-weight="800" fill="#F2EFE3">08</text><text x="146" y="246" text-anchor="middle" class="patch-mono" font-size="8" letter-spacing="1.8" fill="#F26A3D">CHANNELS PATCHED</text><text x="50" y="280" class="patch-label" font-size="9" fill="#9BA7B5">LIFCC</text>
+      <text x="309" y="40" class="patch-mono" font-size="10" letter-spacing="2" fill="#F2B23E">PATCH BAY / CHANNEL MAP</text><text x="1146" y="40" text-anchor="end" class="patch-mono" font-size="8" letter-spacing="1.4" fill="#9BA7B5">AI AGENT INFRASTRUCTURE</text><path d="M309 52H1146" stroke="#2B3543"/><path d="M727 61V303" stroke="#2B3543"/>
       <g class="patch-rise" style="animation-delay:0ms">
-        <path d="M290 91C301 91 299 73 308 73" fill="none" stroke="#C9A227"/><g transform="translate(317 73) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="334" y="70" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#C9A227">01 / DIRECT</text><text x="500" y="70" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">sage</text>
-        <text x="334" y="87" class="patch-label" font-size="8.5" fill="#8E97A3">A fast coding agent in pure Rust</text><path d="M334 95H708" stroke="#323C48"/>
+        <path d="M290 91C301 91 299 73 308 73" fill="none" stroke="#F2B23E"/><g transform="translate(317 73) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="334" y="70" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F2B23E">01 / DIRECT</text><text x="500" y="70" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">sage</text>
+        <text x="334" y="87" class="patch-label" font-size="8.5" fill="#9BA7B5">A fast coding agent in pure Rust</text><path d="M334 95H708" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:42ms">
-        <path d="M290 138C301 138 299 120 308 120" fill="none" stroke="#C9A227"/><g transform="translate(317 120) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="334" y="117" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#C9A227">02 / EXTEND</text><text x="500" y="117" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">claude-skill-registry</text>
-        <text x="334" y="134" class="patch-label" font-size="8.5" fill="#8E97A3">Discovery and distribution for agent skills</text><path d="M334 142H708" stroke="#323C48"/>
+        <path d="M290 138C301 138 299 120 308 120" fill="none" stroke="#F2B23E"/><g transform="translate(317 120) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="334" y="117" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F2B23E">02 / EXTEND</text><text x="500" y="117" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">claude-skill-registry</text>
+        <text x="334" y="134" class="patch-label" font-size="8.5" fill="#9BA7B5">Discovery and distribution for agent skills</text><path d="M334 142H708" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:84ms">
-        <path d="M290 185C301 185 299 167 308 167" fill="none" stroke="#C9A227"/><g transform="translate(317 167) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="334" y="164" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#C9A227">03 / TRUST</text><text x="500" y="164" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">vibeguard</text>
-        <text x="334" y="181" class="patch-label" font-size="8.5" fill="#8E97A3">Rules and guards against unverified changes</text><path d="M334 189H708" stroke="#323C48"/>
+        <path d="M290 185C301 185 299 167 308 167" fill="none" stroke="#F2B23E"/><g transform="translate(317 167) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="334" y="164" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F2B23E">03 / TRUST</text><text x="500" y="164" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">vibeguard</text>
+        <text x="334" y="181" class="patch-label" font-size="8.5" fill="#9BA7B5">Rules and guards against unverified changes</text><path d="M334 189H708" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:126ms">
-        <path d="M290 232C301 232 299 214 308 214" fill="none" stroke="#C9A227"/><g transform="translate(317 214) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="334" y="211" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#C9A227">04 / REMEMBER</text><text x="500" y="211" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">remem</text>
-        <text x="334" y="228" class="patch-label" font-size="8.5" fill="#8E97A3">Local-first auditable agent memory</text><path d="M334 236H708" stroke="#323C48"/>
+        <path d="M290 232C301 232 299 214 308 214" fill="none" stroke="#F2B23E"/><g transform="translate(317 214) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="334" y="211" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F2B23E">04 / REMEMBER</text><text x="500" y="211" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">remem</text>
+        <text x="334" y="228" class="patch-label" font-size="8.5" fill="#9BA7B5">Local-first auditable agent memory</text><path d="M334 236H708" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:168ms">
-        <path d="M290 279C301 279 299 261 308 261" fill="none" stroke="#D96C4F"/><g transform="translate(317 261) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="334" y="258" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#D96C4F">05 / ORCHESTRATE</text><text x="500" y="258" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">harness</text>
-        <text x="334" y="275" class="patch-label" font-size="8.5" fill="#8E97A3">Governed fleets of parallel coding agents</text><path d="M334 283H708" stroke="#323C48"/>
+        <path d="M290 279C301 279 299 261 308 261" fill="none" stroke="#F26A3D"/><g transform="translate(317 261) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="334" y="258" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F26A3D">05 / ORCHESTRATE</text><text x="500" y="258" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">harness</text>
+        <text x="334" y="275" class="patch-label" font-size="8.5" fill="#9BA7B5">Governed fleets of parallel coding agents</text><path d="M334 283H708" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:210ms">
-        <path d="M728 91C739 91 737 73 746 73" fill="none" stroke="#D96C4F"/><g transform="translate(755 73) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="772" y="70" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#D96C4F">06 / ROUTE</text><text x="938" y="70" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">litellm-rs</text>
-        <text x="772" y="87" class="patch-label" font-size="8.5" fill="#8E97A3">One high-performance gateway for 100+ LLM APIs</text><path d="M772 95H1146" stroke="#323C48"/>
+        <path d="M728 91C739 91 737 73 746 73" fill="none" stroke="#F26A3D"/><g transform="translate(755 73) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="772" y="70" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F26A3D">06 / ROUTE</text><text x="938" y="70" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">litellm-rs</text>
+        <text x="772" y="87" class="patch-label" font-size="8.5" fill="#9BA7B5">One high-performance gateway for 100+ LLM APIs</text><path d="M772 95H1146" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:252ms">
-        <path d="M728 138C739 138 737 120 746 120" fill="none" stroke="#D96C4F"/><g transform="translate(755 120) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="772" y="117" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#D96C4F">07 / GOVERN</text><text x="938" y="117" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">specrail</text>
-        <text x="772" y="134" class="patch-label" font-size="8.5" fill="#8E97A3">Spec-first repository workflow rails</text><path d="M772 142H1146" stroke="#323C48"/>
+        <path d="M728 138C739 138 737 120 746 120" fill="none" stroke="#F26A3D"/><g transform="translate(755 120) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="772" y="117" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F26A3D">07 / GOVERN</text><text x="938" y="117" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">specrail</text>
+        <text x="772" y="134" class="patch-label" font-size="8.5" fill="#9BA7B5">Spec-first repository workflow rails</text><path d="M772 142H1146" stroke="#2B3543"/>
       </g><g class="patch-rise" style="animation-delay:294ms">
-        <path d="M728 185C739 185 737 167 746 167" fill="none" stroke="#D96C4F"/><g transform="translate(755 167) scale(.72)"><use href="#patch-jack"/></g>
-        <text x="772" y="164" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#D96C4F">08 / KEEP</text><text x="938" y="164" class="patch-label" font-size="11" font-weight="800" fill="#E9E5D8">keepline</text>
-        <text x="772" y="181" class="patch-label" font-size="8.5" fill="#8E97A3">Monitor and recover long-running agent work</text><path d="M772 189H1146" stroke="#323C48"/>
+        <path d="M728 185C739 185 737 167 746 167" fill="none" stroke="#F26A3D"/><g transform="translate(755 167) scale(.72)"><use href="#patch-jack"/></g>
+        <text x="772" y="164" class="patch-mono" font-size="7.5" letter-spacing="1.3" fill="#F26A3D">08 / KEEP</text><text x="938" y="164" class="patch-label" font-size="11" font-weight="800" fill="#F2EFE3">keepline</text>
+        <text x="772" y="181" class="patch-label" font-size="8.5" fill="#9BA7B5">Monitor and recover long-running agent work</text><path d="M772 189H1146" stroke="#2B3543"/>
       </g><circle cx="1129" cy="293" r="3" fill="#00A7D1"/><circle cx="1141" cy="293" r="3" fill="#E84A8A"/>
     </svg>
