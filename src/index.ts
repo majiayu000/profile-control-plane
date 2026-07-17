@@ -36,4 +36,7 @@ export { MonolithRenderer } from "./themes/monolith/monolith.js";
 export { InterlaceRenderer } from "./themes/interlace/interlace.js";
 export { CipherPrintRenderer } from "./themes/cipher-print/cipher-print.js";
 export { FieldSpecimenRenderer } from "./themes/field-specimen/field-specimen.js";
+export { PatchbayRenderer } from "./themes/patchbay/patchbay.js";
+export { CartographRenderer } from "./themes/cartograph/cartograph.js";
+export { FoundryRenderer } from "./themes/foundry/foundry.js";
 export { THEME_PRESETS, getThemeDefinition } from "./themes/registry.js";

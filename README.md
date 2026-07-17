@@ -14,12 +14,12 @@ Compile a GitHub identity into an animated, dark/light, self-hosted profile READ
 
 Most profile generators render a banner or assemble remote widgets. Profile Control Plane turns your
 repositories into a coherent visual system: a hero, a project map, flagship work, and an expandable module
-registry—all generated from one reviewed YAML file and one of thirteen distinct templates.
+registry—all generated from one reviewed YAML file and one of sixteen distinct templates.
 
 ## What you get
 
 - One declarative `profile.yaml` as the authoring source of truth.
-- Thirteen templates, each producing four SVGs with native dark/light variants and reduced-motion support.
+- Sixteen templates, each producing four SVGs with native dark/light variants and reduced-motion support.
 - A generated GitHub-safe `README.md` with escaped metadata and optional star badges.
 - `init`, `build`, `preview`, and `check` commands with typed, fail-closed errors.
 - A bundled [`design-github-profile`](skills/design-github-profile/SKILL.md) agent skill for evidence-backed
@@ -275,6 +275,63 @@ The default Control Plane hero is shown at the top of this README.
 
 </details>
 
+### Patch Bay (`patchbay`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/patchbay-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/patchbay-output/assets/hero-light.svg">
+  <img alt="Patch Bay template" src="examples/lifcc/patchbay-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the cable routing</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/patchbay-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/patchbay-output/assets/closed-loop-light.svg">
+  <img alt="Patch Bay cable routing" src="examples/lifcc/patchbay-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Cartograph (`cartograph`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/cartograph-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/cartograph-output/assets/hero-light.svg">
+  <img alt="Cartograph template" src="examples/lifcc/cartograph-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the contour survey</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/cartograph-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/cartograph-output/assets/closed-loop-light.svg">
+  <img alt="Cartograph contour survey" src="examples/lifcc/cartograph-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
+### Foundry (`foundry`)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/foundry-output/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/foundry-output/assets/hero-light.svg">
+  <img alt="Foundry template" src="examples/lifcc/foundry-output/assets/hero-light.svg" width="100%">
+</picture>
+
+<details>
+<summary>View the casting floor</summary>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/foundry-output/assets/closed-loop-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/foundry-output/assets/closed-loop-light.svg">
+  <img alt="Foundry casting floor" src="examples/lifcc/foundry-output/assets/closed-loop-light.svg" width="100%">
+</picture>
+
+</details>
+
 ## Quick start
 
 The package is currently distributed from GitHub. Build and link the CLI locally:
@@ -362,9 +419,12 @@ See the curated [lifcc configuration](examples/lifcc/profile.yaml) and its [gene
 | `interlace`      | Work connected across disciplines or layers       | Woven bands and a project loom          |
 | `cipher-print`   | Meticulous systems and high-craft maintainers     | Guilloché engraving and edition marks   |
 | `field-specimen` | Exploratory work and branching research           | Natural-history plate and taxonomy      |
+| `patchbay`       | Tools wired into one routed signal path           | Modular patch panel and animated cables |
+| `cartograph`     | Broad work charted across domains and terrain     | Topographic survey and contour index    |
+| `foundry`        | Hardened tools forged, cast, and shipped          | Casting floor with molten pour          |
 
 The bundled agent skill can recommend a preset from repository evidence. The user remains the decision
-maker: `profilectl preview --all-templates` renders the same configuration in all thirteen directions before
+maker: `profilectl preview --all-templates` renders the same configuration in all sixteen directions before
 anything is built or staged.
 
 ## Commands

@@ -82,8 +82,9 @@ rendering after the user has reviewed the semantic positioning.
      `constellation` for a broad body of work with a few standout stars, `metro` for many repositories that
      organize into clear language or domain lines, `monolith` for a focused body of work that benefits from
      assertive typographic hierarchy, `interlace` for work connected across disciplines or layers,
-     `cipher-print` for meticulous high-craft systems, and `field-specimen` for exploratory or branching work
-     (see the template table in
+     `cipher-print` for meticulous high-craft systems, `field-specimen` for exploratory or branching work,
+     `patchbay` for tools wired into one routed signal path, `cartograph` for work charted across domains
+     or terrain, and `foundry` for hardened tools that are cast and shipped (see the template table in
      `references/visual-and-content-guidelines.md`). Do not treat these as identity labels; repository
      evidence and user preference take precedence.
 

@@ -2,15 +2,18 @@ import { ProfileError } from "../core/errors.js";
 import type { ThemeDefinition, ThemePreset } from "../core/types.js";
 import { BentoGridRenderer } from "./bento-grid/bento-grid.js";
 import { BlueprintRenderer } from "./blueprint/blueprint.js";
+import { CartographRenderer } from "./cartograph/cartograph.js";
 import { CipherPrintRenderer } from "./cipher-print/cipher-print.js";
 import { CommandDeckRenderer } from "./command-deck/command-deck.js";
 import { ConstellationRenderer } from "./constellation/constellation.js";
 import { ControlPlaneRenderer } from "./control-plane/control-plane.js";
 import { EditorialRenderer } from "./editorial/editorial.js";
 import { FieldSpecimenRenderer } from "./field-specimen/field-specimen.js";
+import { FoundryRenderer } from "./foundry/foundry.js";
 import { InterlaceRenderer } from "./interlace/interlace.js";
 import { MetroRenderer } from "./metro/metro.js";
 import { MonolithRenderer } from "./monolith/monolith.js";
+import { PatchbayRenderer } from "./patchbay/patchbay.js";
 import { SignalGridRenderer } from "./signal-grid/signal-grid.js";
 import { TerminalRenderer } from "./terminal/terminal.js";
 
@@ -28,6 +31,9 @@ export const THEME_PRESETS = [
   "interlace",
   "cipher-print",
   "field-specimen",
+  "patchbay",
+  "cartograph",
+  "foundry",
 ] as const satisfies readonly ThemePreset[];
 
 const themes: Record<ThemePreset, ThemeDefinition> = {
@@ -217,6 +223,51 @@ const themes: Record<ThemePreset, ThemeDefinition> = {
       emptyModules: "No additional specimens cataloged.",
       heroAlt: (config) => `${config.identity.name} field specimen plate`,
       overviewAlt: (config) => `${config.identity.name} classification plate`,
+    },
+  },
+  patchbay: {
+    preset: "patchbay",
+    label: "Patch Bay",
+    description:
+      "A modular patch panel for tools wired into one routed signal path.",
+    renderer: new PatchbayRenderer(),
+    copy: {
+      flagshipHeading: "Patched channels",
+      overviewHeading: "Cable routing",
+      modulesHeading: "Jack field",
+      emptyModules: "No spare jacks wired.",
+      heroAlt: (config) => `${config.identity.name} patch bay`,
+      overviewAlt: (config) => `${config.identity.name} cable routing`,
+    },
+  },
+  cartograph: {
+    preset: "cartograph",
+    label: "Cartograph",
+    description:
+      "A topographic survey for work charted across domains and terrain.",
+    renderer: new CartographRenderer(),
+    copy: {
+      flagshipHeading: "Surveyed summits",
+      overviewHeading: "Contour survey",
+      modulesHeading: "Gazetteer",
+      emptyModules: "No gazetteer entries.",
+      heroAlt: (config) => `${config.identity.name} survey map`,
+      overviewAlt: (config) => `${config.identity.name} contour survey`,
+    },
+  },
+  foundry: {
+    preset: "foundry",
+    label: "Foundry",
+    description:
+      "A casting floor for hardened tools that are forged and shipped.",
+    renderer: new FoundryRenderer(),
+    copy: {
+      flagshipHeading: "Master casts",
+      overviewHeading: "Casting floor",
+      modulesHeading: "Alloy stock",
+      emptyModules: "No alloy in stock.",
+      heroAlt: (config) => `${config.identity.name} foundry floor`,
+      overviewAlt: (config) => `${config.identity.name} casting floor`,
     },
   },
 };

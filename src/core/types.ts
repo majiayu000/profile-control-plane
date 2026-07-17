@@ -13,7 +13,10 @@ export type ThemePreset =
   | "monolith"
   | "interlace"
   | "cipher-print"
-  | "field-specimen";
+  | "field-specimen"
+  | "patchbay"
+  | "cartograph"
+  | "foundry";
 
 export interface ProfileLink {
   readonly label: string;

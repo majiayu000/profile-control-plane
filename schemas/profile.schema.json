@@ -57,7 +57,10 @@
             "monolith",
             "interlace",
             "cipher-print",
-            "field-specimen"
+            "field-specimen",
+            "patchbay",
+            "cartograph",
+            "foundry"
           ]
         },
         "primary": { "$ref": "#/definitions/color" },

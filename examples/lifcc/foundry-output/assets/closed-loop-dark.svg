@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="lifcc alloy ledger" data-mode="dark">
+      <defs>
+    <pattern id="forge-grit" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="6" cy="8" r="1" fill="#463B31" fill-opacity=".3"/><circle cx="24" cy="26" r=".8" fill="#463B31" fill-opacity=".22"/></pattern>
+    <filter id="forge-heat" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="7"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .03 0"/></filter>
+    <g id="forge-ingot"><path d="M-11 6H11L8-6H-8Z" fill="none" stroke="#7E8794" stroke-width="1.6"/><path d="M-6 6L-4-6M4-6L6 6" stroke="#7E8794" stroke-opacity=".55"/></g>
+  </defs><style>
+    .forge-serif{font-family:Iowan Old Style,Palatino Linotype,Book Antiqua,Georgia,serif}.forge-label{font-family:Avenir Next Condensed,Arial Narrow,sans-serif}.forge-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .forge-pour{stroke-dasharray:8 12;animation:forge-pour 5.5s linear infinite}.forge-glow{animation:forge-glow 2.8s ease-in-out infinite}.forge-spark{transform-box:fill-box;transform-origin:center;animation:forge-spark 3.1s ease-in-out infinite}.forge-rise{animation:forge-rise .62s cubic-bezier(.2,.75,.2,1) both}
+    @keyframes forge-pour{to{stroke-dashoffset:-140}}@keyframes forge-glow{50%{opacity:.45}}@keyframes forge-spark{0%,100%{transform:translateY(0);opacity:.9}55%{transform:translateY(-5px);opacity:.35}}@keyframes forge-rise{from{opacity:.16;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.forge-pour,.forge-glow,.forge-spark,.forge-rise{animation:none}}
+  </style><rect width="1200" height="330" fill="#120F0D"/><rect x="14" y="14" width="1172" height="302" fill="#1A1512" stroke="#463B31"/><rect x="14" y="14" width="1172" height="302" fill="url(#forge-grit)"/><rect x="14" y="14" width="1172" height="302" filter="url(#forge-heat)" opacity=".4" pointer-events="none"/>
+      <rect x="29" y="29" width="235" height="272" fill="#231C17" fill-opacity=".64" stroke="#463B31"/><text x="50" y="54" class="forge-mono" font-size="8" letter-spacing="2.1" fill="#E8762B">CRUCIBLE</text><text x="50" y="91" class="forge-serif" font-size="21" font-style="italic" fill="#F0E7D7">Casting floor</text>
+      <path class="forge-pour" d="M146 104V130" fill="none" stroke="#E8762B" stroke-width="2.5"/><circle class="forge-spark" cx="132" cy="120" r="1.7" fill="#E8762B"/><circle class="forge-spark" style="animation-delay:1.1s" cx="160" cy="116" r="1.5" fill="#E8762B"/><use href="#forge-ingot" transform="translate(146 150) scale(1.6)"/><circle class="forge-glow" cx="146" cy="144" r="4" fill="#E8762B"/>
+      <text x="146" y="222" text-anchor="middle" class="forge-serif" font-size="52" font-weight="700" fill="#F0E7D7">08</text><text x="146" y="246" text-anchor="middle" class="forge-mono" font-size="8" letter-spacing="1.8" fill="#E8762B">ALLOYS SMELTED</text><text x="50" y="280" class="forge-label" font-size="9" fill="#A39888">LIFCC</text>
+      <text x="309" y="40" class="forge-mono" font-size="10" letter-spacing="2" fill="#E8762B">FOUNDRY / ALLOY LEDGER</text><text x="1146" y="40" text-anchor="end" class="forge-mono" font-size="8" letter-spacing="1.4" fill="#A39888">AI AGENT INFRASTRUCTURE</text><path d="M309 52H1146" stroke="#463B31"/><path d="M727 61V303" stroke="#463B31"/>
+      <g class="forge-rise" style="animation-delay:0ms">
+        <path d="M290 91C301 91 299 73 306 73" fill="none" stroke="#E8762B"/><g transform="translate(317 73) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="334" y="70" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#E8762B">01 / DIRECT</text><text x="500" y="70" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">sage</text>
+        <text x="334" y="87" class="forge-label" font-size="8.5" fill="#A39888">A fast coding agent in pure Rust</text><path d="M334 95H708" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:42ms">
+        <path d="M290 138C301 138 299 120 306 120" fill="none" stroke="#E8762B"/><g transform="translate(317 120) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="334" y="117" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#E8762B">02 / EXTEND</text><text x="500" y="117" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">claude-skill-registry</text>
+        <text x="334" y="134" class="forge-label" font-size="8.5" fill="#A39888">Discovery and distribution for agent skills</text><path d="M334 142H708" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:84ms">
+        <path d="M290 185C301 185 299 167 306 167" fill="none" stroke="#E8762B"/><g transform="translate(317 167) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="334" y="164" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#E8762B">03 / TRUST</text><text x="500" y="164" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">vibeguard</text>
+        <text x="334" y="181" class="forge-label" font-size="8.5" fill="#A39888">Rules and guards against unverified changes</text><path d="M334 189H708" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:126ms">
+        <path d="M290 232C301 232 299 214 306 214" fill="none" stroke="#E8762B"/><g transform="translate(317 214) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="334" y="211" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#E8762B">04 / REMEMBER</text><text x="500" y="211" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">remem</text>
+        <text x="334" y="228" class="forge-label" font-size="8.5" fill="#A39888">Local-first auditable agent memory</text><path d="M334 236H708" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:168ms">
+        <path d="M290 279C301 279 299 261 306 261" fill="none" stroke="#5E97B0"/><g transform="translate(317 261) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="334" y="258" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#5E97B0">05 / ORCHESTRATE</text><text x="500" y="258" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">harness</text>
+        <text x="334" y="275" class="forge-label" font-size="8.5" fill="#A39888">Governed fleets of parallel coding agents</text><path d="M334 283H708" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:210ms">
+        <path d="M728 91C739 91 737 73 744 73" fill="none" stroke="#5E97B0"/><g transform="translate(755 73) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="772" y="70" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#5E97B0">06 / ROUTE</text><text x="938" y="70" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">litellm-rs</text>
+        <text x="772" y="87" class="forge-label" font-size="8.5" fill="#A39888">One high-performance gateway for 100+ LLM APIs</text><path d="M772 95H1146" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:252ms">
+        <path d="M728 138C739 138 737 120 744 120" fill="none" stroke="#5E97B0"/><g transform="translate(755 120) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="772" y="117" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#5E97B0">07 / GOVERN</text><text x="938" y="117" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">specrail</text>
+        <text x="772" y="134" class="forge-label" font-size="8.5" fill="#A39888">Spec-first repository workflow rails</text><path d="M772 142H1146" stroke="#463B31"/>
+      </g><g class="forge-rise" style="animation-delay:294ms">
+        <path d="M728 185C739 185 737 167 744 167" fill="none" stroke="#5E97B0"/><g transform="translate(755 167) scale(.75)"><use href="#forge-ingot"/></g>
+        <text x="772" y="164" class="forge-mono" font-size="7.5" letter-spacing="1.3" fill="#5E97B0">08 / KEEP</text><text x="938" y="164" class="forge-serif" font-size="11" font-style="italic" fill="#F0E7D7">keepline</text>
+        <text x="772" y="181" class="forge-label" font-size="8.5" fill="#A39888">Monitor and recover long-running agent work</text><path d="M772 189H1146" stroke="#463B31"/>
+      </g><circle cx="1129" cy="293" r="3" fill="#00A7D1"/><circle cx="1141" cy="293" r="3" fill="#E84A8A"/>
+    </svg>

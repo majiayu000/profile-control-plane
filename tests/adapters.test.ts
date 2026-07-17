@@ -198,6 +198,9 @@ describe("preview server", () => {
     );
     expect(gallery).toContain("/editorial/assets/hero-dark.svg");
     expect(gallery).toContain("/field-specimen/assets/hero-dark.svg");
+    expect(gallery).toContain("/patchbay/assets/hero-dark.svg");
+    expect(gallery).toContain("/cartograph/assets/hero-dark.svg");
+    expect(gallery).toContain("/foundry/assets/hero-dark.svg");
     expect(await (await fetch(`${preview.url}/light`)).text()).toContain(
       "hero-light.svg",
     );

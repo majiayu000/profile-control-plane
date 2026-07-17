@@ -56,6 +56,9 @@ describe("profile compiler", () => {
       ["interlace", "## Anchor threads"],
       ["cipher-print", "## Registered works"],
       ["field-specimen", "## Reference specimens"],
+      ["patchbay", "## Patched channels"],
+      ["cartograph", "## Surveyed summits"],
+      ["foundry", "## Master casts"],
     ]);
     const heroes = THEME_PRESETS.map((preset) => {
       const output = compileProfile({
@@ -145,6 +148,12 @@ describe("profile compiler", () => {
         "field-specimen",
         ["FIELD SPECIMEN / SYSTEMATIC INDEX", "CLASSIFICATION KEY"],
       ],
+      ["patchbay", ["PATCH BAY / SIGNAL ROUTING", "PATCH BAY / CHANNEL MAP"]],
+      [
+        "cartograph",
+        ["CARTOGRAPH / FIELD SURVEY", "CARTOGRAPH / CONTOUR INDEX"],
+      ],
+      ["foundry", ["FOUNDRY / CASTING FLOOR", "FOUNDRY / ALLOY LEDGER"]],
     ]);
     for (const [preset, probes] of signatures) {
       const output = compileProfile({
@@ -288,6 +297,9 @@ describe("escaping and palette utilities", () => {
     expect(publicApi.InterlaceRenderer).toBeTypeOf("function");
     expect(publicApi.CipherPrintRenderer).toBeTypeOf("function");
     expect(publicApi.FieldSpecimenRenderer).toBeTypeOf("function");
+    expect(publicApi.PatchbayRenderer).toBeTypeOf("function");
+    expect(publicApi.CartographRenderer).toBeTypeOf("function");
+    expect(publicApi.FoundryRenderer).toBeTypeOf("function");
     expect(publicApi.THEME_PRESETS).toEqual(THEME_PRESETS);
   });
 });

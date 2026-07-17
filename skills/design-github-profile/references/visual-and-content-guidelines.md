@@ -58,6 +58,9 @@ typing gimmicks, exhaustive technology lists, or generic enthusiasm.
 | `interlace`      | Projects connect across disciplines, layers, or shared craft | The projects are unrelated independent products |
 | `cipher-print`   | Precision, stewardship, and craft are part of the evidence   | The audience needs a casual or playful tone     |
 | `field-specimen` | Exploratory or branching work benefits from classification   | The work is one linear operational pipeline     |
+| `patchbay`       | Tools and projects wired into one routed signal path         | The projects share no interfaces or flow        |
+| `cartograph`     | The work spans domains that benefit from orientation         | The account is a single focused product         |
+| `foundry`        | Hardened, durable tools are cast and shipped                 | The work is exploratory or unshipped            |
 
 Recommend the strongest evidence fit, then use the all-template preview when another direction remains
 credible. The user's explicit visual preference overrides the recommendation as long as it does not require
