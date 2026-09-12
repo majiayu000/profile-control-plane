@@ -150,6 +150,139 @@ describe("compiled profile checker", () => {
       }),
     ).rejects.toMatchObject({ code: "OUTPUT_INVALID" });
   });
+
+  it("rejects private and metadata link hosts before calling fetch", async () => {
+    const fetchImpl = vi.fn<typeof fetch>();
+    const config = {
+      ...validConfig,
+      links: [
+        { label: "Loopback", url: "http://127.0.0.1/admin" },
+        { label: "Metadata", url: "http://169.254.169.254/latest/meta-data/" },
+        { label: "RFC1918", url: "http://192.168.0.10/" },
+      ],
+      flagships: [],
+    };
+
+    await expect(
+      checkCompiledProfile(config, compileProfile(config), {
+        online: true,
+        fetchImpl,
+      }),
+    ).rejects.toMatchObject({
+      code: "OUTPUT_INVALID",
+      message: "online link checks failed",
+    });
+    expect(fetchImpl).toHaveBeenCalledTimes(0);
+  });
+
+  it("re-validates redirect targets and refuses private Location hosts", async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response("", {
+        status: 302,
+        headers: { Location: "http://169.254.169.254/latest/meta-data/" },
+      }),
+    );
+    const config = {
+      ...validConfig,
+      links: [{ label: "Trap", url: "https://example.com/redirect" }],
+      flagships: [],
+    };
+
+    await expect(
+      checkCompiledProfile(config, compileProfile(config), {
+        online: true,
+        fetchImpl,
+      }),
+    ).rejects.toMatchObject({
+      code: "OUTPUT_INVALID",
+      message: "online link checks failed",
+    });
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(fetchImpl.mock.calls[0]?.[1]).toMatchObject({
+      method: "HEAD",
+      redirect: "manual",
+    });
+  });
+
+  it("follows public redirects after re-validating each Location", async () => {
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        new Response("", {
+          status: 301,
+          headers: { Location: "https://example.com/final" },
+        }),
+      )
+      .mockResolvedValueOnce(new Response("", { status: 200 }));
+    const config = {
+      ...validConfig,
+      links: [{ label: "Site", url: "https://example.com/start" }],
+      flagships: [],
+    };
+
+    await expect(
+      checkCompiledProfile(config, compileProfile(config), {
+        online: true,
+        fetchImpl,
+      }),
+    ).resolves.toEqual({ fileCount: 5, onlineUrlCount: 1 });
+    expect(fetchImpl).toHaveBeenCalledTimes(2);
+    expect(String(fetchImpl.mock.calls[1]?.[0])).toBe(
+      "https://example.com/final",
+    );
+  });
+
+  it("fails redirects that omit Location, use an invalid Location, or exceed the hop limit", async () => {
+    const config = {
+      ...validConfig,
+      links: [{ label: "Site", url: "https://example.com/start" }],
+      flagships: [],
+    };
+    const profile = compileProfile(config);
+
+    await expect(
+      checkCompiledProfile(config, profile, {
+        online: true,
+        fetchImpl: vi.fn().mockResolvedValue(
+          new Response("", {
+            status: 302,
+            headers: {},
+          }),
+        ),
+      }),
+    ).rejects.toMatchObject({ code: "OUTPUT_INVALID" });
+
+    await expect(
+      checkCompiledProfile(config, profile, {
+        online: true,
+        fetchImpl: vi.fn().mockResolvedValue(
+          new Response("", {
+            status: 302,
+            headers: { Location: "https://exa mple.com" },
+          }),
+        ),
+      }),
+    ).rejects.toMatchObject({ code: "OUTPUT_INVALID" });
+
+    const looping = vi.fn<typeof fetch>().mockImplementation(async (input) => {
+      const href = String(input);
+      return new Response("", {
+        status: 302,
+        headers: {
+          Location: href.includes("b")
+            ? "https://example.com/a"
+            : "https://example.com/b",
+        },
+      });
+    });
+    await expect(
+      checkCompiledProfile(config, profile, {
+        online: true,
+        fetchImpl: looping,
+      }),
+    ).rejects.toMatchObject({ code: "OUTPUT_INVALID" });
+    expect(looping.mock.calls.length).toBeGreaterThan(5);
+  });
 });
 
 describe("preview server", () => {

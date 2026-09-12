@@ -4,6 +4,7 @@ import type {
   GitHubSnapshot,
   ProfileConfig,
 } from "../core/types.js";
+import { isPublicHttpUrl } from "../core/url-policy.js";
 
 function repositoryRank(
   left: GitHubRepository,
@@ -18,7 +19,11 @@ function repositoryRank(
 function normalizeWebsite(value: string): string | undefined {
   const trimmed = value.trim();
   if (!trimmed) return undefined;
-  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  const candidate = /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+  // Omit attacker-controlled private/metadata hosts from starter links.
+  return isPublicHttpUrl(candidate) ? candidate : undefined;
 }
 
 function truncate(value: string, maximumLength: number): string {

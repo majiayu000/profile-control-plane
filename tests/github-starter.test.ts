@@ -179,4 +179,24 @@ describe("starter configuration", () => {
       /no eligible public source repositories/,
     );
   });
+
+  it("omits attacker-controlled private or metadata blog hosts", () => {
+    for (const blog of [
+      "http://127.0.0.1",
+      "127.0.0.1",
+      "http://169.254.169.254/latest/meta-data/",
+      "169.254.169.254",
+      "http://192.168.1.1",
+      "localhost",
+      "http://10.0.0.5",
+    ]) {
+      const config = createStarterConfig({
+        profile: { ...githubProfile, blog },
+        repositories: [repository()],
+      });
+      expect(config.links).toEqual([
+        { label: "GitHub", url: "https://github.com/octocat" },
+      ]);
+    }
+  });
 });

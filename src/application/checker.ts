@@ -1,7 +1,9 @@
 import { ProfileError } from "../core/errors.js";
 import type { CompiledProfile, ProfileConfig } from "../core/types.js";
+import { assertPublicHttpUrl } from "../core/url-policy.js";
 
 const ONLINE_REQUEST_TIMEOUT_MS = 10_000;
+const MAX_REDIRECTS = 5;
 
 export interface CheckResult {
   readonly fileCount: number;
@@ -50,6 +52,44 @@ function onlineUrls(config: ProfileConfig): readonly string[] {
   ].filter((url) => url.startsWith("http"));
 }
 
+function isRedirectStatus(status: number): boolean {
+  return status >= 300 && status < 400;
+}
+
+async function fetchHeadWithRedirectPolicy(
+  url: string,
+  fetchImpl: typeof fetch,
+  signal: AbortSignal,
+): Promise<Response> {
+  let current = assertPublicHttpUrl(url);
+
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop += 1) {
+    const response = await fetchImpl(current, {
+      method: "HEAD",
+      redirect: "manual",
+      signal,
+    });
+
+    if (!isRedirectStatus(response.status)) return response;
+
+    const location = response.headers.get("location");
+    if (!location) {
+      throw new Error(`${current} redirected without a Location header`);
+    }
+
+    let next: URL;
+    try {
+      next = new URL(location, current);
+    } catch {
+      throw new Error(`${current} redirected to an invalid Location`);
+    }
+
+    current = assertPublicHttpUrl(next.href);
+  }
+
+  throw new Error(`${url} exceeded ${MAX_REDIRECTS} redirects`);
+}
+
 async function assertOnlineUrls(
   urls: readonly string[],
   fetchImpl: typeof fetch,
@@ -59,11 +99,13 @@ async function assertOnlineUrls(
   await Promise.all(
     urls.map(async (url) => {
       try {
-        const response = await fetchImpl(url, {
-          method: "HEAD",
-          redirect: "follow",
-          signal: AbortSignal.timeout(timeoutMs),
-        });
+        // Reject non-public hosts before any network I/O.
+        assertPublicHttpUrl(url);
+        const response = await fetchHeadWithRedirectPolicy(
+          url,
+          fetchImpl,
+          AbortSignal.timeout(timeoutMs),
+        );
         if (!response.ok)
           failures.push(`${url} returned HTTP ${response.status}`);
       } catch (error) {
