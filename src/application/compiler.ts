@@ -51,7 +51,19 @@ const BLOCKED_ELEMENTS = new Set([
   "animatemotion",
 ]);
 
-const HREF_SCAN_ELEMENTS = new Set(["image", "use", "a"]);
+/** Presentation attributes that commonly embed CSS url(...) references. */
+const URL_PRESENTATION_ATTRS = new Set([
+  "fill",
+  "stroke",
+  "filter",
+  "clip-path",
+  "mask",
+  "marker",
+  "marker-start",
+  "marker-mid",
+  "marker-end",
+  "cursor",
+]);
 
 function elementLocalName(key: string): string {
   const normalized = key.toLowerCase();
@@ -63,6 +75,10 @@ function isHrefAttribute(attrName: string): boolean {
   return attrName === "href" || attrName.endsWith(":href");
 }
 
+function isXmlBaseAttribute(attrName: string): boolean {
+  return attrName === "xml:base" || attrName === "base";
+}
+
 /** Allow fragment refs only; reject schemes, protocol-relative, and path/relative URLs. */
 function isUnsafeHref(value: string): boolean {
   const trimmed = value.trim();
@@ -70,13 +86,25 @@ function isUnsafeHref(value: string): boolean {
   return !trimmed.startsWith("#");
 }
 
-function containsActiveContent(
-  value: unknown,
-  parentLocalName?: string,
-): boolean {
+/** Extract url(...) targets from CSS/presentation attribute values. */
+function extractCssUrls(value: string): string[] {
+  const urls: string[] = [];
+  const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)\s]+))\s*\)/gi;
+  for (const match of value.matchAll(pattern)) {
+    const target = (match[2] ?? match[3] ?? "").trim();
+    if (target.length > 0) urls.push(target);
+  }
+  return urls;
+}
+
+function hasUnsafeCssUrls(value: string): boolean {
+  return extractCssUrls(value).some(isUnsafeHref);
+}
+
+function containsActiveContent(value: unknown): boolean {
   if (value === null || typeof value !== "object") return false;
   if (Array.isArray(value)) {
-    return value.some((item) => containsActiveContent(item, parentLocalName));
+    return value.some((item) => containsActiveContent(item));
   }
   return Object.entries(value as Record<string, unknown>).some(
     ([key, child]) => {
@@ -84,21 +112,21 @@ function containsActiveContent(
       if (normalized.startsWith("@_")) {
         const attrName = normalized.slice(2);
         if (attrName.startsWith("on")) return true;
-        if (typeof child === "string" && /^\s*javascript:/i.test(child))
+        if (typeof child !== "string") return false;
+        if (/^\s*javascript:/i.test(child)) return true;
+        // Any non-empty xml:base rebases fragment hrefs against an attacker-chosen URI.
+        if (isXmlBaseAttribute(attrName) && child.trim().length > 0)
           return true;
-        if (
-          parentLocalName &&
-          HREF_SCAN_ELEMENTS.has(parentLocalName) &&
-          isHrefAttribute(attrName) &&
-          typeof child === "string" &&
-          isUnsafeHref(child)
-        )
+        // Validate href on every element (feImage, pattern, textPath, etc.).
+        if (isHrefAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
+        if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;
         return false;
       }
       const localName = elementLocalName(normalized);
       if (BLOCKED_ELEMENTS.has(localName)) return true;
-      return containsActiveContent(child, localName);
+      return containsActiveContent(child);
     },
   );
 }

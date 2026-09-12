@@ -290,6 +290,11 @@ describe("profile compiler", () => {
       `<svg ${ns}><use href="assets/local.svg"/></svg>`,
       `<svg ${ns}><image href="#safe"><set attributeName="href" to="https://evil.example/pixel"/></image></svg>`,
       `<svg ${ns}><image href="#safe"><animate attributeName="href" values="#safe;https://evil.example/pixel"/></image></svg>`,
+      `<svg ${ns}><filter><feImage href="https://evil.example/pixel"/></filter></svg>`,
+      `<svg ${ns}><pattern href="https://evil.example/pattern.svg"/></svg>`,
+      `<svg ${ns}><rect style="filter:url(https://evil.example/filter.svg#f)"/></svg>`,
+      `<svg ${ns}><rect fill="url(https://evil.example/fill.svg#g)"/></svg>`,
+      `<svg ${ns} xml:base="https://evil.example/remote.svg"><image href="#pixel"/></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -299,7 +304,9 @@ describe("profile compiler", () => {
     expect(() =>
       compileProfile(
         validConfig,
-        renderer(`<svg ${ns}><use href="#icon"/><a href="#section"/></svg>`),
+        renderer(
+          `<svg ${ns}><defs><filter id="f"/><linearGradient id="g"/></defs><use href="#icon"/><a href="#section"/><rect fill="url(#g)" filter="url(#f)" style="mask:url(#m)"/></svg>`,
+        ),
       ),
     ).not.toThrow();
   });
