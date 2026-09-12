@@ -269,6 +269,35 @@ describe("profile compiler", () => {
       ),
     ).toThrow(/unsafe/);
   });
+
+  it("rejects namespaced script, handler, and unsafe image/use href schemes", () => {
+    const renderer = (content: string): ThemeRenderer => ({
+      renderHero: () => content,
+      renderLoop: () => content,
+    });
+    const ns = 'xmlns="http://www.w3.org/2000/svg"';
+    const cases = [
+      `<svg ${ns}><foreignObject width="1" height="1"><xhtml:script xmlns:xhtml="http://www.w3.org/1999/xhtml">alert(1)</xhtml:script></foreignObject></svg>`,
+      `<svg ${ns}><xhtml:script xmlns:xhtml="http://www.w3.org/1999/xhtml">alert(1)</xhtml:script></svg>`,
+      `<svg ${ns}><handler type="application/javascript">alert(1)</handler></svg>`,
+      `<svg ${ns}><image href="data:image/svg+xml,payload"/></svg>`,
+      `<svg ${ns}><use href="https://evil.example/x.svg"/></svg>`,
+      `<svg ${ns}><image xlink:href="javascript:alert(1)"/></svg>`,
+      `<svg ${ns}><a href="https://evil.example/"/></svg>`,
+      `<svg ${ns}><embed src="https://evil.example/x"/></svg>`,
+    ];
+    for (const payload of cases) {
+      expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
+        /unsafe/,
+      );
+    }
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(`<svg ${ns}><use href="#icon"/><a href="#section"/></svg>`),
+      ),
+    ).not.toThrow();
+  });
 });
 
 describe("escaping and palette utilities", () => {
