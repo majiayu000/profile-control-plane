@@ -307,6 +307,15 @@ describe("profile compiler", () => {
       `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:img src="https://evil.example/pixel"/></svg>`,
       `<svg ${ns}><image src="https://evil.example/pixel"/></svg>`,
       `<!DOCTYPE svg [<!ENTITY payload '<script>alert(1)</script>'>]><svg ${ns}>&payload;</svg>`,
+      // SMIL animateColor can rewrite fill/stroke to external url(...) after scan.
+      `<svg ${ns}><rect fill="#fff"><animateColor attributeName="fill" to="url(https://evil.example/fill.svg#g)"/></rect></svg>`,
+      // CSS comments are whitespace: @import/**/"..." must still be rejected.
+      `<svg ${ns}><style>@import/**/"https://evil.example/theme.css";</style></svg>`,
+      // Foreign media poster/src loaders.
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:video poster="https://evil.example/pixel"/></svg>`,
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:video src="https://evil.example/clip.mp4"/></svg>`,
+      // Comment-shaped text inside a PI must not erase a following DOCTYPE.
+      `<?x <!-- ?><!DOCTYPE svg [<!ENTITY payload '<script>alert(1)</script>'>]><!-- --><svg ${ns}>&payload;</svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -328,6 +337,13 @@ describe("profile compiler", () => {
         renderer(
           `<svg ${ns}><!-- generated without <!DOCTYPE html> --><rect width="1" height="1"/></svg>`,
         ),
+      ),
+    ).not.toThrow();
+    // Out-of-range CSS escapes must not throw; harmless values stay accepted.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(`<svg ${ns}><rect style="fill:\\FFFFFF"/></svg>`),
       ),
     ).not.toThrow();
   });

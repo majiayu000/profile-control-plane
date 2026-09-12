@@ -14,11 +14,51 @@ const parser = new XMLParser({
   processEntities: false,
 });
 
+/**
+ * Strip real XML comments without treating comment-shaped text inside
+ * processing instructions or CDATA as comment delimiters.
+ */
+function stripXmlComments(content: string): string {
+  let result = "";
+  let i = 0;
+  while (i < content.length) {
+    if (content.startsWith("<!--", i)) {
+      const end = content.indexOf("-->", i + 4);
+      if (end === -1) break;
+      i = end + 3;
+      continue;
+    }
+    if (content.startsWith("<![CDATA[", i)) {
+      const end = content.indexOf("]]>", i + 9);
+      if (end === -1) {
+        result += content.slice(i);
+        break;
+      }
+      result += content.slice(i, end + 3);
+      i = end + 3;
+      continue;
+    }
+    if (content.startsWith("<?", i)) {
+      const end = content.indexOf("?>", i + 2);
+      if (end === -1) {
+        result += content.slice(i);
+        break;
+      }
+      result += content.slice(i, end + 2);
+      i = end + 2;
+      continue;
+    }
+    result += content[i];
+    i += 1;
+  }
+  return result;
+}
+
 function hasDoctypeOrEntityDeclarations(content: string): boolean {
   // processEntities:false leaves &entity; unexpanded, so consumers that expand
   // DTD entities can reintroduce blocked markup. Reject declarations outright.
-  // Ignore comment text so provenance notes mentioning DOCTYPE stay allowed.
-  const withoutComments = content.replace(/<!--[\s\S]*?-->/g, "");
+  // Ignore real comment text so provenance notes mentioning DOCTYPE stay allowed.
+  const withoutComments = stripXmlComments(content);
   return (
     /<!DOCTYPE\b/i.test(withoutComments) || /<!ENTITY\b/i.test(withoutComments)
   );
@@ -62,9 +102,14 @@ const BLOCKED_ELEMENTS = new Set([
   "object",
   // Foreign XHTML loaders can fetch without href/foreignObject.
   "img",
-  // SMIL can rewrite href after compile-time checks; block mutation elements.
+  "video",
+  "audio",
+  "source",
+  "track",
+  // SMIL can rewrite href/fill/stroke after compile-time checks; block mutation.
   "set",
   "animate",
+  "animatecolor",
   "animatetransform",
   "animatemotion",
 ]);
@@ -97,6 +142,10 @@ function isSrcAttribute(attrName: string): boolean {
   return attrName === "src" || attrName.endsWith(":src");
 }
 
+function isPosterAttribute(attrName: string): boolean {
+  return attrName === "poster" || attrName.endsWith(":poster");
+}
+
 function isXmlBaseAttribute(attrName: string): boolean {
   return attrName === "xml:base" || attrName === "base";
 }
@@ -115,7 +164,15 @@ function decodeCssEscapes(value: string): string {
     (_match, hex: string | undefined, ch: string | undefined) => {
       if (hex !== undefined) {
         const code = Number.parseInt(hex, 16);
-        if (Number.isNaN(code)) return "";
+        // CSS replaces null, surrogates, and out-of-range code points with U+FFFD.
+        if (
+          Number.isNaN(code) ||
+          code === 0 ||
+          code > 0x10ffff ||
+          (code >= 0xd800 && code <= 0xdfff)
+        ) {
+          return "\uFFFD";
+        }
         return String.fromCodePoint(code);
       }
       return ch ?? "";
@@ -123,10 +180,15 @@ function decodeCssEscapes(value: string): string {
   );
 }
 
+/** Treat CSS comments as inter-token whitespace before import/url scans. */
+function stripCssComments(value: string): string {
+  return value.replace(/\/\*[\s\S]*?\*\//g, " ");
+}
+
 /** Extract url(...) targets from CSS/presentation attribute values. */
 function extractCssUrls(value: string): string[] {
   const urls: string[] = [];
-  const decoded = decodeCssEscapes(value);
+  const decoded = stripCssComments(decodeCssEscapes(value));
   const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)\s]+))\s*\)/gi;
   for (const match of decoded.matchAll(pattern)) {
     const target = (match[2] ?? match[3] ?? "").trim();
@@ -143,7 +205,8 @@ function hasUnsafeCssUrls(value: string): boolean {
 function hasUnsafeStyleSheet(value: string): boolean {
   if (hasUnsafeCssUrls(value)) return true;
   // @import "..." / @import '...' / @import bare — url(...) already covered above.
-  const decoded = decodeCssEscapes(value);
+  // Comments are whitespace, so @import/**/"https://..." must still match.
+  const decoded = stripCssComments(decodeCssEscapes(value));
   const bareImport = /@import\s+(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
   for (const match of decoded.matchAll(bareImport)) {
     const target = (match[2] ?? match[3] ?? "").trim();
@@ -183,9 +246,10 @@ function containsActiveContent(value: unknown): boolean {
         // Any non-empty xml:base rebases fragment hrefs against an attacker-chosen URI.
         if (isXmlBaseAttribute(attrName) && child.trim().length > 0)
           return true;
-        // Validate href/src on every element (feImage, pattern, XHTML img, etc.).
+        // Validate href/src/poster on every element (feImage, XHTML media, etc.).
         if (isHrefAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isSrcAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (isPosterAttribute(attrName) && isUnsafeHref(child)) return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;
