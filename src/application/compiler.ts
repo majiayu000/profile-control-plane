@@ -17,7 +17,11 @@ const parser = new XMLParser({
 function hasDoctypeOrEntityDeclarations(content: string): boolean {
   // processEntities:false leaves &entity; unexpanded, so consumers that expand
   // DTD entities can reintroduce blocked markup. Reject declarations outright.
-  return /<!DOCTYPE\b/i.test(content) || /<!ENTITY\b/i.test(content);
+  // Ignore comment text so provenance notes mentioning DOCTYPE stay allowed.
+  const withoutComments = content.replace(/<!--[\s\S]*?-->/g, "");
+  return (
+    /<!DOCTYPE\b/i.test(withoutComments) || /<!ENTITY\b/i.test(withoutComments)
+  );
 }
 
 function validateSvg(file: CompiledFile): void {
@@ -56,6 +60,8 @@ const BLOCKED_ELEMENTS = new Set([
   "iframe",
   "embed",
   "object",
+  // Foreign XHTML loaders can fetch without href/foreignObject.
+  "img",
   // SMIL can rewrite href after compile-time checks; block mutation elements.
   "set",
   "animate",
@@ -87,6 +93,10 @@ function isHrefAttribute(attrName: string): boolean {
   return attrName === "href" || attrName.endsWith(":href");
 }
 
+function isSrcAttribute(attrName: string): boolean {
+  return attrName === "src" || attrName.endsWith(":src");
+}
+
 function isXmlBaseAttribute(attrName: string): boolean {
   return attrName === "xml:base" || attrName === "base";
 }
@@ -98,11 +108,27 @@ function isUnsafeHref(value: string): boolean {
   return !trimmed.startsWith("#");
 }
 
+/** Decode CSS escapes (e.g. u\\72l → url) before matching URL functions. */
+function decodeCssEscapes(value: string): string {
+  return value.replace(
+    /\\([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|\\(.)/g,
+    (_match, hex: string | undefined, ch: string | undefined) => {
+      if (hex !== undefined) {
+        const code = Number.parseInt(hex, 16);
+        if (Number.isNaN(code)) return "";
+        return String.fromCodePoint(code);
+      }
+      return ch ?? "";
+    },
+  );
+}
+
 /** Extract url(...) targets from CSS/presentation attribute values. */
 function extractCssUrls(value: string): string[] {
   const urls: string[] = [];
+  const decoded = decodeCssEscapes(value);
   const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)\s]+))\s*\)/gi;
-  for (const match of value.matchAll(pattern)) {
+  for (const match of decoded.matchAll(pattern)) {
     const target = (match[2] ?? match[3] ?? "").trim();
     if (target.length > 0) urls.push(target);
   }
@@ -117,8 +143,9 @@ function hasUnsafeCssUrls(value: string): boolean {
 function hasUnsafeStyleSheet(value: string): boolean {
   if (hasUnsafeCssUrls(value)) return true;
   // @import "..." / @import '...' / @import bare — url(...) already covered above.
+  const decoded = decodeCssEscapes(value);
   const bareImport = /@import\s+(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
-  for (const match of value.matchAll(bareImport)) {
+  for (const match of decoded.matchAll(bareImport)) {
     const target = (match[2] ?? match[3] ?? "").trim();
     if (target.length > 0 && isUnsafeHref(target)) return true;
   }
@@ -156,8 +183,9 @@ function containsActiveContent(value: unknown): boolean {
         // Any non-empty xml:base rebases fragment hrefs against an attacker-chosen URI.
         if (isXmlBaseAttribute(attrName) && child.trim().length > 0)
           return true;
-        // Validate href on every element (feImage, pattern, textPath, etc.).
+        // Validate href/src on every element (feImage, pattern, XHTML img, etc.).
         if (isHrefAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (isSrcAttribute(attrName) && isUnsafeHref(child)) return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;

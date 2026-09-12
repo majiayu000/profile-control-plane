@@ -298,6 +298,14 @@ describe("profile compiler", () => {
       `<svg ${ns}><style>@import url(https://evil.example/theme.css);</style></svg>`,
       `<svg ${ns}><style>@import "https://evil.example/theme.css";</style></svg>`,
       `<svg ${ns}><style>.x{fill:url(https://evil.example/fill.svg#g)}</style></svg>`,
+      // Object/array <style> shapes from the XML parser (attrs + multiple siblings).
+      `<svg ${ns}><style type="text/css">@import "https://evil.example/theme.css";</style></svg>`,
+      `<svg ${ns}><style id="safe">@keyframes ok{to{opacity:1}}</style><style>@import "https://evil.example/theme.css";</style></svg>`,
+      // CSS-escaped url() identifiers and foreign-namespace src loaders.
+      `<svg ${ns}><rect style="filter:u\\72l(https://evil.example/filter.svg#f)"/></svg>`,
+      `<svg ${ns}><style>.x{fill:u\\72l(https://evil.example/fill.svg#g)}</style></svg>`,
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:img src="https://evil.example/pixel"/></svg>`,
+      `<svg ${ns}><image src="https://evil.example/pixel"/></svg>`,
       `<!DOCTYPE svg [<!ENTITY payload '<script>alert(1)</script>'>]><svg ${ns}>&payload;</svg>`,
     ];
     for (const payload of cases) {
@@ -310,6 +318,15 @@ describe("profile compiler", () => {
         validConfig,
         renderer(
           `<svg ${ns}><defs><filter id="f"/><linearGradient id="g"/></defs><style>@keyframes ok{to{opacity:1}}</style><use href="#icon"/><a href="#section"/><rect fill="url(#g)" filter="url(#f)" style="mask:url(#m)"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // DOCTYPE-like text inside comments must not fail compilation.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><!-- generated without <!DOCTYPE html> --><rect width="1" height="1"/></svg>`,
         ),
       ),
     ).not.toThrow();
