@@ -185,7 +185,79 @@ function stripCssComments(value: string): string {
   return value.replace(/\/\*[\s\S]*?\*\//g, " ");
 }
 
-/** Extract url(...) targets from CSS/presentation attribute values. */
+/**
+ * Read the body of a CSS function given the index of its opening '('.
+ * Respects quoted strings and nested parentheses.
+ */
+function readCssFunctionBody(
+  css: string,
+  openParenIdx: number,
+): string | null {
+  let depth = 0;
+  let inQuote: '"' | "'" | null = null;
+  let escaped = false;
+  for (let i = openParenIdx; i < css.length; i += 1) {
+    const ch = css[i]!;
+    if (inQuote) {
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (ch === "\\") {
+        escaped = true;
+        continue;
+      }
+      if (ch === inQuote) inQuote = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      continue;
+    }
+    if (ch === "(") {
+      depth += 1;
+      continue;
+    }
+    if (ch === ")") {
+      depth -= 1;
+      if (depth === 0) return css.slice(openParenIdx + 1, i);
+    }
+  }
+  return null;
+}
+
+/**
+ * Pull image-source <string> tokens from image()/image-set() bodies.
+ * MIME strings inside type("...") are ignored — they are not fetch targets.
+ */
+function extractCssImageFunctionStrings(css: string): string[] {
+  const targets: string[] = [];
+  // image(, image-set(, -webkit-image-set( — not mid-identifier.
+  const callPattern = /(?<![a-zA-Z0-9_-])(?:-webkit-)?image(?:-set)?\s*\(/gi;
+  let match: RegExpExecArray | null;
+  while ((match = callPattern.exec(css)) !== null) {
+    const openIdx = match.index + match[0].length - 1;
+    const body = readCssFunctionBody(css, openIdx);
+    if (body === null) continue;
+    // Skip past this call so nested image() is still found by later matches
+    // when scanned from the outer CSS, but avoid re-matching the same '('.
+    callPattern.lastIndex = openIdx + 1 + body.length + 1;
+
+    // Drop type("mime/type") args so MIME strings are not treated as URLs.
+    const withoutTypeArgs = body.replace(
+      /type\s*\(\s*(["'])(?:\\.|(?!\1).)*\1\s*\)/gi,
+      " ",
+    );
+    const stringPattern = /(["'])((?:\\.|(?!\1).)*)\1/g;
+    for (const stringMatch of withoutTypeArgs.matchAll(stringPattern)) {
+      const target = (stringMatch[2] ?? "").trim();
+      if (target.length > 0) targets.push(target);
+    }
+  }
+  return targets;
+}
+
+/** Extract url(...) and image()/image-set() string targets from CSS values. */
 function extractCssUrls(value: string): string[] {
   const urls: string[] = [];
   const decoded = stripCssComments(decodeCssEscapes(value));
@@ -193,6 +265,9 @@ function extractCssUrls(value: string): string[] {
   for (const match of decoded.matchAll(pattern)) {
     const target = (match[2] ?? match[3] ?? "").trim();
     if (target.length > 0) urls.push(target);
+  }
+  for (const target of extractCssImageFunctionStrings(decoded)) {
+    urls.push(target);
   }
   return urls;
 }

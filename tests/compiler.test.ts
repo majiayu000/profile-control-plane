@@ -316,6 +316,13 @@ describe("profile compiler", () => {
       `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:video src="https://evil.example/clip.mp4"/></svg>`,
       // Comment-shaped text inside a PI must not erase a following DOCTYPE.
       `<?x <!-- ?><!DOCTYPE svg [<!ENTITY payload '<script>alert(1)</script>'>]><!-- --><svg ${ns}>&payload;</svg>`,
+      // image()/image-set() string URLs fetch without url(...).
+      `<svg ${ns}><rect style="background:image('https://evil.example/a.png')"/></svg>`,
+      `<svg ${ns}><rect style="background:image-set('https://evil.example/a.png' 1x)"/></svg>`,
+      `<svg ${ns}><style>.x{background:image-set("https://evil.example/a.png" 1x)}</style></svg>`,
+      `<svg ${ns}><style>.x{background:-webkit-image-set("https://evil.example/a.png" 1x)}</style></svg>`,
+      `<svg ${ns}><rect style="background:image-set('https://evil.example/a.png' type('image/png'))"/></svg>`,
+      `<svg ${ns}><style>.x{background:image("https://evil.example/a.png")}</style></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -327,6 +334,15 @@ describe("profile compiler", () => {
         validConfig,
         renderer(
           `<svg ${ns}><defs><filter id="f"/><linearGradient id="g"/></defs><style>@keyframes ok{to{opacity:1}}</style><use href="#icon"/><a href="#section"/><rect fill="url(#g)" filter="url(#f)" style="mask:url(#m)"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // Fragment-only image-set sources (and type() MIME strings) stay allowed.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><rect style="background:image-set('#icon' 1x type('image/png'))"/></svg>`,
         ),
       ),
     ).not.toThrow();
