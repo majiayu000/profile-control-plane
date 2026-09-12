@@ -333,6 +333,15 @@ describe("profile compiler", () => {
       // Anchor ping= hyperlink audit targets are outbound URLs.
       `<svg ${ns}><a href="#safe" ping="https://evil.example/a"/></svg>`,
       `<svg ${ns}><a href="#safe" ping="#ok https://evil.example/b"/></svg>`,
+      // CSS allows @import"..." with no whitespace after the at-keyword.
+      `<svg ${ns}><style>@import"https://evil.example/theme.css";</style></svg>`,
+      `<svg ${ns}><style>@import'https://evil.example/theme.css';</style></svg>`,
+      // Quoted /* */ markers must not erase intervening url() declarations.
+      `<svg ${ns}><rect style='--a:"/*";filter:url(https://evil.example/f.svg);--b:"*/"'/></svg>`,
+      `<svg ${ns}><style>.x{--a:"/*";fill:url(https://evil.example/fill.svg#g);--b:"*/"}</style></svg>`,
+      // xml-stylesheet + embedded XSLT can synthesize script/external loads.
+      `<?xml-stylesheet type="text/xsl" href="#x"?><svg ${ns}><xsl:stylesheet id="x" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"><xsl:template match="/"><xsl:element name="script"/></xsl:template></xsl:stylesheet></svg>`,
+      `<svg ${ns} xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:stylesheet version="1.0"><xsl:template match="/"/></xsl:stylesheet></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(

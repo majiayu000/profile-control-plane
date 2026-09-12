@@ -64,8 +64,22 @@ function hasDoctypeOrEntityDeclarations(content: string): boolean {
   );
 }
 
+/** xml-stylesheet PIs can apply embedded XSLT that synthesizes blocked markup. */
+function hasXmlStylesheetPi(content: string): boolean {
+  const withoutComments = stripXmlComments(content);
+  return /<\?xml-stylesheet\b/i.test(withoutComments);
+}
+
+function isXsltElementKey(key: string): boolean {
+  // xsl:stylesheet, xsl:element, … — prefix check avoids blocking SVG <text>.
+  return /(^|:)xsl:/.test(key.toLowerCase());
+}
+
 function validateSvg(file: CompiledFile): void {
-  if (hasDoctypeOrEntityDeclarations(file.content)) {
+  if (
+    hasDoctypeOrEntityDeclarations(file.content) ||
+    hasXmlStylesheetPi(file.content)
+  ) {
     throw new ProfileError(
       "OUTPUT_INVALID",
       `generated SVG contains unsafe active content: ${file.path}`,
@@ -200,9 +214,50 @@ function decodeCssEscapes(value: string): string {
     );
 }
 
-/** Treat CSS comments as inter-token whitespace before import/url scans. */
+/**
+ * Treat CSS comments as inter-token whitespace before import/url scans.
+ * Quoted strings keep literal comment delimiters so markers inside values
+ * cannot erase intervening url()/filter declarations.
+ */
 function stripCssComments(value: string): string {
-  return value.replace(/\/\*[\s\S]*?\*\//g, " ");
+  let result = "";
+  let i = 0;
+  let inQuote: '"' | "'" | null = null;
+  let escaped = false;
+  while (i < value.length) {
+    const ch = value[i]!;
+    if (inQuote) {
+      result += ch;
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === inQuote) {
+        inQuote = null;
+      }
+      i += 1;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      result += ch;
+      i += 1;
+      continue;
+    }
+    if (ch === "/" && value[i + 1] === "*") {
+      const end = value.indexOf("*/", i + 2);
+      if (end === -1) {
+        result += " ";
+        break;
+      }
+      result += " ";
+      i = end + 2;
+      continue;
+    }
+    result += ch;
+    i += 1;
+  }
+  return result;
 }
 
 /**
@@ -296,10 +351,12 @@ function hasUnsafeCssUrls(value: string): boolean {
 /** Scan <style> text for url(...) and bare @import targets (not just style attrs). */
 function hasUnsafeStyleSheet(value: string): boolean {
   if (hasUnsafeCssUrls(value)) return true;
-  // @import "..." / @import '...' / @import bare — url(...) already covered above.
+  // @import "..." / @import"... (no space) / bare — url(...) covered above.
+  // (?![\w-]) avoids matching longer at-keywords like @important.
   // Comments are whitespace, so @import/**/"https://..." must still match.
   const decoded = stripCssComments(decodeCssEscapes(value));
-  const bareImport = /@import\s+(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
+  const bareImport =
+    /@import(?![\w-])\s*(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
   for (const match of decoded.matchAll(bareImport)) {
     const target = (match[2] ?? match[3] ?? "").trim();
     if (target.length > 0 && isUnsafeHref(target)) return true;
@@ -348,6 +405,7 @@ function containsActiveContent(value: unknown): boolean {
           return true;
         return false;
       }
+      if (isXsltElementKey(normalized)) return true;
       const localName = elementLocalName(normalized);
       if (BLOCKED_ELEMENTS.has(localName)) return true;
       // <style> bodies are text/#text, not attributes — scan stylesheet content.
