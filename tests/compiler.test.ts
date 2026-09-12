@@ -285,6 +285,11 @@ describe("profile compiler", () => {
       `<svg ${ns}><image xlink:href="javascript:alert(1)"/></svg>`,
       `<svg ${ns}><a href="https://evil.example/"/></svg>`,
       `<svg ${ns}><embed src="https://evil.example/x"/></svg>`,
+      `<svg ${ns}><image href="\\\\evil.example/pixel"/></svg>`,
+      `<svg ${ns}><image href="/relative/path.svg"/></svg>`,
+      `<svg ${ns}><use href="assets/local.svg"/></svg>`,
+      `<svg ${ns}><image href="#safe"><set attributeName="href" to="https://evil.example/pixel"/></image></svg>`,
+      `<svg ${ns}><image href="#safe"><animate attributeName="href" values="#safe;https://evil.example/pixel"/></image></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(

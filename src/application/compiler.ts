@@ -44,6 +44,11 @@ const BLOCKED_ELEMENTS = new Set([
   "iframe",
   "embed",
   "object",
+  // SMIL can rewrite href after compile-time checks; block mutation elements.
+  "set",
+  "animate",
+  "animatetransform",
+  "animatemotion",
 ]);
 
 const HREF_SCAN_ELEMENTS = new Set(["image", "use", "a"]);
@@ -58,13 +63,11 @@ function isHrefAttribute(attrName: string): boolean {
   return attrName === "href" || attrName.endsWith(":href");
 }
 
-/** Reject data/javascript schemes and non-fragment external URLs. */
+/** Allow fragment refs only; reject schemes, protocol-relative, and path/relative URLs. */
 function isUnsafeHref(value: string): boolean {
   const trimmed = value.trim();
-  if (trimmed.startsWith("#")) return false;
-  if (/^\s*(data|javascript):/i.test(trimmed)) return true;
-  if (trimmed.startsWith("//")) return true;
-  return /^[a-z][a-z0-9+.-]*:/i.test(trimmed);
+  if (trimmed.length === 0) return false;
+  return !trimmed.startsWith("#");
 }
 
 function containsActiveContent(
