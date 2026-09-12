@@ -14,7 +14,19 @@ const parser = new XMLParser({
   processEntities: false,
 });
 
+function hasDoctypeOrEntityDeclarations(content: string): boolean {
+  // processEntities:false leaves &entity; unexpanded, so consumers that expand
+  // DTD entities can reintroduce blocked markup. Reject declarations outright.
+  return /<!DOCTYPE\b/i.test(content) || /<!ENTITY\b/i.test(content);
+}
+
 function validateSvg(file: CompiledFile): void {
+  if (hasDoctypeOrEntityDeclarations(file.content)) {
+    throw new ProfileError(
+      "OUTPUT_INVALID",
+      `generated SVG contains unsafe active content: ${file.path}`,
+    );
+  }
   const validation = XMLValidator.validate(file.content);
   if (validation !== true) {
     throw new ProfileError(
@@ -101,6 +113,33 @@ function hasUnsafeCssUrls(value: string): boolean {
   return extractCssUrls(value).some(isUnsafeHref);
 }
 
+/** Scan <style> text for url(...) and bare @import targets (not just style attrs). */
+function hasUnsafeStyleSheet(value: string): boolean {
+  if (hasUnsafeCssUrls(value)) return true;
+  // @import "..." / @import '...' / @import bare — url(...) already covered above.
+  const bareImport = /@import\s+(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
+  for (const match of value.matchAll(bareImport)) {
+    const target = (match[2] ?? match[3] ?? "").trim();
+    if (target.length > 0 && isUnsafeHref(target)) return true;
+  }
+  return false;
+}
+
+function styleElementHasUnsafeContent(value: unknown): boolean {
+  if (typeof value === "string") return hasUnsafeStyleSheet(value);
+  if (value === null || typeof value !== "object") return false;
+  if (Array.isArray(value)) {
+    return value.some((item) => styleElementHasUnsafeContent(item));
+  }
+  return Object.entries(value as Record<string, unknown>).some(
+    ([key, child]) => {
+      // Attribute checks for style elements still run via containsActiveContent.
+      if (key.startsWith("@_")) return false;
+      return styleElementHasUnsafeContent(child);
+    },
+  );
+}
+
 function containsActiveContent(value: unknown): boolean {
   if (value === null || typeof value !== "object") return false;
   if (Array.isArray(value)) {
@@ -126,6 +165,9 @@ function containsActiveContent(value: unknown): boolean {
       }
       const localName = elementLocalName(normalized);
       if (BLOCKED_ELEMENTS.has(localName)) return true;
+      // <style> bodies are text/#text, not attributes — scan stylesheet content.
+      if (localName === "style" && styleElementHasUnsafeContent(child))
+        return true;
       return containsActiveContent(child);
     },
   );

@@ -295,6 +295,10 @@ describe("profile compiler", () => {
       `<svg ${ns}><rect style="filter:url(https://evil.example/filter.svg#f)"/></svg>`,
       `<svg ${ns}><rect fill="url(https://evil.example/fill.svg#g)"/></svg>`,
       `<svg ${ns} xml:base="https://evil.example/remote.svg"><image href="#pixel"/></svg>`,
+      `<svg ${ns}><style>@import url(https://evil.example/theme.css);</style></svg>`,
+      `<svg ${ns}><style>@import "https://evil.example/theme.css";</style></svg>`,
+      `<svg ${ns}><style>.x{fill:url(https://evil.example/fill.svg#g)}</style></svg>`,
+      `<!DOCTYPE svg [<!ENTITY payload '<script>alert(1)</script>'>]><svg ${ns}>&payload;</svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -305,7 +309,7 @@ describe("profile compiler", () => {
       compileProfile(
         validConfig,
         renderer(
-          `<svg ${ns}><defs><filter id="f"/><linearGradient id="g"/></defs><use href="#icon"/><a href="#section"/><rect fill="url(#g)" filter="url(#f)" style="mask:url(#m)"/></svg>`,
+          `<svg ${ns}><defs><filter id="f"/><linearGradient id="g"/></defs><style>@keyframes ok{to{opacity:1}}</style><use href="#icon"/><a href="#section"/><rect fill="url(#g)" filter="url(#f)" style="mask:url(#m)"/></svg>`,
         ),
       ),
     ).not.toThrow();
