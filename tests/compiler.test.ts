@@ -342,6 +342,9 @@ describe("profile compiler", () => {
       // xml-stylesheet + embedded XSLT can synthesize script/external loads.
       `<?xml-stylesheet type="text/xsl" href="#x"?><svg ${ns}><xsl:stylesheet id="x" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"><xsl:template match="/"><xsl:element name="script"/></xsl:template></xsl:stylesheet></svg>`,
       `<svg ${ns} xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:stylesheet version="1.0"><xsl:template match="/"/></xsl:stylesheet></svg>`,
+      // Hex-escaped ASCII whitespace inside unquoted url() still forms an HTTPS URL.
+      `<svg ${ns}><rect style="fill:url(ht\\9 tps://evil.example/x)"/></svg>`,
+      `<svg ${ns}><style>.x{filter:url(ht\\9 tps://evil.example/filter.svg#f)}</style></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -378,6 +381,24 @@ describe("profile compiler", () => {
         validConfig,
         renderer(
           `<svg ${ns}><!-- generated without <!DOCTYPE html> --><rect width="1" height="1"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // DOCTYPE/ENTITY literals inside CDATA are display text, not declarations.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><text><![CDATA[<!DOCTYPE html><!ENTITY example>]]></text></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // xmlns:* namespace URIs are identifiers, not href/src fetch targets.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns} xmlns:href="urn:vendor"><rect width="1" height="1"/></svg>`,
         ),
       ),
     ).not.toThrow();

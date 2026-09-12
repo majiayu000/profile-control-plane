@@ -29,12 +29,10 @@ function stripXmlComments(content: string): string {
       continue;
     }
     if (content.startsWith("<![CDATA[", i)) {
+      // Skip CDATA bodies: literal `<!DOCTYPE` / `<?xml-stylesheet` text is
+      // inert markup, not a real declaration or processing instruction.
       const end = content.indexOf("]]>", i + 9);
-      if (end === -1) {
-        result += content.slice(i);
-        break;
-      }
-      result += content.slice(i, end + 3);
+      if (end === -1) break;
       i = end + 3;
       continue;
     }
@@ -148,19 +146,28 @@ function elementLocalName(key: string): string {
   return separator === -1 ? normalized : normalized.slice(separator + 1);
 }
 
+/** xmlns / xmlns:* declare namespace URIs; they are not fetch targets. */
+function isXmlnsAttribute(attrName: string): boolean {
+  return attrName === "xmlns" || attrName.startsWith("xmlns:");
+}
+
 function isHrefAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
   return attrName === "href" || attrName.endsWith(":href");
 }
 
 function isSrcAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
   return attrName === "src" || attrName.endsWith(":src");
 }
 
 function isPosterAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
   return attrName === "poster" || attrName.endsWith(":poster");
 }
 
 function isPingAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
   return attrName === "ping" || attrName.endsWith(":ping");
 }
 
@@ -329,17 +336,28 @@ function extractCssImageFunctionStrings(css: string): string[] {
   return targets;
 }
 
+/**
+ * Strip ASCII controls that URL parsers remove (e.g. tab from `\9` escapes)
+ * so hex-escaped whitespace cannot hide external fetch targets.
+ */
+function normalizeCssUrlTarget(value: string): string {
+  return value.replace(/[\u0000-\u001F\u007F]/g, "").trim();
+}
+
 /** Extract url(...) and image()/image-set() string targets from CSS values. */
 function extractCssUrls(value: string): string[] {
   const urls: string[] = [];
   const decoded = stripCssComments(decodeCssEscapes(value));
-  const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)\s]+))\s*\)/gi;
+  // Unquoted bodies may contain decoded control whitespace (`\9` → tab); do
+  // not terminate on `\s` — normalize controls after capture instead.
+  const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)]*?))\s*\)/gi;
   for (const match of decoded.matchAll(pattern)) {
-    const target = (match[2] ?? match[3] ?? "").trim();
+    const target = normalizeCssUrlTarget(match[2] ?? match[3] ?? "");
     if (target.length > 0) urls.push(target);
   }
   for (const target of extractCssImageFunctionStrings(decoded)) {
-    urls.push(target);
+    const normalized = normalizeCssUrlTarget(target);
+    if (normalized.length > 0) urls.push(normalized);
   }
   return urls;
 }
@@ -358,7 +376,7 @@ function hasUnsafeStyleSheet(value: string): boolean {
   const bareImport =
     /@import(?![\w-])\s*(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
   for (const match of decoded.matchAll(bareImport)) {
-    const target = (match[2] ?? match[3] ?? "").trim();
+    const target = normalizeCssUrlTarget(match[2] ?? match[3] ?? "");
     if (target.length > 0 && isUnsafeHref(target)) return true;
   }
   return false;
