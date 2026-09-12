@@ -1,7 +1,25 @@
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+const fsState = vi.hoisted(() => ({
+  interruptLink: false,
+}));
+
+vi.mock("node:fs/promises", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("node:fs/promises")>();
+  return {
+    ...actual,
+    link: async (...args: Parameters<typeof actual.link>) => {
+      if (fsState.interruptLink) {
+        throw new Error("simulated interrupt before publish");
+      }
+      return actual.link(...args);
+    },
+  };
+});
+
+import * as fs from "node:fs/promises";
 import {
   loadProfileConfig,
   writeProfileConfig,
@@ -50,7 +68,7 @@ describe("profile schema", () => {
 
   it("keeps the registry and JSON Schema preset catalogs identical", async () => {
     const schema = JSON.parse(
-      await readFile(
+      await fs.readFile(
         new URL("../schemas/profile.schema.json", import.meta.url),
         "utf8",
       ),
@@ -90,8 +108,12 @@ describe("profile schema", () => {
 });
 
 describe("configuration files", () => {
+  afterEach(() => {
+    fsState.interruptLink = false;
+  });
+
   it("round-trips YAML and protects existing files", async () => {
-    const root = await mkdtemp(join(tmpdir(), "profile-config-"));
+    const root = await fs.mkdtemp(join(tmpdir(), "profile-config-"));
     const path = join(root, "nested", "profile.yaml");
     await writeProfileConfig(path, validConfig);
     expect((await loadProfileConfig(path)).github.username).toBe("octocat");
@@ -103,23 +125,34 @@ describe("configuration files", () => {
       { ...validConfig, identity: { ...validConfig.identity, name: "New" } },
       true,
     );
-    expect(await readFile(path, "utf8")).toContain("name: New");
+    expect(await fs.readFile(path, "utf8")).toContain("name: New");
+  });
+
+  it("does not leave an empty destination if publish is interrupted", async () => {
+    const root = await fs.mkdtemp(join(tmpdir(), "profile-config-interrupt-"));
+    const path = join(root, "profile.yaml");
+    fsState.interruptLink = true;
+
+    await expect(writeProfileConfig(path, validConfig)).rejects.toMatchObject({
+      code: "OUTPUT_WRITE_FAILED",
+    });
+    await expect(fs.access(path)).rejects.toMatchObject({ code: "ENOENT" });
   });
 
   it("reports missing, unreadable, malformed, and invalid files", async () => {
-    const root = await mkdtemp(join(tmpdir(), "profile-config-errors-"));
+    const root = await fs.mkdtemp(join(tmpdir(), "profile-config-errors-"));
     await expect(
       loadProfileConfig(join(root, "missing.yaml")),
     ).rejects.toMatchObject({ code: "CONFIG_NOT_FOUND" });
-    await mkdir(join(root, "directory.yaml"));
+    await fs.mkdir(join(root, "directory.yaml"));
     await expect(
       loadProfileConfig(join(root, "directory.yaml")),
     ).rejects.toMatchObject({ code: "CONFIG_PARSE_FAILED" });
-    await writeFile(join(root, "broken.yaml"), "identity: [}");
+    await fs.writeFile(join(root, "broken.yaml"), "identity: [}");
     await expect(
       loadProfileConfig(join(root, "broken.yaml")),
     ).rejects.toMatchObject({ code: "CONFIG_PARSE_FAILED" });
-    await writeFile(join(root, "invalid.yaml"), "version: 1\n");
+    await fs.writeFile(join(root, "invalid.yaml"), "version: 1\n");
     await expect(
       loadProfileConfig(join(root, "invalid.yaml")),
     ).rejects.toMatchObject({ code: "CONFIG_INVALID" });
