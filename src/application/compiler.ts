@@ -146,6 +146,10 @@ function isPosterAttribute(attrName: string): boolean {
   return attrName === "poster" || attrName.endsWith(":poster");
 }
 
+function isPingAttribute(attrName: string): boolean {
+  return attrName === "ping" || attrName.endsWith(":ping");
+}
+
 function isXmlBaseAttribute(attrName: string): boolean {
   return attrName === "xml:base" || attrName === "base";
 }
@@ -157,27 +161,43 @@ function isUnsafeHref(value: string): boolean {
   return !trimmed.startsWith("#");
 }
 
-/** Decode CSS escapes (e.g. u\\72l → url) before matching URL functions. */
+/** Space-separated hyperlink-audit targets (HTML ping) must also be fragment-only. */
+function hasUnsafePingUrls(value: string): boolean {
+  return value
+    .trim()
+    .split(/\s+/)
+    .filter((token) => token.length > 0)
+    .some(isUnsafeHref);
+}
+
+/**
+ * Decode CSS escapes (e.g. u\\72l → url) and remove string line continuations
+ * (backslash + newline) before matching URL functions.
+ */
 function decodeCssEscapes(value: string): string {
-  return value.replace(
-    /\\([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|\\(.)/g,
-    (_match, hex: string | undefined, ch: string | undefined) => {
-      if (hex !== undefined) {
-        const code = Number.parseInt(hex, 16);
-        // CSS replaces null, surrogates, and out-of-range code points with U+FFFD.
-        if (
-          Number.isNaN(code) ||
-          code === 0 ||
-          code > 0x10ffff ||
-          (code >= 0xd800 && code <= 0xdfff)
-        ) {
-          return "\uFFFD";
+  // CSS: \ + line terminator is a line continuation (removed), not a character escape.
+  // Handle it first — JS `.` does not match newlines, so `\\(.)` would miss these.
+  return value
+    .replace(/\\(?:\r\n|[\n\r\f])/g, "")
+    .replace(
+      /\\([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|\\(.)/g,
+      (_match, hex: string | undefined, ch: string | undefined) => {
+        if (hex !== undefined) {
+          const code = Number.parseInt(hex, 16);
+          // CSS replaces null, surrogates, and out-of-range code points with U+FFFD.
+          if (
+            Number.isNaN(code) ||
+            code === 0 ||
+            code > 0x10ffff ||
+            (code >= 0xd800 && code <= 0xdfff)
+          ) {
+            return "\uFFFD";
+          }
+          return String.fromCodePoint(code);
         }
-        return String.fromCodePoint(code);
-      }
-      return ch ?? "";
-    },
-  );
+        return ch ?? "";
+      },
+    );
 }
 
 /** Treat CSS comments as inter-token whitespace before import/url scans. */
@@ -189,10 +209,7 @@ function stripCssComments(value: string): string {
  * Read the body of a CSS function given the index of its opening '('.
  * Respects quoted strings and nested parentheses.
  */
-function readCssFunctionBody(
-  css: string,
-  openParenIdx: number,
-): string | null {
+function readCssFunctionBody(css: string, openParenIdx: number): string | null {
   let depth = 0;
   let inQuote: '"' | "'" | null = null;
   let escaped = false;
@@ -321,10 +338,11 @@ function containsActiveContent(value: unknown): boolean {
         // Any non-empty xml:base rebases fragment hrefs against an attacker-chosen URI.
         if (isXmlBaseAttribute(attrName) && child.trim().length > 0)
           return true;
-        // Validate href/src/poster on every element (feImage, XHTML media, etc.).
+        // Validate href/src/poster/ping on every element (feImage, XHTML media, anchors).
         if (isHrefAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isSrcAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isPosterAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (isPingAttribute(attrName) && hasUnsafePingUrls(child)) return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;

@@ -323,6 +323,16 @@ describe("profile compiler", () => {
       `<svg ${ns}><style>.x{background:-webkit-image-set("https://evil.example/a.png" 1x)}</style></svg>`,
       `<svg ${ns}><rect style="background:image-set('https://evil.example/a.png' type('image/png'))"/></svg>`,
       `<svg ${ns}><style>.x{background:image("https://evil.example/a.png")}</style></svg>`,
+      // CSS string line continuations (backslash + newline) must decode before URL scan.
+      `<svg ${ns}><style>.x{fill:url("https:\\
+//evil.example/x")}</style></svg>`,
+      `<svg ${ns}><rect style="filter:url('https:\\
+//evil.example/filter.svg#f')"/></svg>`,
+      `<svg ${ns}><style>@import "https:\\
+//evil.example/theme.css";</style></svg>`,
+      // Anchor ping= hyperlink audit targets are outbound URLs.
+      `<svg ${ns}><a href="#safe" ping="https://evil.example/a"/></svg>`,
+      `<svg ${ns}><a href="#safe" ping="#ok https://evil.example/b"/></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -344,6 +354,13 @@ describe("profile compiler", () => {
         renderer(
           `<svg ${ns}><rect style="background:image-set('#icon' 1x type('image/png'))"/></svg>`,
         ),
+      ),
+    ).not.toThrow();
+    // Fragment-only ping targets stay allowed (no outbound hyperlink audit).
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(`<svg ${ns}><a href="#safe" ping="#audit"/></svg>`),
       ),
     ).not.toThrow();
     // DOCTYPE-like text inside comments must not fail compilation.
