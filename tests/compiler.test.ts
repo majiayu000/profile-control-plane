@@ -373,6 +373,17 @@ describe("profile compiler", () => {
       `<svg ${ns}><style>@font-face{font-family:x;src:src("https://evil.example/f.woff")}text{font-family:x}</style></svg>`,
       `<svg ${ns}><rect style="background:src('https://evil.example/a.png')"/></svg>`,
       `<svg ${ns}><style>.x{mask-image:src(https://evil.example/m.png)}</style></svg>`,
+      // Escaped '(' inside url() must not absorb a following external filter:url(...).
+      `<svg ${ns}><rect style="fill:url(#safe\\28 );filter:url(https://evil.example/f.svg);)"/></svg>`,
+      `<svg ${ns}><style>.x{fill:url(#safe\\28 );filter:url(https://evil.example/f.svg);)}</style></svg>`,
+      // CSS Motion Path presentation attribute can fetch external SVGs.
+      `<svg ${ns}><path offset-path="url(https://evil.example/path.svg#p)"/></svg>`,
+      // Unescaped newline ends a CSS bad-string; following url() must still be scanned.
+      `<svg ${ns}><style>.x{content:"broken
+;fill:url(https://evil.example/f.svg#f)}</style><rect class="x"/></svg>`,
+      // Responsive preload imagesrcset can fetch without href.
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:link rel="preload" as="image" imagesrcset="https://evil.example/pixel.png 1x"/></svg>`,
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:img srcset="https://evil.example/a.png 1x, https://evil.example/b.png 2x"/></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(

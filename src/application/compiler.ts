@@ -146,6 +146,8 @@ const URL_PRESENTATION_ATTRS = new Set([
   "marker-mid",
   "marker-end",
   "cursor",
+  // CSS Motion Path can fetch an external SVG via url(...).
+  "offset-path",
 ]);
 
 function elementLocalName(key: string): string {
@@ -202,6 +204,32 @@ function isBackgroundAttribute(attrName: string): boolean {
   return attrName === "background" || attrName.endsWith(":background");
 }
 
+/** Responsive image candidate lists (srcset / imagesrcset). */
+function isSrcSetAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
+  return (
+    attrName === "srcset" ||
+    attrName.endsWith(":srcset") ||
+    attrName === "imagesrcset" ||
+    attrName.endsWith(":imagesrcset")
+  );
+}
+
+/**
+ * Parse HTML srcset/imagesrcset candidates and reject any non-fragment URL.
+ * Each comma-separated candidate begins with a URL token before descriptors.
+ */
+function hasUnsafeSrcSetUrls(value: string): boolean {
+  return value
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0)
+    .some((candidate) => {
+      const url = candidate.split(/\s+/)[0] ?? "";
+      return url.length > 0 && isUnsafeHref(url);
+    });
+}
+
 function isXmlBaseAttribute(attrName: string): boolean {
   // Only namespace-qualified xml:base rebases URIs; unqualified `base` does not.
   return attrName === "xml:base";
@@ -228,12 +256,31 @@ function hasUnsafePingUrls(value: string): boolean {
  * delimiters during scan walks — that would skip following url()/filter text.
  */
 const CSS_ESCAPED_QUOTE_PLACEHOLDER = "\uFFFC";
+/**
+ * Parentheses produced by CSS escapes (e.g. \\28 → "(") must not become
+ * structural nesting during readCssFunctionBody — that would absorb a following
+ * filter:url(...) into a fragment-looking target such as url(#safe\28 ).
+ */
+const CSS_ESCAPED_OPEN_PAREN_PLACEHOLDER = "\uE000";
+const CSS_ESCAPED_CLOSE_PAREN_PLACEHOLDER = "\uE001";
+
+/** CSS bad-string: unescaped newline/CR/FF ends the string token. */
+function isCssBadStringTerminator(ch: string): boolean {
+  return ch === "\n" || ch === "\r" || ch === "\f";
+}
+
+function placeholderForEscapedCssChar(decoded: string): string | null {
+  if (decoded === '"' || decoded === "'") return CSS_ESCAPED_QUOTE_PLACEHOLDER;
+  if (decoded === "(") return CSS_ESCAPED_OPEN_PAREN_PLACEHOLDER;
+  if (decoded === ")") return CSS_ESCAPED_CLOSE_PAREN_PLACEHOLDER;
+  return null;
+}
 
 /**
  * Decode CSS escapes (e.g. u\\72l → url) and remove string line continuations
  * (backslash + newline) before matching URL functions.
- * Escaped quotes become a non-delimiter placeholder so token boundaries stay
- * stable for string-aware scanners.
+ * Escaped quotes/parentheses become non-delimiter placeholders so token
+ * boundaries stay stable for string-aware scanners.
  */
 function decodeCssEscapes(value: string): string {
   // CSS: \ + line terminator is a line continuation (removed), not a character escape.
@@ -255,13 +302,10 @@ function decodeCssEscapes(value: string): string {
             return "\uFFFD";
           }
           const decoded = String.fromCodePoint(code);
-          if (decoded === '"' || decoded === "'") {
-            return CSS_ESCAPED_QUOTE_PLACEHOLDER;
-          }
-          return decoded;
+          return placeholderForEscapedCssChar(decoded) ?? decoded;
         }
-        if (ch === '"' || ch === "'") return CSS_ESCAPED_QUOTE_PLACEHOLDER;
-        return ch ?? "";
+        if (ch === undefined) return "";
+        return placeholderForEscapedCssChar(ch) ?? ch;
       },
     );
 }
@@ -286,7 +330,7 @@ function stripCssComments(value: string): string {
         escaped = false;
       } else if (ch === "\\") {
         escaped = true;
-      } else if (ch === inQuote) {
+      } else if (ch === inQuote || isCssBadStringTerminator(ch)) {
         inQuote = null;
       }
       i += 1;
@@ -344,7 +388,7 @@ function readCssFunctionBody(css: string, openParenIdx: number): string | null {
         escaped = true;
         continue;
       }
-      if (ch === inQuote) inQuote = null;
+      if (ch === inQuote || isCssBadStringTerminator(ch)) inQuote = null;
       continue;
     }
     if (ch === '"' || ch === "'") {
@@ -397,7 +441,7 @@ function extractCssImageFunctionStrings(css: string): CssUrlScan {
         escaped = false;
       } else if (ch === "\\") {
         escaped = true;
-      } else if (ch === inQuote) {
+      } else if (ch === inQuote || isCssBadStringTerminator(ch)) {
         inQuote = null;
       }
       i += 1;
@@ -447,6 +491,8 @@ function normalizeCssUrlTarget(value: string): string {
   return value
     .replace(/[\u0000-\u001F\u007F]/g, "")
     .replaceAll(CSS_ESCAPED_QUOTE_PLACEHOLDER, "")
+    .replaceAll(CSS_ESCAPED_OPEN_PAREN_PLACEHOLDER, "(")
+    .replaceAll(CSS_ESCAPED_CLOSE_PAREN_PLACEHOLDER, ")")
     .trim();
 }
 
@@ -468,7 +514,7 @@ function extractCssUrlFunctionTargets(css: string): CssUrlScan {
         escaped = false;
       } else if (ch === "\\") {
         escaped = true;
-      } else if (ch === inQuote) {
+      } else if (ch === inQuote || isCssBadStringTerminator(ch)) {
         inQuote = null;
       }
       i += 1;
@@ -558,7 +604,7 @@ function extractBareCssImportTargets(css: string): string[] {
         escaped = false;
       } else if (ch === "\\") {
         escaped = true;
-      } else if (ch === inQuote) {
+      } else if (ch === inQuote || isCssBadStringTerminator(ch)) {
         inQuote = null;
       }
       i += 1;
@@ -642,6 +688,8 @@ function containsActiveContent(value: unknown): boolean {
           return true;
         if (isHandlerUriAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isBackgroundAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (isSrcSetAttribute(attrName) && hasUnsafeSrcSetUrls(child))
+          return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;
