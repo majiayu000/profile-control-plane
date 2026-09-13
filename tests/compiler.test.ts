@@ -345,6 +345,15 @@ describe("profile compiler", () => {
       // Hex-escaped ASCII whitespace inside unquoted url() still forms an HTTPS URL.
       `<svg ${ns}><rect style="fill:url(ht\\9 tps://evil.example/x)"/></svg>`,
       `<svg ${ns}><style>.x{filter:url(ht\\9 tps://evil.example/filter.svg#f)}</style></svg>`,
+      // Escaped /* */ must not become comments that erase intervening url().
+      `<svg ${ns}><rect style="--a:\\2f\\2a;filter:url(https://evil.example/f.svg);--b:\\2a\\2f"/></svg>`,
+      `<svg ${ns}><style>.x{--a:\\2f\\2a;fill:url(https://evil.example/fill.svg#g);--b:\\2a\\2f}</style></svg>`,
+      // image-set(var(--*)) resolves custom properties to external string sources.
+      `<svg ${ns}><rect style="--remote:'https://evil.example/a.png';mask-image:image-set(var(--remote) 1x)"/></svg>`,
+      `<svg ${ns}><style>.x{--r:"https://evil.example/a.png";background:image(var(--r))}</style></svg>`,
+      // Unterminated image-set/url still fetch under CSS EOF error recovery.
+      `<svg ${ns}><rect style="mask-image:image-set('https://evil.example/a.png' 1x"/></svg>`,
+      `<svg ${ns}><rect style="filter:url(https://evil.example/f.svg"/></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -407,6 +416,24 @@ describe("profile compiler", () => {
       compileProfile(
         validConfig,
         renderer(`<svg ${ns}><rect style="fill:\\FFFFFF"/></svg>`),
+      ),
+    ).not.toThrow();
+    // Unqualified base is not xml:base and must not fail compilation.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><metadata base="main"/><rect width="1" height="1"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // URL-shaped text inside CSS strings is not a live fetch target.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><rect style="content:'url(https://docs.example)'"/></svg>`,
+        ),
       ),
     ).not.toThrow();
   });

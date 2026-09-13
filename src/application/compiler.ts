@@ -172,7 +172,8 @@ function isPingAttribute(attrName: string): boolean {
 }
 
 function isXmlBaseAttribute(attrName: string): boolean {
-  return attrName === "xml:base" || attrName === "base";
+  // Only namespace-qualified xml:base rebases URIs; unqualified `base` does not.
+  return attrName === "xml:base";
 }
 
 /** Allow fragment refs only; reject schemes, protocol-relative, and path/relative URLs. */
@@ -306,10 +307,27 @@ function readCssFunctionBody(css: string, openParenIdx: number): string | null {
 }
 
 /**
+ * Normalize CSS before URL/import scans: strip real comments first (string-
+ * aware), then decode escapes. Decoding first would turn `\2f\2a` ... `\2a\2f`
+ * into synthetic comment delimiters and erase intervening url()/filter text.
+ */
+function normalizeCssForScan(value: string): string {
+  return decodeCssEscapes(stripCssComments(value));
+}
+
+function cssContainsVarFunction(css: string): boolean {
+  return /(?<![a-zA-Z0-9_-])var\s*\(/i.test(css);
+}
+
+type CssUrlScan = { urls: string[]; unsafe: boolean };
+
+/**
  * Pull image-source <string> tokens from image()/image-set() bodies.
  * MIME strings inside type("...") are ignored — they are not fetch targets.
+ * Unterminated calls and var() sources are treated as unsafe (CSS resolves
+ * them / closes open functions at EOF during error recovery).
  */
-function extractCssImageFunctionStrings(css: string): string[] {
+function extractCssImageFunctionStrings(css: string): CssUrlScan {
   const targets: string[] = [];
   // image(, image-set(, -webkit-image-set( — not mid-identifier.
   const callPattern = /(?<![a-zA-Z0-9_-])(?:-webkit-)?image(?:-set)?\s*\(/gi;
@@ -317,10 +335,13 @@ function extractCssImageFunctionStrings(css: string): string[] {
   while ((match = callPattern.exec(css)) !== null) {
     const openIdx = match.index + match[0].length - 1;
     const body = readCssFunctionBody(css, openIdx);
-    if (body === null) continue;
+    if (body === null) return { urls: targets, unsafe: true };
     // Skip past this call so nested image() is still found by later matches
     // when scanned from the outer CSS, but avoid re-matching the same '('.
     callPattern.lastIndex = openIdx + 1 + body.length + 1;
+
+    // Custom properties resolve before image-set validates sources; reject var().
+    if (cssContainsVarFunction(body)) return { urls: targets, unsafe: true };
 
     // Drop type("mime/type") args so MIME strings are not treated as URLs.
     const withoutTypeArgs = body.replace(
@@ -333,7 +354,7 @@ function extractCssImageFunctionStrings(css: string): string[] {
       if (target.length > 0) targets.push(target);
     }
   }
-  return targets;
+  return { urls: targets, unsafe: false };
 }
 
 /**
@@ -344,26 +365,82 @@ function normalizeCssUrlTarget(value: string): string {
   return value.replace(/[\u0000-\u001F\u007F]/g, "").trim();
 }
 
-/** Extract url(...) and image()/image-set() string targets from CSS values. */
-function extractCssUrls(value: string): string[] {
+/**
+ * Extract url(...) targets outside CSS string tokens. Quoted text such as
+ * content:"url(https://docs.example)" is not a live fetch. Unterminated
+ * url( calls are unsafe — CSS closes open functions at EOF.
+ */
+function extractCssUrlFunctionTargets(css: string): CssUrlScan {
   const urls: string[] = [];
-  const decoded = stripCssComments(decodeCssEscapes(value));
-  // Unquoted bodies may contain decoded control whitespace (`\9` → tab); do
-  // not terminate on `\s` — normalize controls after capture instead.
-  const pattern = /url\s*\(\s*(?:(["'])(.*?)\1|([^)]*?))\s*\)/gi;
-  for (const match of decoded.matchAll(pattern)) {
-    const target = normalizeCssUrlTarget(match[2] ?? match[3] ?? "");
-    if (target.length > 0) urls.push(target);
+  let i = 0;
+  let inQuote: '"' | "'" | null = null;
+  let escaped = false;
+  while (i < css.length) {
+    const ch = css[i]!;
+    if (inQuote) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === inQuote) {
+        inQuote = null;
+      }
+      i += 1;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      i += 1;
+      continue;
+    }
+    const prev = i === 0 ? "" : css[i - 1]!;
+    if (
+      (prev.length === 0 || !/[a-zA-Z0-9_-]/.test(prev)) &&
+      /^url\s*\(/i.test(css.slice(i))
+    ) {
+      const call = css.slice(i).match(/^url\s*\(/i)!;
+      const openIdx = i + call[0].length - 1;
+      const body = readCssFunctionBody(css, openIdx);
+      if (body === null) return { urls, unsafe: true };
+      const trimmed = body.trim();
+      let target = "";
+      if (
+        (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+        (trimmed.startsWith("'") && trimmed.endsWith("'"))
+      ) {
+        target = trimmed.slice(1, -1);
+      } else {
+        target = trimmed;
+      }
+      const normalized = normalizeCssUrlTarget(target);
+      if (normalized.length > 0) urls.push(normalized);
+      i = openIdx + 1 + body.length + 1;
+      continue;
+    }
+    i += 1;
   }
-  for (const target of extractCssImageFunctionStrings(decoded)) {
+  return { urls, unsafe: false };
+}
+
+/** Extract url(...) and image()/image-set() string targets from CSS values. */
+function extractCssUrls(value: string): CssUrlScan {
+  const decoded = normalizeCssForScan(value);
+  const fromUrl = extractCssUrlFunctionTargets(decoded);
+  if (fromUrl.unsafe) return fromUrl;
+  const fromImage = extractCssImageFunctionStrings(decoded);
+  if (fromImage.unsafe) return { urls: fromUrl.urls, unsafe: true };
+  const urls = [...fromUrl.urls];
+  for (const target of fromImage.urls) {
     const normalized = normalizeCssUrlTarget(target);
     if (normalized.length > 0) urls.push(normalized);
   }
-  return urls;
+  return { urls, unsafe: false };
 }
 
 function hasUnsafeCssUrls(value: string): boolean {
-  return extractCssUrls(value).some(isUnsafeHref);
+  const scanned = extractCssUrls(value);
+  if (scanned.unsafe) return true;
+  return scanned.urls.some(isUnsafeHref);
 }
 
 /** Scan <style> text for url(...) and bare @import targets (not just style attrs). */
@@ -372,7 +449,7 @@ function hasUnsafeStyleSheet(value: string): boolean {
   // @import "..." / @import"... (no space) / bare — url(...) covered above.
   // (?![\w-]) avoids matching longer at-keywords like @important.
   // Comments are whitespace, so @import/**/"https://..." must still match.
-  const decoded = stripCssComments(decodeCssEscapes(value));
+  const decoded = normalizeCssForScan(value);
   const bareImport =
     /@import(?![\w-])\s*(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
   for (const match of decoded.matchAll(bareImport)) {
