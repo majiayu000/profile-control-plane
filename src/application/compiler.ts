@@ -42,7 +42,11 @@ function stripXmlComments(content: string): string {
         result += content.slice(i);
         break;
       }
-      result += content.slice(i, end + 2);
+      // Keep only the PI target (for xml-stylesheet detection). PI data can
+      // contain inert `<!DOCTYPE` text that must not trip declaration scans.
+      const piBody = content.slice(i + 2, end);
+      const target = piBody.match(/^\s*([^\s?]+)/)?.[1] ?? "";
+      result += `<?${target}?>`;
       i = end + 2;
       continue;
     }
@@ -192,6 +196,12 @@ function isHandlerUriAttribute(attrName: string): boolean {
   return attrName === "handler" || attrName.endsWith(":handler");
 }
 
+/** Legacy HTML background= image URL on foreign containers (body/table/…). */
+function isBackgroundAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
+  return attrName === "background" || attrName.endsWith(":background");
+}
+
 function isXmlBaseAttribute(attrName: string): boolean {
   // Only namespace-qualified xml:base rebases URIs; unqualified `base` does not.
   return attrName === "xml:base";
@@ -214,8 +224,16 @@ function hasUnsafePingUrls(value: string): boolean {
 }
 
 /**
+ * Quotes produced by CSS escapes (e.g. \\22 → ") must not become string
+ * delimiters during scan walks — that would skip following url()/filter text.
+ */
+const CSS_ESCAPED_QUOTE_PLACEHOLDER = "\uFFFC";
+
+/**
  * Decode CSS escapes (e.g. u\\72l → url) and remove string line continuations
  * (backslash + newline) before matching URL functions.
+ * Escaped quotes become a non-delimiter placeholder so token boundaries stay
+ * stable for string-aware scanners.
  */
 function decodeCssEscapes(value: string): string {
   // CSS: \ + line terminator is a line continuation (removed), not a character escape.
@@ -236,8 +254,13 @@ function decodeCssEscapes(value: string): string {
           ) {
             return "\uFFFD";
           }
-          return String.fromCodePoint(code);
+          const decoded = String.fromCodePoint(code);
+          if (decoded === '"' || decoded === "'") {
+            return CSS_ESCAPED_QUOTE_PLACEHOLDER;
+          }
+          return decoded;
         }
+        if (ch === '"' || ch === "'") return CSS_ESCAPED_QUOTE_PLACEHOLDER;
         return ch ?? "";
       },
     );
@@ -347,33 +370,58 @@ type CssUrlScan = { urls: string[]; unsafe: boolean };
  * MIME strings inside type("...") are ignored — they are not fetch targets.
  * Unterminated calls and var() sources are treated as unsafe (CSS resolves
  * them / closes open functions at EOF during error recovery).
+ * Matches only outside CSS string tokens so content:"image(...)" stays inert.
  */
 function extractCssImageFunctionStrings(css: string): CssUrlScan {
   const targets: string[] = [];
-  // image(, image-set(, -webkit-image-set( — not mid-identifier.
-  const callPattern = /(?<![a-zA-Z0-9_-])(?:-webkit-)?image(?:-set)?\s*\(/gi;
-  let match: RegExpExecArray | null;
-  while ((match = callPattern.exec(css)) !== null) {
-    const openIdx = match.index + match[0].length - 1;
-    const body = readCssFunctionBody(css, openIdx);
-    if (body === null) return { urls: targets, unsafe: true };
-    // Skip past this call so nested image() is still found by later matches
-    // when scanned from the outer CSS, but avoid re-matching the same '('.
-    callPattern.lastIndex = openIdx + 1 + body.length + 1;
-
-    // Custom properties resolve before image-set validates sources; reject var().
-    if (cssContainsVarFunction(body)) return { urls: targets, unsafe: true };
-
-    // Drop type("mime/type") args so MIME strings are not treated as URLs.
-    const withoutTypeArgs = body.replace(
-      /type\s*\(\s*(["'])(?:\\.|(?!\1).)*\1\s*\)/gi,
-      " ",
-    );
-    const stringPattern = /(["'])((?:\\.|(?!\1).)*)\1/g;
-    for (const stringMatch of withoutTypeArgs.matchAll(stringPattern)) {
-      const target = (stringMatch[2] ?? "").trim();
-      if (target.length > 0) targets.push(target);
+  let i = 0;
+  let inQuote: '"' | "'" | null = null;
+  let escaped = false;
+  while (i < css.length) {
+    const ch = css[i]!;
+    if (inQuote) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === inQuote) {
+        inQuote = null;
+      }
+      i += 1;
+      continue;
     }
+    if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      i += 1;
+      continue;
+    }
+    const prev = i === 0 ? "" : css[i - 1]!;
+    if (
+      (prev.length === 0 || !/[a-zA-Z0-9_-]/.test(prev)) &&
+      /^(?:-webkit-)?image(?:-set)?\s*\(/i.test(css.slice(i))
+    ) {
+      const call = css.slice(i).match(/^(?:-webkit-)?image(?:-set)?\s*\(/i)!;
+      const openIdx = i + call[0].length - 1;
+      const body = readCssFunctionBody(css, openIdx);
+      if (body === null) return { urls: targets, unsafe: true };
+
+      // Custom properties resolve before image-set validates sources; reject var().
+      if (cssContainsVarFunction(body)) return { urls: targets, unsafe: true };
+
+      // Drop type("mime/type") args so MIME strings are not treated as URLs.
+      const withoutTypeArgs = body.replace(
+        /type\s*\(\s*(["'])(?:\\.|(?!\1).)*\1\s*\)/gi,
+        " ",
+      );
+      const stringPattern = /(["'])((?:\\.|(?!\1).)*)\1/g;
+      for (const stringMatch of withoutTypeArgs.matchAll(stringPattern)) {
+        const target = (stringMatch[2] ?? "").trim();
+        if (target.length > 0) targets.push(target);
+      }
+      i = openIdx + 1 + body.length + 1;
+      continue;
+    }
+    i += 1;
   }
   return { urls: targets, unsafe: false };
 }
@@ -383,7 +431,10 @@ function extractCssImageFunctionStrings(css: string): CssUrlScan {
  * so hex-escaped whitespace cannot hide external fetch targets.
  */
 function normalizeCssUrlTarget(value: string): string {
-  return value.replace(/[\u0000-\u001F\u007F]/g, "").trim();
+  return value
+    .replace(/[\u0000-\u001F\u007F]/g, "")
+    .replaceAll(CSS_ESCAPED_QUOTE_PLACEHOLDER, "")
+    .trim();
 }
 
 /**
@@ -470,14 +521,71 @@ function hasUnsafeStyleSheet(value: string): boolean {
   // @import "..." / @import"... (no space) / bare — url(...) covered above.
   // (?![\w-]) avoids matching longer at-keywords like @important.
   // Comments are whitespace, so @import/**/"https://..." must still match.
+  // Only match outside CSS string tokens so content:"@import'...'" stays inert.
   const decoded = normalizeCssForScan(value);
-  const bareImport =
-    /@import(?![\w-])\s*(?!url\b)(?:(["'])(.*?)\1|([^\s;]+))/gi;
-  for (const match of decoded.matchAll(bareImport)) {
-    const target = normalizeCssUrlTarget(match[2] ?? match[3] ?? "");
-    if (target.length > 0 && isUnsafeHref(target)) return true;
+  return extractBareCssImportTargets(decoded).some(
+    (target) => target.length > 0 && isUnsafeHref(target),
+  );
+}
+
+/**
+ * Extract bare @import targets outside CSS strings. @import url(...) is left
+ * to extractCssUrlFunctionTargets.
+ */
+function extractBareCssImportTargets(css: string): string[] {
+  const targets: string[] = [];
+  let i = 0;
+  let inQuote: '"' | "'" | null = null;
+  let escaped = false;
+  while (i < css.length) {
+    const ch = css[i]!;
+    if (inQuote) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === inQuote) {
+        inQuote = null;
+      }
+      i += 1;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      i += 1;
+      continue;
+    }
+    const prev = i === 0 ? "" : css[i - 1]!;
+    if (
+      (prev.length === 0 || !/[a-zA-Z0-9_-]/.test(prev)) &&
+      /^@import(?![\w-])/i.test(css.slice(i))
+    ) {
+      const head = css.slice(i).match(/^@import(?![\w-])\s*/i)!;
+      let j = i + head[0].length;
+      if (/^url\b/i.test(css.slice(j))) {
+        // url(...) import — handled by extractCssUrlFunctionTargets.
+        i = j;
+        continue;
+      }
+      const rest = css.slice(j);
+      const quoted = rest.match(/^(["'])(.*?)\1/);
+      if (quoted) {
+        targets.push(normalizeCssUrlTarget(quoted[2] ?? ""));
+        i = j + quoted[0].length;
+        continue;
+      }
+      const bare = rest.match(/^([^\s;]+)/);
+      if (bare) {
+        targets.push(normalizeCssUrlTarget(bare[1] ?? ""));
+        i = j + bare[0].length;
+        continue;
+      }
+      i = j;
+      continue;
+    }
+    i += 1;
   }
-  return false;
+  return targets;
 }
 
 function styleElementHasUnsafeContent(value: unknown): boolean {
@@ -519,6 +627,7 @@ function containsActiveContent(value: unknown): boolean {
         if (isFormSubmissionAttribute(attrName) && isUnsafeHref(child))
           return true;
         if (isHandlerUriAttribute(attrName) && isUnsafeHref(child)) return true;
+        if (isBackgroundAttribute(attrName) && isUnsafeHref(child)) return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;

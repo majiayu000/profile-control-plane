@@ -361,6 +361,11 @@ describe("profile compiler", () => {
       `<svg ${ns} xmlns:ev="http://www.w3.org/2001/xml-events"><ev:listener event="load" handler="https://evil.example/events.svg#h"/></svg>`,
       // Foreign meta refresh navigates without href/src.
       `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:meta http-equiv="refresh" content="0;url=https://evil.example/"/></svg>`,
+      // Hex-escaped quote (\\22) must not open a CSS string and hide url().
+      `<svg ${ns}><rect style='--x:\\22;filter:url(https://evil.example/f.svg)'/></svg>`,
+      `<svg ${ns}><style>.x{--x:\\22;fill:url(https://evil.example/fill.svg#g)}</style></svg>`,
+      // Legacy HTML background= on foreign containers fetches images.
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:body background="https://evil.example/pixel"><h:table/></h:body></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -449,6 +454,33 @@ describe("profile compiler", () => {
         validConfig,
         renderer(
           `<svg ${ns}><rect style="content:'url(https://docs.example)'"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // image()/image-set() text inside CSS strings is not a live fetch target.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><style>.x::before{content:"image('https://docs.example/example.png')"}</style></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // @import text inside CSS strings is not a live stylesheet import.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><style>.x::before{content:"@import'https://docs.example/theme.css'"}</style></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // DOCTYPE-like text inside PI data is inert, not a real declaration.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<?note generated without <!DOCTYPE html>?><svg ${ns}><rect width="1" height="1"/></svg>`,
         ),
       ),
     ).not.toThrow();
