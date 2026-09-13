@@ -108,6 +108,8 @@ function validateSvg(file: CompiledFile): void {
 const BLOCKED_ELEMENTS = new Set([
   "script",
   "handler",
+  // XML Events <listener handler="..."> can load external handler documents.
+  "listener",
   "foreignobject",
   "iframe",
   "embed",
@@ -118,6 +120,8 @@ const BLOCKED_ELEMENTS = new Set([
   "audio",
   "source",
   "track",
+  // Foreign meta refresh can navigate without href/src.
+  "meta",
   // SMIL can rewrite href/fill/stroke after compile-time checks; block mutation.
   "set",
   "animate",
@@ -169,6 +173,23 @@ function isPosterAttribute(attrName: string): boolean {
 function isPingAttribute(attrName: string): boolean {
   if (isXmlnsAttribute(attrName)) return false;
   return attrName === "ping" || attrName.endsWith(":ping");
+}
+
+/** HTML form submission targets (action / formaction). */
+function isFormSubmissionAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
+  return (
+    attrName === "action" ||
+    attrName.endsWith(":action") ||
+    attrName === "formaction" ||
+    attrName.endsWith(":formaction")
+  );
+}
+
+/** XML Events handler= URI on <listener> (and similar). */
+function isHandlerUriAttribute(attrName: string): boolean {
+  if (isXmlnsAttribute(attrName)) return false;
+  return attrName === "handler" || attrName.endsWith(":handler");
 }
 
 function isXmlBaseAttribute(attrName: string): boolean {
@@ -490,11 +511,14 @@ function containsActiveContent(value: unknown): boolean {
         // Any non-empty xml:base rebases fragment hrefs against an attacker-chosen URI.
         if (isXmlBaseAttribute(attrName) && child.trim().length > 0)
           return true;
-        // Validate href/src/poster/ping on every element (feImage, XHTML media, anchors).
+        // Validate href/src/poster/ping/action/handler on every element.
         if (isHrefAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isSrcAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isPosterAttribute(attrName) && isUnsafeHref(child)) return true;
         if (isPingAttribute(attrName) && hasUnsafePingUrls(child)) return true;
+        if (isFormSubmissionAttribute(attrName) && isUnsafeHref(child))
+          return true;
+        if (isHandlerUriAttribute(attrName) && isUnsafeHref(child)) return true;
         if (attrName === "style" && hasUnsafeCssUrls(child)) return true;
         if (URL_PRESENTATION_ATTRS.has(attrName) && hasUnsafeCssUrls(child))
           return true;
