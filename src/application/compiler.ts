@@ -269,7 +269,9 @@ function decodeCssEscapes(value: string): string {
 /**
  * Treat CSS comments as inter-token whitespace before import/url scans.
  * Quoted strings keep literal comment delimiters so markers inside values
- * cannot erase intervening url()/filter declarations.
+ * cannot erase intervening url()/filter declarations. Outside strings,
+ * escaped `/` (e.g. `\/*`) is not a comment opener — CSS keeps the slash as
+ * token content, so the following filter/url must remain visible to scans.
  */
 function stripCssComments(value: string): string {
   let result = "";
@@ -294,6 +296,17 @@ function stripCssComments(value: string): string {
       inQuote = ch;
       result += ch;
       i += 1;
+      continue;
+    }
+    // Outside strings, honor escapes so `\/*` does not open a comment.
+    if (ch === "\\") {
+      result += ch;
+      if (i + 1 < value.length) {
+        result += value[i + 1]!;
+        i += 2;
+      } else {
+        i += 1;
+      }
       continue;
     }
     if (ch === "/" && value[i + 1] === "*") {
@@ -438,9 +451,10 @@ function normalizeCssUrlTarget(value: string): string {
 }
 
 /**
- * Extract url(...) targets outside CSS string tokens. Quoted text such as
- * content:"url(https://docs.example)" is not a live fetch. Unterminated
- * url( calls are unsafe — CSS closes open functions at EOF.
+ * Extract url(...)/src(...) targets outside CSS string tokens. Quoted text
+ * such as content:"url(https://docs.example)" is not a live fetch.
+ * Unterminated url(/src( calls are unsafe — CSS closes open functions at EOF.
+ * `src()` is the CSS Values URL notation used by @font-face and similar.
  */
 function extractCssUrlFunctionTargets(css: string): CssUrlScan {
   const urls: string[] = [];
@@ -468,9 +482,9 @@ function extractCssUrlFunctionTargets(css: string): CssUrlScan {
     const prev = i === 0 ? "" : css[i - 1]!;
     if (
       (prev.length === 0 || !/[a-zA-Z0-9_-]/.test(prev)) &&
-      /^url\s*\(/i.test(css.slice(i))
+      /^(?:url|src)\s*\(/i.test(css.slice(i))
     ) {
-      const call = css.slice(i).match(/^url\s*\(/i)!;
+      const call = css.slice(i).match(/^(?:url|src)\s*\(/i)!;
       const openIdx = i + call[0].length - 1;
       const body = readCssFunctionBody(css, openIdx);
       if (body === null) return { urls, unsafe: true };
@@ -494,7 +508,7 @@ function extractCssUrlFunctionTargets(css: string): CssUrlScan {
   return { urls, unsafe: false };
 }
 
-/** Extract url(...) and image()/image-set() string targets from CSS values. */
+/** Extract url()/src() and image()/image-set() string targets from CSS values. */
 function extractCssUrls(value: string): CssUrlScan {
   const decoded = normalizeCssForScan(value);
   const fromUrl = extractCssUrlFunctionTargets(decoded);

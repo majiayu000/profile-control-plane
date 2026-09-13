@@ -366,6 +366,13 @@ describe("profile compiler", () => {
       `<svg ${ns}><style>.x{--x:\\22;fill:url(https://evil.example/fill.svg#g)}</style></svg>`,
       // Legacy HTML background= on foreign containers fetches images.
       `<svg ${ns} xmlns:h="http://www.w3.org/1999/xhtml"><h:body background="https://evil.example/pixel"><h:table/></h:body></svg>`,
+      // Escaped `/` before `*` is not a CSS comment opener; url() must stay visible.
+      `<svg ${ns}><rect style="--a:\\/*;filter:url(https://evil.example/f.svg);--b:*/"/></svg>`,
+      `<svg ${ns}><style>.x{--a:\\/*;fill:url(https://evil.example/fill.svg#g);--b:*/}</style></svg>`,
+      // CSS Values src() fetches fonts/resources without url(...).
+      `<svg ${ns}><style>@font-face{font-family:x;src:src("https://evil.example/f.woff")}text{font-family:x}</style></svg>`,
+      `<svg ${ns}><rect style="background:src('https://evil.example/a.png')"/></svg>`,
+      `<svg ${ns}><style>.x{mask-image:src(https://evil.example/m.png)}</style></svg>`,
     ];
     for (const payload of cases) {
       expect(() => compileProfile(validConfig, renderer(payload))).toThrow(
@@ -481,6 +488,24 @@ describe("profile compiler", () => {
         validConfig,
         renderer(
           `<?note generated without <!DOCTYPE html>?><svg ${ns}><rect width="1" height="1"/></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // Fragment-only src() stays allowed (no outbound font/resource fetch).
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><style>@font-face{font-family:x;src:src("#local-font")}text{font-family:x}</style></svg>`,
+        ),
+      ),
+    ).not.toThrow();
+    // src() text inside CSS strings is not a live fetch target.
+    expect(() =>
+      compileProfile(
+        validConfig,
+        renderer(
+          `<svg ${ns}><style>.x::before{content:"src('https://docs.example/f.woff')"}</style></svg>`,
         ),
       ),
     ).not.toThrow();
