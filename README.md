@@ -6,6 +6,11 @@
 
 Compile a GitHub identity into an animated, dark/light, self-hosted profile README.
 
+[Quick start](#quick-start) · [Configuration](#configuration) · [Commands](#commands) ·
+[Architecture](docs/architecture.md)
+
+Requires Node.js 20 or later. Build and link the CLI from GitHub using the quick start below.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="examples/lifcc/output/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="examples/lifcc/output/assets/hero-light.svg">
