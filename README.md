@@ -7,7 +7,7 @@
 Compile a GitHub identity into an animated, dark/light, self-hosted profile README.
 
 [Quick start](#quick-start) · [Configuration](#configuration) · [Commands](#commands) ·
-[Architecture](docs/architecture.md)
+[Architecture](docs/architecture.md) · [Build and publish a profile](docs/build-a-self-hosted-profile.md)
 
 Requires Node.js 20 or later. Build and link the CLI from GitHub using the quick start below.
 
